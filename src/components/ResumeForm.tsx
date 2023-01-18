@@ -8,7 +8,7 @@ import {
   Box,
   Button,
 } from "@mui/material";
-import { Fragment, FunctionComponent, useState } from "react";
+import { Fragment, FunctionComponent, useEffect, useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import PersonalInformation from "./PersonalInformation";
 import Experience from "./Experience";
@@ -16,36 +16,68 @@ import { PlaylistAdd } from "@mui/icons-material";
 import Education from "./Education";
 import { useForm } from "./hooks/useForm";
 import AddExperienceModal from "./modals/AddExperienceModal";
+import { JobExperience } from "../types/jobExperience.types";
+import { AnyCnameRecord } from "dns";
 
-interface IResumeFormProps {}
+interface IResumeFormProps {
+  jobExperience: JobExperience[];
+  setJobExperience: Function;
+}
 
 const steps = ["Personal Information", "Experience", "Education"];
 
-const ResumeForm: FunctionComponent<IResumeFormProps> = () => {
+const ResumeForm: FunctionComponent<IResumeFormProps> = ({jobExperience, setJobExperience}) => {
   const {
     activeStep,
-    setActiveStep,
     theme,
     handleNext,
     handleBack,
     setView,
     isView,
     handleCloseModal,
+    currentExperience, 
+    setCurrentExperience,
   } = useForm();
 
-  const getStepContent = (step: number) => {
+  const onEdit = (key: string | undefined) => {
+    const editJobExperience = jobExperience?.find((x: any) => x.key === key);
+    setCurrentExperience(editJobExperience);
+    setView(true);
+  };
+
+  const onAdd = (value: any) => {
+  
+    if (value?.key) {
+      const index = jobExperience?.findIndex((x) => x.key === value.key);
+      const newArray = jobExperience;
+      newArray[index] = value;
+      setJobExperience([...newArray]);
+    } else {
+     
+      const uniqueKey = new Date().getTime().toString();
+      const newDate = new Date().toDateString();
+      setJobExperience([...jobExperience, { key: uniqueKey, date: newDate, ...value }]);
+    } 
+    setCurrentExperience(undefined);
+  };
+
+  const onDelete = (key: string | undefined) => {
+    const newList = jobExperience.filter((x) => x.key != key);
+    setJobExperience([...newList]);
+  };
+
+    const getStepContent = (step: number) => {
     switch (step) {
       case 0:
         return <PersonalInformation />;
       case 1:
-        return <Experience activeStep={activeStep} setView={setView} />;
+        return <Experience activeStep={activeStep} setView={setView} jobExperience={jobExperience} onEdit={onEdit} onDelete={onDelete}/>;
       case 2:
         return <Education />;
       default:
         throw new Error("Unknown step");
     }
   };
-
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -109,7 +141,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = () => {
           </Paper>
         </Container>
       </ThemeProvider>
-      <AddExperienceModal isView={isView} handleClose={handleCloseModal}/>
+      <AddExperienceModal isView={isView} handleClose={handleCloseModal}  jobExperience={currentExperience} setView={setView} onAdd={onAdd} />
     </>
   );
 };

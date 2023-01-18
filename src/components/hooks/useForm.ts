@@ -1,11 +1,13 @@
 
 import { createTheme } from '@mui/material'
 import { useEffect, useState } from 'react'
+import { JobExperience } from '../../types/jobExperience.types'
 import { useLocalStorage } from './useLocalStorage'
 
 
 export const useForm = () => {
     const { getItem, setItem, clearItem } = useLocalStorage()
+    const [currentExperience, setCurrentExperience] = useState<JobExperience | any>()
     const [isView, setView] = useState(false)
     const handleCloseModal = () => setView(false);
     const [activeStep, setActiveStep] = useState(0);
@@ -17,7 +19,8 @@ export const useForm = () => {
     const handleBack = () => {
       setActiveStep(activeStep - 1);
     };
-    
+   
+
     return {
         isView,
         setView,
@@ -26,7 +29,9 @@ export const useForm = () => {
         setActiveStep,
         theme,
         handleNext,
-        handleBack
+        handleBack,
+        currentExperience, 
+        setCurrentExperience,
     } as const
 }
 
