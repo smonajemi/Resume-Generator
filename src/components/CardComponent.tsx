@@ -5,14 +5,12 @@ import { JobExperience } from '../types/jobExperience.types';
 
 interface ICardComponentProps {
 jobExperience: JobExperience
-setView: Function
 onEdit: Function
 onDelete: Function
 }
 
 const CardComponent: FunctionComponent<ICardComponentProps> = ({
   jobExperience,
-  setView,
   onEdit,
   onDelete
 }) => {
