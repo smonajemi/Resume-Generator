@@ -1,6 +1,6 @@
 import React, {} from 'react';
 import { Box } from "@mui/material";
-import { BrowserRouter, Route, Route as Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import routes from "./config/routes";
 
 function App() {
@@ -13,11 +13,7 @@ function App() {
             key={index}
             path={route.path}
             element={
-              route.protected ? (
-                  <route.component />
-              ) : (
-                <route.component />
-              )
+              <route.component />
             }
           />
         ))}

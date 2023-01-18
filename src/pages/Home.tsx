@@ -1,17 +1,17 @@
-import { Box, Button, Typography } from "@mui/material"
+import { Box, Button, Container, Divider, Typography } from "@mui/material"
 import { Link } from "react-router-dom"
+import AddExperienceModal from "../components/modals/AddExperienceModal"
 import { MainContainer } from "../components/MainContainer"
+import ResumeForm from "../components/ResumeForm"
 
 const Home = () => {
     return (
-    <MainContainer title={'Not Found'} >
-        <Box flexDirection='column'>
-            <Box flexDirection='column' display='flex' justifyContent='center'>
-                <Typography gutterBottom>This page was not found</Typography>
-                <Button color='primary' variant='contained' component={Link} to='/select'> Return to Home Page</Button>
-            </Box>
-        </Box>
-    </MainContainer>
+        <MainContainer title={"Home"} >
+   
+   <Box>
+            <ResumeForm />
+          </Box>
+      </MainContainer>
     )
 }
 
