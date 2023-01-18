@@ -18,7 +18,7 @@ const CardComponent: FunctionComponent<ICardComponentProps> = ({
 }) => {
  
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, minWidth: 150 }}>
     <CardActionArea>
       <CardContent>
         <Typography gutterBottom variant="subtitle1" component="div">

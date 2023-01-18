@@ -31,7 +31,7 @@ const Experience: FunctionComponent<IExperienceProps> = ({
     <Box >
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
           {jobExperience?.map((value: JobExperience) => (
-               <Grid item xs={2} sm={4} md={4} key={value?.key}>
+               <Grid item xs={2} sm={4} md={6} key={value?.key}>
                <CardComponent setView={setView} jobExperience={value} onEdit={onEdit} onDelete={onDelete}/>
           </Grid>
          
