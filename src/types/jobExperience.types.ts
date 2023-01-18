@@ -5,4 +5,6 @@ export interface JobExperience {
     startDate?: string
     endDate?: string
     jobDetail?: string
+    city?: string
+    province?: string
 }

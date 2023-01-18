@@ -37,26 +37,36 @@ const AddExperienceModal: FunctionComponent<IAddExperienceModalProps> = ({
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
   const [jobDetail, setJobDetail] = useState('')
+  const [city, setCity] = useState('')
+  const [province, setProvince] = useState('')
 
   const handleAddExperience = (e: any, type: string) => {
-      switch (type) {
-        case 'jobTitle':
-          setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value });
-          setJobTitle(e?.target?.value)
-          break;
-        case 'company':
-          setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value });
-          setCompany(e?.target?.value)
-          break;
-        case 'startDate':
-          setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value });
-          setStartDate(e?.target?.value)
-          break;
-        case 'jobDetail':
-          setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value });
-          setJobDetail(e?.target?.value)
-          break;
-      }
+    switch (type) {
+      case 'jobTitle':
+        setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value });
+        setJobTitle(e?.target?.value)
+        break;
+      case 'company':
+        setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value });
+        setCompany(e?.target?.value)
+        break;
+      case 'city':
+        setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value });
+        setCity(e?.target?.value)
+        break;
+      case 'province':
+        setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value });
+        setProvince(e?.target?.value)
+        break;
+      case 'startDate':
+        setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value });
+        setStartDate(e?.target?.value)
+        break;
+      case 'jobDetail':
+        setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value });
+        setJobDetail(e?.target?.value)
+        break;
+    }
   };
   useEffect(() => {
     if (jobExperience) {
@@ -93,6 +103,28 @@ const AddExperienceModal: FunctionComponent<IAddExperienceModalProps> = ({
                 autoComplete="company"
                 variant="standard"
                 value={newExperience?.company}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                id="city"
+                name="city"
+                label="City"
+                fullWidth
+                autoComplete="city"
+                variant="standard"
+                value={newExperience?.city}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                id="province"
+                name="province"
+                label="Province/Territory"
+                fullWidth
+                variant="standard"
+                value={newExperience?.province}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -139,13 +171,13 @@ const AddExperienceModal: FunctionComponent<IAddExperienceModalProps> = ({
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={() => {
-              onAdd(newExperience);
-              setNewExperience(undefined as any);
-              setView(false);
-            }}>Save</Button>
+            onAdd(newExperience);
+            setNewExperience(undefined as any);
+            setView(false);
+          }}>Save</Button>
         </DialogActions>
       </Dialog>
-    </Box>  
+    </Box>
   );
 };
 
