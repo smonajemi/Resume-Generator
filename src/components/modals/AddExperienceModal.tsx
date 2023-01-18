@@ -58,7 +58,11 @@ const AddExperienceModal: FunctionComponent<IAddExperienceModalProps> = ({
           break;
       }
   };
-
+  useEffect(() => {
+    if (jobExperience) {
+      setNewExperience({ ...jobExperience });
+    }
+  }, [jobExperience]);
 
 
   return (
@@ -76,7 +80,7 @@ const AddExperienceModal: FunctionComponent<IAddExperienceModalProps> = ({
                 fullWidth
                 autoComplete="job-title"
                 variant="standard"
-                value={jobExperience?.jobTitle}
+                value={newExperience?.jobTitle || ""}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -88,7 +92,7 @@ const AddExperienceModal: FunctionComponent<IAddExperienceModalProps> = ({
                 fullWidth
                 autoComplete="company"
                 variant="standard"
-                value={jobExperience?.company}
+                value={newExperience?.company}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -100,7 +104,7 @@ const AddExperienceModal: FunctionComponent<IAddExperienceModalProps> = ({
                 fullWidth
                 autoComplete="start-date"
                 variant="standard"
-                value={jobExperience?.startDate}
+                value={newExperience?.startDate}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -111,7 +115,7 @@ const AddExperienceModal: FunctionComponent<IAddExperienceModalProps> = ({
                 fullWidth
                 autoComplete="endDate"
                 variant="standard"
-                value={jobExperience?.endDate}
+                value={newExperience?.endDate}
               />
             </Grid>
             <Grid item xs={12}>
@@ -127,7 +131,7 @@ const AddExperienceModal: FunctionComponent<IAddExperienceModalProps> = ({
                 fullWidth
                 autoComplete="job-detail"
                 variant="standard"
-                value={jobExperience?.jobDetail}
+                value={newExperience?.jobDetail}
               />
             </Grid>
           </Grid>

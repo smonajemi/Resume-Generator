@@ -41,6 +41,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({jobExperience, setJobE
 
   const onEdit = (key: string | undefined) => {
     const editJobExperience = jobExperience?.find((x: any) => x.key === key);
+    console.log(editJobExperience)
     setCurrentExperience(editJobExperience);
     setView(true);
   };

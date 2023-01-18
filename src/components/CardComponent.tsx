@@ -31,7 +31,7 @@ const CardComponent: FunctionComponent<ICardComponentProps> = ({
     </CardActionArea>
     <CardActions>
       <Button size="small" color="error" onClick={() => onDelete(jobExperience?.key)}>Delete</Button>
-      <Button size="small" color="primary" onClick={() =>  onEdit(jobExperience?.key)} >Edit</Button>
+      <Button size="small" color="primary" onClick={() => onEdit(jobExperience?.key)} >Edit</Button>
     </CardActions>
   </Card>
   );
