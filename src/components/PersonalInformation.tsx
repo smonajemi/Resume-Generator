@@ -1,6 +1,6 @@
-import { Typography, Grid, TextField, FormControlLabel, Checkbox } from "@mui/material";
+import { Typography, Grid, TextField } from "@mui/material";
 import { Box } from "@mui/system";
-import { Fragment, FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { UserTypes } from "../types/user.types";
 
 interface IPersonalInformationProps {
@@ -19,10 +19,10 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
   const handleAddUser = (e: any, type: string) => {
     switch (type) {
       case 'firstName':
-        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value?.toUpperCase() });
+        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
         break;
       case 'lastName':
-        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value?.toUpperCase() });
+        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value});
 
         break;
       case 'email':
@@ -72,6 +72,7 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             fullWidth
             autoComplete="first-name"
             variant="standard"
+            inputProps={{style: {textTransform: 'capitalize'}}} 
             value={newUser?.firstName || ""}
           />
         </Grid>
@@ -84,6 +85,7 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             fullWidth
             autoComplete="last-name"
             variant="standard"
+            inputProps={{style: {textTransform: 'capitalize'}}} 
             value={newUser?.lastName || ""}
           />
         </Grid>
@@ -133,6 +135,7 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             fullWidth
             autoComplete="city"
             variant="standard"
+            inputProps={{style: {textTransform: 'capitalize'}}} 
             value={newUser?.city || ""}
           />
         </Grid>
@@ -162,7 +165,8 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
         </Grid>
         <Grid item xs={12}>
        <TextField
-         required
+        inputProps={{style: {textTransform: 'capitalize'}}} 
+        required
          InputProps={{
            minRows: 5,
          }}

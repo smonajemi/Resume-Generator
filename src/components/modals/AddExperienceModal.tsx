@@ -5,12 +5,9 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  Grid,
-  Modal,
-  TextField,
-  Typography,
+  Grid, TextField
 } from "@mui/material";
-import React, { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { JobExperience } from "../../types/jobExperience.types";
 
 interface IAddExperienceModalProps {

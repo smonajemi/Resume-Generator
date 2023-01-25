@@ -1,18 +1,12 @@
-import React, { FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 import {
   Page,
-  Text,
-  Image,
-  Document,
+  Text, Document,
   StyleSheet,
-  View,
+  View
 } from "@react-pdf/renderer";
 import { UserTypes } from "../../types/user.types";
 import { JobExperience } from "../../types/jobExperience.types";
-import { Box, Divider } from "@mui/material";
-import { validateHeaderValue } from "http";
-import List, { Item } from "../List";
-import { padding } from "@mui/system";
 import EducationEntries from "./EducationEntries";
 import { EducationTypes } from "../../types/Education.types";
 import ExperienceEntries from "./ExperienceEntries";
@@ -113,8 +107,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const personalData = [
-  {
+const personalData = {
     firstName: "Sina",
     lastName: "Monajemi",
     address:
@@ -123,15 +116,14 @@ const personalData = [
       "Committed professional offering more than 3 years of experience in software development. Excellent communication skills and exceptional problem-solving abilities both in team-oriented and self-motivated settings.",
 
     jobDetail: ["1", "2", "3"],
-  },
-];
+  }
 
 const jobExperienceData = [
   {
     jobTitle: "Software Developer",
     company: "Freelance",
     startDate: "March 2020",
-    endDate: "Current",
+    endDate: "",
     jobDetail: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Ut enim ad minim veniam"],
     city: "Toronto",
     province: "ON",
@@ -177,20 +169,19 @@ const PdfGenerator: FunctionComponent<IPdfGeneratorProps> = ({
   educationData,
   userData
 }) => {
-  console.log("userData", userData)
 
   return (
     <Document>
-      <Page style={styles.body}>
+      <Page style={styles.body} size="A4">
         <>
           <View>
-            <PersonalInfoEntries userInfo={userData} />
+            <PersonalInfoEntries userInfo={personalData} />
           </View>
           <View>
-            <ExperienceEntries jobExperience={experienceData} />
+            <ExperienceEntries jobExperience={jobExperienceData} />
           </View>
           <View>
-            <EducationEntries education={educationData} />
+            <EducationEntries education={educationEntriesData} />
           </View>
         </>
         <Text

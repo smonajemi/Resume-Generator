@@ -1,4 +1,4 @@
-import { Typography, Grid, TextField, Button, Box } from "@mui/material";
+import { Typography, Grid, Box } from "@mui/material";
 import { Fragment, FunctionComponent } from "react";
 import { EducationTypes } from "../types/Education.types";
 import CardComponent from "./CardComponent";

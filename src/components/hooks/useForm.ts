@@ -1,6 +1,6 @@
 
 import { createTheme } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { EducationTypes } from '../../types/Education.types'
 import { JobExperience } from '../../types/jobExperience.types'
 import { UserTypes } from '../../types/user.types'

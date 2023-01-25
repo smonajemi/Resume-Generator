@@ -1,5 +1,4 @@
-import { PlaylistAdd } from "@mui/icons-material";
-import { Typography, Grid, TextField, Button, Box } from "@mui/material";
+import { Typography, Grid, Box } from "@mui/material";
 import { Fragment, FunctionComponent } from "react";
 import { JobExperience } from "../types/jobExperience.types";
 import CardComponent from "./CardComponent";

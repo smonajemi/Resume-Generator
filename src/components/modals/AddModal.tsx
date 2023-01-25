@@ -5,12 +5,9 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  Grid,
-  Modal,
-  TextField,
-  Typography,
+  Grid, TextField
 } from "@mui/material";
-import React, { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { EducationTypes } from "../../types/Education.types";
 import { JobExperience } from "../../types/jobExperience.types";
 
@@ -60,7 +57,7 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
         setCity(e?.target?.value)
         break;
       case 'province':
-        setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value });
+        setNewExperience({ ...newExperience, [e?.target?.name]:  e?.target?.value?.toUpperCase() });
         setProvince(e?.target?.value)
         break;
       case 'startDate':
@@ -101,7 +98,7 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
      
         break;
         case 'province':
-          setNewEducation({ ...newEducation, [e?.target?.name]: e?.target?.value });
+          setNewEducation({ ...newEducation, [e?.target?.name]:  e?.target?.value?.toUpperCase()});
        
           break;   
 
@@ -130,6 +127,7 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
    <Grid container spacing={3}>
      <Grid item xs={12} sm={6}>
        <TextField
+         inputProps={{style: {textTransform: 'capitalize'}}} 
          required
          id="jobTitle"
          name="jobTitle"
@@ -142,6 +140,7 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
      </Grid>
      <Grid item xs={12} sm={6}>
        <TextField
+         inputProps={{style: {textTransform: 'capitalize'}}} 
          required
          id="company"
          name="company"
@@ -149,11 +148,12 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
          fullWidth
          autoComplete="company"
          variant="standard"
-         value={newExperience?.company}
+         value={newExperience?.company || ""}
        />
      </Grid>
      <Grid item xs={12} sm={6}>
        <TextField
+         inputProps={{style: {textTransform: 'capitalize'}}} 
          required
          id="city"
          name="city"
@@ -161,21 +161,24 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
          fullWidth
          autoComplete="city"
          variant="standard"
-         value={newExperience?.city}
+         value={newExperience?.city || ""}
        />
      </Grid>
      <Grid item xs={12} sm={6}>
        <TextField
+         required
          id="province"
          name="province"
          label="Province/Territory"
          fullWidth
          variant="standard"
-         value={newExperience?.province}
+         inputProps={{ maxLength: 2 }}
+         value={newExperience?.province || ""}
        />
      </Grid>
      <Grid item xs={12} sm={6}>
        <TextField
+         inputProps={{style: {textTransform: 'capitalize'}}} 
          required
          id="startDate"
          name="startDate"
@@ -183,22 +186,25 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
          fullWidth
          autoComplete="start-date"
          variant="standard"
-         value={newExperience?.startDate}
+         value={newExperience?.startDate || ""}
        />
      </Grid>
      <Grid item xs={12} sm={6}>
        <TextField
+          inputProps={{style: {textTransform: 'capitalize'}}} 
+          required
          id="endDate"
          name="endDate"
          label="End Date"
          fullWidth
          autoComplete="endDate"
          variant="standard"
-         value={newExperience?.endDate}
+         value={newExperience?.endDate || ""}
        />
      </Grid>
      <Grid item xs={12}>
        <TextField
+         inputProps={{style: {textTransform: 'capitalize'}}} 
          required
          InputProps={{
            minRows: 5,
@@ -210,7 +216,7 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
          fullWidth
          autoComplete="job-detail"
          variant="standard"
-         value={newExperience?.jobDetail}
+         value={newExperience?.jobDetail || ""}
        />
      </Grid>
    </Grid>
@@ -235,7 +241,8 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <TextField
-              required
+              inputProps={{style: {textTransform: 'capitalize'}}} 
+         required
               id="schoolName"
               name="schoolName"
               label="School Name"
@@ -247,7 +254,8 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              required
+              inputProps={{style: {textTransform: 'capitalize'}}} 
+         required
               id="program"
               name="program"
               label="program"
@@ -259,7 +267,8 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              required
+              inputProps={{style: {textTransform: 'capitalize'}}} 
+         required
               id="city"
               name="city"
               label="City"
@@ -276,12 +285,14 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
               label="Province/Territory"
               fullWidth
               variant="standard"
+              inputProps={{ maxLength: 2 }}
               value={newEducation?.province}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              required
+              inputProps={{style: {textTransform: 'capitalize'}}} 
+         required
               id="startDate"
               name="startDate"
               label="Start Date"

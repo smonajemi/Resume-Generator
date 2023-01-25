@@ -9,19 +9,18 @@ import {
   Button,
   CircularProgress,
 } from "@mui/material";
-import { Fragment, FunctionComponent, useEffect, useState } from "react";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Fragment, FunctionComponent } from "react";
+import { ThemeProvider } from "@mui/material/styles";
 import PersonalInformation from "./PersonalInformation";
 import Experience from "./Experience";
 import { PlaylistAdd } from "@mui/icons-material";
 import Education from "./Education";
 import { useForm } from "./hooks/useForm";
-import AddExperienceModal from "./modals/AddExperienceModal";
 import { JobExperience } from "../types/jobExperience.types";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import PdfGenerator from "./resume/PdfGenerator";
 import { EducationTypes } from "../types/Education.types";
-import { BackendUser, UserTypes } from "../types/user.types";
+import { UserTypes } from "../types/user.types";
 import AddModal from "./modals/AddModal";
 
 
