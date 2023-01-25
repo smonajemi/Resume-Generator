@@ -63,8 +63,10 @@ const AddExperienceModal: FunctionComponent<IAddExperienceModalProps> = ({
         setStartDate(e?.target?.value)
         break;
       case 'jobDetail':
-        setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value });
-        setJobDetail(e?.target?.value)
+        let temp = []
+        temp = e?.target?.value?.split(",")
+        setNewExperience({ ...newExperience, [e?.target?.name]: temp});
+        setJobDetail(temp)
         break;
     }
   };

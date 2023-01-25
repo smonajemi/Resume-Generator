@@ -8,4 +8,10 @@ export interface UserTypes {
     city?: string
     province?: string
     postalCode?: string
+    summary?: string
+}
+
+export interface BackendUser {
+    firstName?: string
+    lastName?: string
 }

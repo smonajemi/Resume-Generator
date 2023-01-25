@@ -1,16 +1,64 @@
 import { Typography, Grid, TextField, FormControlLabel, Checkbox } from "@mui/material";
-import { Fragment, FunctionComponent } from "react";
+import { Box } from "@mui/system";
+import { Fragment, FunctionComponent, useEffect, useState } from "react";
+import { UserTypes } from "../types/user.types";
 
 interface IPersonalInformationProps {
+  user: UserTypes
+  setUser: Function
 
 }
 
 
 const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
-
+  user,
+  setUser
 }) => {
-    return <>
-         <Fragment>
+  const [newUser, setNewUser] = useState(user);
+
+  const handleAddUser = (e: any, type: string) => {
+    switch (type) {
+      case 'firstName':
+        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
+        break;
+      case 'lastName':
+        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
+
+        break;
+      case 'email':
+        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
+
+        break;
+      case 'phoneNumber':
+        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
+        break;
+      case 'address':
+        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
+
+        break;
+      case 'city':
+        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
+        break;
+      case 'province':
+        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value?.toUpperCase() });
+        break;
+      case 'postalCode':
+        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value?.toUpperCase() });
+        break;
+      case 'summary':
+        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
+        break;
+
+    }
+  };
+  useEffect(() => {
+    if (newUser) {
+      setUser({ ...newUser });
+    }
+  }, [user, newUser]);
+
+  return <>
+    <Box component="form" noValidate onChange={e => handleAddUser(e, (e?.target as HTMLTextAreaElement)?.name)}>
       <Typography variant="h6" gutterBottom>
         Your Personal Information
       </Typography>
@@ -24,6 +72,7 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             fullWidth
             autoComplete="first-name"
             variant="standard"
+            value={newUser?.firstName || ""}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -35,6 +84,7 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             fullWidth
             autoComplete="last-name"
             variant="standard"
+            value={newUser?.lastName || ""}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -46,6 +96,7 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             fullWidth
             autoComplete="phone-number"
             variant="standard"
+            value={newUser?.phoneNumber || ""}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -57,6 +108,7 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             fullWidth
             autoComplete="email"
             variant="standard"
+            value={newUser?.email || ""}
           />
         </Grid>
         <Grid item xs={12}>
@@ -68,6 +120,7 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             fullWidth
             autoComplete="address-line"
             variant="standard"
+            value={newUser?.address || ""}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -79,6 +132,7 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             fullWidth
             autoComplete="city"
             variant="standard"
+            value={newUser?.city || ""}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -87,7 +141,9 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             name="province"
             label="Province/Territory"
             fullWidth
+            inputProps={{ maxLength: 2 }}
             variant="standard"
+            value={newUser?.province || ""}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -98,12 +154,30 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             label="Postal code"
             fullWidth
             autoComplete="postal-code"
+            inputProps={{ maxLength: 6 }}
             variant="standard"
+            value={newUser?.postalCode || ""}
           />
         </Grid>
+        <Grid item xs={12}>
+       <TextField
+         required
+         InputProps={{
+           minRows: 5,
+         }}
+         multiline
+         id="summary"
+         name="summary"
+         label="Summary"
+         fullWidth
+         autoComplete="summary"
+         variant="standard"
+         value={newUser?.summary || ""}
+       />
+     </Grid>
       </Grid>
-    </Fragment>
-        </>
+    </Box>
+  </>
 }
 
 export default PersonalInformation;

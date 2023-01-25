@@ -4,7 +4,7 @@ export interface JobExperience {
     company?: string
     startDate?: string
     endDate?: string
-    jobDetail?: string
+    jobDetail?: string[]
     city?: string
     province?: string
 }
