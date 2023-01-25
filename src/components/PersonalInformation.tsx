@@ -19,10 +19,10 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
   const handleAddUser = (e: any, type: string) => {
     switch (type) {
       case 'firstName':
-        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
+        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value?.toUpperCase() });
         break;
       case 'lastName':
-        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
+        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value?.toUpperCase() });
 
         break;
       case 'email':
@@ -94,6 +94,7 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             name="phoneNumber"
             label="Phone number"
             fullWidth
+            inputProps={{ maxLength: 10 }}
             autoComplete="phone-number"
             variant="standard"
             value={newUser?.phoneNumber || ""}
