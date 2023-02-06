@@ -16,6 +16,7 @@ interface ICardComponentProps {
   onEdit: Function;
   onDelete: Function;
   activeStep: number;
+  setEdit: Function
 }
 
 const CardComponent: FunctionComponent<ICardComponentProps> = ({
@@ -24,6 +25,7 @@ const CardComponent: FunctionComponent<ICardComponentProps> = ({
   onEdit,
   onDelete,
   activeStep,
+  setEdit
 }) => {
   return (
     <Card sx={{ maxWidth: 345, minWidth: 150 }}>
@@ -65,7 +67,7 @@ const CardComponent: FunctionComponent<ICardComponentProps> = ({
             <Button
               size="small"
               color="primary"
-              onClick={() => onEdit(jobExperience?.key)}
+              onClick={() => {onEdit(jobExperience?.key); setEdit(true)}}
             >
               Edit
             </Button>

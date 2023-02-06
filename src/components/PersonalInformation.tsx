@@ -1,5 +1,6 @@
 import { Typography, Grid, TextField } from "@mui/material";
 import { Box } from "@mui/system";
+import { Dayjs } from "dayjs";
 import { FunctionComponent, useEffect, useState } from "react";
 import { UserTypes } from "../types/user.types";
 
@@ -94,7 +95,7 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             required
             id="phoneNumber"
             name="phoneNumber"
-            label="Phone number"
+            label="Phone"
             fullWidth
             inputProps={{ maxLength: 10 }}
             autoComplete="phone-number"

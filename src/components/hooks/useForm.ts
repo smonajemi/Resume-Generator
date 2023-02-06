@@ -13,6 +13,7 @@ export const useForm = () => {
     const [currentEducation, setCurrentEducation] = useState<EducationTypes | any>()
     const [currentUser, setCurrentUser] = useState<UserTypes | any>()
     const [isView, setView] = useState(false)
+    const [isEdit, setEdit] = useState(false)
     const handleCloseModal = () => setView(false);
     const [activeStep, setActiveStep] = useState(0);
     const theme = createTheme();
@@ -33,6 +34,8 @@ export const useForm = () => {
         setCurrentUser,
         currentEducation,
         setCurrentEducation,
+        isEdit, 
+        setEdit
     } as const
 }
 

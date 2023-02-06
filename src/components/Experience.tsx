@@ -9,13 +9,15 @@ interface IExperienceProps {
   onEdit: Function
   onDelete: Function
   activeStep: number
+  setEdit: Function
 }
 
 const Experience: FunctionComponent<IExperienceProps> = ({
   jobExperience,
   onEdit,
   onDelete,
-  activeStep
+  activeStep,
+  setEdit
 }) => {
 
   return <>
@@ -29,7 +31,7 @@ const Experience: FunctionComponent<IExperienceProps> = ({
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             {jobExperience?.map((value: JobExperience) => (
               <Grid item xs={2} sm={4} md={6} key={value?.key}>
-                <CardComponent jobExperience={value} onEdit={onEdit} onDelete={onDelete} activeStep={activeStep} />
+                <CardComponent setEdit={setEdit} jobExperience={value} onEdit={onEdit} onDelete={onDelete} activeStep={activeStep} />
               </Grid>
 
             ))}

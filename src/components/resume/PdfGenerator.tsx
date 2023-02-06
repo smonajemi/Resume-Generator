@@ -175,13 +175,13 @@ const PdfGenerator: FunctionComponent<IPdfGeneratorProps> = ({
       <Page style={styles.body} size="A4">
         <>
           <View>
-            <PersonalInfoEntries userInfo={personalData} />
+            <PersonalInfoEntries userInfo={userData} />
           </View>
           <View>
-            <ExperienceEntries jobExperience={jobExperienceData} />
+            <ExperienceEntries jobExperience={experienceData} />
           </View>
           <View>
-            <EducationEntries education={educationEntriesData} />
+            <EducationEntries education={educationData} />
           </View>
         </>
         <Text

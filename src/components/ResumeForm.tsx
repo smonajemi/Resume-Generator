@@ -48,7 +48,9 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
     setCurrentEducation,
     setCurrentUser,
     currentUser,
-    setActiveStep
+    setActiveStep,
+    isEdit,
+    setEdit
   } = useForm();
   const onEdit = (key: string | undefined) => {
     switch (activeStep) {
@@ -156,9 +158,9 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
       case 0:
         return <PersonalInformation user={currentUser} setUser={setCurrentUser} />;
       case 1:
-        return <Experience jobExperience={jobExperience} onEdit={onEdit} onDelete={onDelete} activeStep={activeStep} />;
+        return <Experience setEdit={setEdit} jobExperience={jobExperience} onEdit={onEdit} onDelete={onDelete} activeStep={activeStep} />;
       case 2:
-        return <Education education={education} onEdit={onEdit} onDelete={onDelete} activeStep={activeStep} />;
+        return <Education setEdit={setEdit} education={education} onEdit={onEdit} onDelete={onDelete} activeStep={activeStep} />;
       default:
         throw new Error("Unknown step");  
     }
@@ -233,7 +235,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
           </Paper>
         </Container>
       </ThemeProvider>
-      <AddModal isView={isView} handleClose={handleCloseModal} jobExperience={currentExperience} setView={setView} onAdd={onAdd} education={currentEducation} activeStep={activeStep} />
+      <AddModal setEdit= {setEdit} isEdit ={isEdit} isView={isView} handleClose={handleCloseModal} jobExperience={currentExperience} setView={setView} onAdd={onAdd} education={currentEducation} activeStep={activeStep} />
     </>
   );
 };

@@ -19,6 +19,8 @@ interface IAddModalProps {
   setView: Function
   onAdd: Function
   activeStep: number
+  isEdit: boolean
+  setEdit: Function
 }
 
 const AddModal: FunctionComponent<IAddModalProps> = ({
@@ -28,7 +30,9 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
   setView,
   onAdd,
   activeStep,
-  education
+  education,
+  isEdit,
+  setEdit
 }) => {
 
   const [newExperience, setNewExperience] = useState(jobExperience);
@@ -57,21 +61,21 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
         setCity(e?.target?.value)
         break;
       case 'province':
-        setNewExperience({ ...newExperience, [e?.target?.name]:  e?.target?.value?.toUpperCase() });
+        setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value?.toUpperCase() });
         setProvince(e?.target?.value)
         break;
       case 'startDate':
         setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value });
         setStartDate(e?.target?.value)
         break;
-        case 'endDate':
-          setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value });
-          setEndDate(e?.target?.value)
-          break;   
+      case 'endDate':
+        setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value });
+        setEndDate(e?.target?.value)
+        break;
       case 'jobDetail':
         let temp = new Array()
-        temp = e?.target?.value .split(",")
-        setNewExperience({ ...newExperience, [e?.target?.name]: temp});
+        temp = e?.target?.value.split(",")
+        setNewExperience({ ...newExperience, [e?.target?.name]: temp });
         setJobDetail(e?.target?.value)
         break;
     }
@@ -80,27 +84,27 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
     switch (type) {
       case 'schoolName':
         setNewEducation({ ...newEducation, [e?.target?.name]: e?.target?.value });
-      
+
         break;
       case 'program':
         setNewEducation({ ...newEducation, [e?.target?.name]: e?.target?.value });
-     
+
         break;
       case 'startDate':
         setNewEducation({ ...newEducation, [e?.target?.name]: e?.target?.value });
-      
+
         break;
       case 'endDate':
         setNewEducation({ ...newEducation, [e?.target?.name]: e?.target?.value });
         break;
       case 'city':
         setNewEducation({ ...newEducation, [e?.target?.name]: e?.target?.value });
-     
+
         break;
-        case 'province':
-          setNewEducation({ ...newEducation, [e?.target?.name]:  e?.target?.value?.toUpperCase()});
-       
-          break;   
+      case 'province':
+        setNewEducation({ ...newEducation, [e?.target?.name]: e?.target?.value?.toUpperCase() });
+
+        break;
 
     }
   };
@@ -116,218 +120,231 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
 
 
   return (
-<>
+    <>
 
-{activeStep === 1 && (
-    <Box component="form" noValidate onChange={e => handleAddExperience(e, (e?.target as HTMLTextAreaElement)?.name)} sx={{ mt: 3 }}>
-    
- <Dialog open={isView} onClose={handleClose}>
- <DialogTitle>Your Experience</DialogTitle>
- <DialogContent>
-   <Grid container spacing={3}>
-     <Grid item xs={12} sm={6}>
-       <TextField
-         inputProps={{style: {textTransform: 'capitalize'}}} 
-         required
-         id="jobTitle"
-         name="jobTitle"
-         label="Job Title"
-         fullWidth
-         autoComplete="job-title"
-         variant="standard"
-         value={newExperience?.jobTitle || ""}
-       />
-     </Grid>
-     <Grid item xs={12} sm={6}>
-       <TextField
-         inputProps={{style: {textTransform: 'capitalize'}}} 
-         required
-         id="company"
-         name="company"
-         label="Company"
-         fullWidth
-         autoComplete="company"
-         variant="standard"
-         value={newExperience?.company || ""}
-       />
-     </Grid>
-     <Grid item xs={12} sm={6}>
-       <TextField
-         inputProps={{style: {textTransform: 'capitalize'}}} 
-         required
-         id="city"
-         name="city"
-         label="City"
-         fullWidth
-         autoComplete="city"
-         variant="standard"
-         value={newExperience?.city || ""}
-       />
-     </Grid>
-     <Grid item xs={12} sm={6}>
-       <TextField
-         required
-         id="province"
-         name="province"
-         label="Province/Territory"
-         fullWidth
-         variant="standard"
-         inputProps={{ maxLength: 2 }}
-         value={newExperience?.province || ""}
-       />
-     </Grid>
-     <Grid item xs={12} sm={6}>
-       <TextField
-         inputProps={{style: {textTransform: 'capitalize'}}} 
-         required
-         id="startDate"
-         name="startDate"
-         label="Start Date"
-         fullWidth
-         autoComplete="start-date"
-         variant="standard"
-         value={newExperience?.startDate || ""}
-       />
-     </Grid>
-     <Grid item xs={12} sm={6}>
-       <TextField
-          inputProps={{style: {textTransform: 'capitalize'}}} 
-          required
-         id="endDate"
-         name="endDate"
-         label="End Date"
-         fullWidth
-         autoComplete="endDate"
-         variant="standard"
-         value={newExperience?.endDate || ""}
-       />
-     </Grid>
-     <Grid item xs={12}>
-       <TextField
-         inputProps={{style: {textTransform: 'capitalize'}}} 
-         required
-         InputProps={{
-           minRows: 5,
-         }}
-         multiline
-         id="jobDetail"
-         name="jobDetail"
-         label="Job Detail"
-         fullWidth
-         autoComplete="job-detail"
-         variant="standard"
-         value={newExperience?.jobDetail || ""}
-       />
-     </Grid>
-   </Grid>
- </DialogContent>
- <DialogActions>
-   <Button onClick={handleClose}>Cancel</Button>
-   <Button onClick={() => {
-     onAdd(newExperience);
-     setNewExperience(undefined as any);
-     setView(false);
-   }}>Save</Button>
- </DialogActions>
-</Dialog>
- </Box>
+      {activeStep === 1 && (
+        <Box component="form" noValidate onChange={e => handleAddExperience(e, (e?.target as HTMLTextAreaElement)?.name)} sx={{ mt: 3 }}>
+
+          <Dialog open={isView} onClose={() => {handleClose(); setEdit(false)}}>
+            <DialogTitle>Your Experience</DialogTitle>
+            <DialogContent>
+              <Grid container spacing={3}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    inputProps={{ style: { textTransform: 'capitalize' } }}
+                    required
+                    id="jobTitle"
+                    name="jobTitle"
+                    label="Job Title"
+                    fullWidth
+                    autoComplete="job-title"
+                    variant="standard"
+                    value={newExperience?.jobTitle || ""}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    inputProps={{ style: { textTransform: 'capitalize' } }}
+                    required
+                    id="company"
+                    name="company"
+                    label="Company"
+                    fullWidth
+                    autoComplete="company"
+                    variant="standard"
+                    value={newExperience?.company || ""}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    inputProps={{ style: { textTransform: 'capitalize' } }}
+                    required
+                    id="city"
+                    name="city"
+                    label="City"
+                    fullWidth
+                    autoComplete="city"
+                    variant="standard"
+                    value={newExperience?.city || ""}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    id="province"
+                    name="province"
+                    label="Province/Territory"
+                    fullWidth
+                    variant="standard"
+                    inputProps={{ maxLength: 2 }}
+                    value={newExperience?.province || ""}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    inputProps={{ style: { textTransform: 'capitalize' } }}
+                    required
+                    id="startDate"
+                    name="startDate"
+                    label="Start Date"
+                    fullWidth
+                    autoComplete="start-date"
+                    variant="standard"
+                    value={newExperience?.startDate || ""}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    inputProps={{ style: { textTransform: 'capitalize' } }}
+                    id="endDate"
+                    name="endDate"
+                    label="End Date"
+                    fullWidth
+                    autoComplete="endDate"
+                    variant="standard"
+                    value={newExperience?.endDate || ""}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    inputProps={{ style: { textTransform: 'capitalize' } }}
+                    required
+                    InputProps={{
+                      minRows: 5,
+                    }}
+                    multiline
+                    id="jobDetail"
+                    name="jobDetail"
+                    label="Job Detail"
+                    fullWidth
+                    autoComplete="job-detail"
+                    variant="standard"
+                    value={newExperience?.jobDetail || ""}
+                  />
+                </Grid>
+              </Grid>
+            </DialogContent>
+            <DialogActions>
+              {isEdit ? (
+                <>
+              <Button onClick={() => {handleClose(); setEdit(false)}}>Cancel</Button>
+              <Button onClick={() => {
+                onAdd(newExperience);
+                setNewExperience(undefined as any);
+                setView(false);
+              }}>Save</Button>
+                </>
+              ) : 
+              <>
+              <Button onClick={() => {setNewExperience(undefined as any); handleClose(); setEdit(false)}}>Cancel</Button>
+              <Button onClick={() => {
+                onAdd(newExperience);
+                setNewExperience(undefined as any);
+                setView(false);
+              }}>Add</Button>
+              </>
+              }
+
+            </DialogActions>
+          </Dialog>
+        </Box>
       )}
-   
-    {activeStep === 2 && (
-      <Box component="form" noValidate onChange={e => handleAddEducation(e, (e?.target as HTMLTextAreaElement)?.name)} sx={{ mt: 3 }}>
-      <Dialog open={isView} onClose={handleClose}>
-      <DialogTitle>Your Education</DialogTitle>
-      <DialogContent>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              inputProps={{style: {textTransform: 'capitalize'}}} 
-         required
-              id="schoolName"
-              name="schoolName"
-              label="School Name"
-              fullWidth
-              autoComplete="school-name"
-              variant="standard"
-              value={newEducation?.schoolName}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              inputProps={{style: {textTransform: 'capitalize'}}} 
-         required
-              id="program"
-              name="program"
-              label="program"
-              fullWidth
-              autoComplete="program"
-              variant="standard"
-              value={newEducation?.program}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              inputProps={{style: {textTransform: 'capitalize'}}} 
-         required
-              id="city"
-              name="city"
-              label="City"
-              fullWidth
-              autoComplete="city"
-              variant="standard"
-              value={newEducation?.city}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              id="province"
-              name="province"
-              label="Province/Territory"
-              fullWidth
-              variant="standard"
-              inputProps={{ maxLength: 2 }}
-              value={newEducation?.province}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              inputProps={{style: {textTransform: 'capitalize'}}} 
-         required
-              id="startDate"
-              name="startDate"
-              label="Start Date"
-              fullWidth
-              autoComplete="start-date"
-              variant="standard"
-              value={newEducation?.startDate}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              id="endDate"
-              name="endDate"
-              label="End Date"
-              fullWidth
-              autoComplete="endDate"
-              variant="standard"
-              value={newEducation?.endDate}
-            />
-          </Grid>
- 
-        </Grid>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={() => {
-          onAdd(newEducation);
-          setNewEducation(undefined as any);
-          setView(false);
-        }}>Save</Button>
-      </DialogActions>
-    </Dialog>
-    </Box>
-   )}</>
-  
+
+      {activeStep === 2 && (
+        <Box component="form" noValidate onChange={e => handleAddEducation(e, (e?.target as HTMLTextAreaElement)?.name)} sx={{ mt: 3 }}>
+      <Dialog open={isView} onClose={() => {handleClose(); setEdit(false)}}>
+            <DialogTitle>Your Education</DialogTitle>
+            <DialogContent>
+              <Grid container spacing={3}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    inputProps={{ style: { textTransform: 'capitalize' } }}
+                    required
+                    id="schoolName"
+                    name="schoolName"
+                    label="School Name"
+                    fullWidth
+                    autoComplete="school-name"
+                    variant="standard"
+                    value={newEducation?.schoolName || ""}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    inputProps={{ style: { textTransform: 'capitalize' } }}
+                    required
+                    id="program"
+                    name="program"
+                    label="program"
+                    fullWidth
+                    autoComplete="program"
+                    variant="standard"
+                    value={newEducation?.program || ""}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    inputProps={{ style: { textTransform: 'capitalize' } }}
+                    required
+                    id="city"
+                    name="city"
+                    label="City"
+                    fullWidth
+                    autoComplete="city"
+                    variant="standard"
+                    value={newEducation?.city || ""}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    id="province"
+                    name="province"
+                    label="Province/Territory"
+                    fullWidth
+                    variant="standard"
+                    inputProps={{ maxLength: 2 }}
+                    value={newEducation?.province || ""}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    inputProps={{ style: { textTransform: 'capitalize' } }}
+                    required
+                    id="startDate"
+                    name="startDate"
+                    label="Start Date"
+                    fullWidth
+                    autoComplete="start-date"
+                    variant="standard"
+                    value={newEducation?.startDate || ""}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    id="endDate"
+                    name="endDate"
+                    label="End Date"
+                    fullWidth
+                    autoComplete="endDate"
+                    variant="standard"
+                    value={newEducation?.endDate || ""}
+                  />
+                </Grid>
+
+              </Grid>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose}>Cancel</Button>
+              <Button onClick={() => {
+                onAdd(newEducation);
+                setNewEducation(undefined as any);
+                setView(false);
+              }}>Save</Button>
+            </DialogActions>
+          </Dialog>
+        </Box>
+      )}</>
+
   );
 };
 
