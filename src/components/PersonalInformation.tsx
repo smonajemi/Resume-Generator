@@ -55,7 +55,6 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
       case 'skillSet':
         let temp = new Array()
         temp = e?.target?.value.split(",")
-        console.log(temp)
         setNewUser({ ...newUser, [e?.target?.name]: temp });
         break;
 
@@ -152,6 +151,7 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
         </Grid>
         <Grid item xs={12} sm={4}>
           <TextField
+            required
             id="province"
             name="province"
             label="Province/Territory"

@@ -134,16 +134,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
   const handleNext = () => {
     setActiveStep(activeStep + 1);
   };
-  const handleClick = () => {
-    if (!currentUser?.firstName || !currentUser?.lastName || !currentUser?.city || !currentUser?.address || !currentUser?.postalCode || !currentUser?.summary) {
-      setOpen(true);
-      return;
-    } 
-    onAddUserInfo(currentUser)
-    setCurrentExperience(undefined as any);
-    setView(false);
-    setOpen(false);
-  }
+
   
   const handleBack = () => {
     setActiveStep(activeStep - 1);
@@ -169,11 +160,19 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
     if (!isEdit) {
       setCurrentExperience(undefined);
       setCurrentEducation(undefined);
-    }console.log(isEdit)
-  
-  }, [currentExperience, isEdit, currentEducation, currentUser]);
+    }  
+  }, [currentExperience, isEdit, currentEducation]);
 
-
+  const handleClick = () => {
+    if ( !currentUser?.lastName || !currentUser?.city || !currentUser?.address || !currentUser?.postalCode || !currentUser?.summary) {
+      setOpen(true);
+      return;
+    } 
+    onAddUserInfo(currentUser)
+    setCurrentExperience(undefined as any);
+    setView(false);
+    setOpen(false);
+  }
   const getStepContent = (step: number) => {
     switch (step) {
       case 0:
@@ -243,7 +242,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
                     )}
                     <Button
                       variant="contained"
-                      onClick={() => {( activeStep === 0 && !currentUser) ? handleClick() : handleNext()}}
+                      onClick={() => {activeStep === 0  ? handleClick() : handleNext()}}
                       sx={{ mt: 3, ml: 1 }}
                     >
                       Next
