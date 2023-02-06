@@ -17,7 +17,7 @@ export const useForm = () => {
     const handleCloseModal = () => setView(false);
     const [activeStep, setActiveStep] = useState(0);
     const theme = createTheme();
-
+    const [isOpen, setOpen] = useState(false);
   
    
 
@@ -35,7 +35,9 @@ export const useForm = () => {
         currentEducation,
         setCurrentEducation,
         isEdit, 
-        setEdit
+        setEdit,
+        isOpen, 
+        setOpen
     } as const
 }
 

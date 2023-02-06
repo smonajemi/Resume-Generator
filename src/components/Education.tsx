@@ -19,7 +19,6 @@ const Education: FunctionComponent<IEducationProps> = ({
   activeStep,
   setEdit
 }) => {
-  console.log('education', education)
   return <>
     <Fragment>
       <Typography variant="h6" gutterBottom>

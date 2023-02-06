@@ -23,7 +23,7 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
         setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
         break;
       case 'lastName':
-        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value});
+        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
 
         break;
       case 'email':
@@ -49,6 +49,16 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
       case 'summary':
         setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
         break;
+      case 'technicalExperience':
+        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
+        break;
+      case 'skillSet':
+        let temp = new Array()
+        temp = e?.target?.value.split(",")
+        console.log(temp)
+        setNewUser({ ...newUser, [e?.target?.name]: temp });
+        break;
+
 
     }
   };
@@ -73,7 +83,7 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             fullWidth
             autoComplete="first-name"
             variant="standard"
-            inputProps={{style: {textTransform: 'capitalize'}}} 
+            inputProps={{ style: { textTransform: 'capitalize' } }}
             value={newUser?.firstName || ""}
           />
         </Grid>
@@ -86,7 +96,7 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             fullWidth
             autoComplete="last-name"
             variant="standard"
-            inputProps={{style: {textTransform: 'capitalize'}}} 
+            inputProps={{ style: { textTransform: 'capitalize' } }}
             value={newUser?.lastName || ""}
           />
         </Grid>
@@ -127,7 +137,7 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             value={newUser?.address || ""}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={4}>
           <TextField
             required
             id="city"
@@ -136,11 +146,11 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             fullWidth
             autoComplete="city"
             variant="standard"
-            inputProps={{style: {textTransform: 'capitalize'}}} 
+            inputProps={{ style: { textTransform: 'capitalize' } }}
             value={newUser?.city || ""}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={4}>
           <TextField
             id="province"
             name="province"
@@ -151,7 +161,7 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             value={newUser?.province || ""}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={4}>
           <TextField
             required
             id="postalCode"
@@ -165,22 +175,54 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
           />
         </Grid>
         <Grid item xs={12}>
-       <TextField
-        inputProps={{style: {textTransform: 'capitalize'}}} 
-        required
-         InputProps={{
-           minRows: 5,
-         }}
-         multiline
-         id="summary"
-         name="summary"
-         label="Summary"
-         fullWidth
-         autoComplete="summary"
-         variant="standard"
-         value={newUser?.summary || ""}
-       />
-     </Grid>
+          <TextField
+            inputProps={{ style: { textTransform: 'capitalize' } }}
+            required
+            InputProps={{
+              minRows: 5,
+            }}
+            multiline
+            id="summary"
+            name="summary"
+            label="Summary"
+            fullWidth
+            autoComplete="summary"
+            variant="standard"
+            value={newUser?.summary || ""}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            inputProps={{ style: { textTransform: 'capitalize' } }}
+            InputProps={{
+              minRows: 4,
+            }}
+            multiline
+            id="technicalExperience"
+            name="technicalExperience"
+            label="Technical Experience"
+            fullWidth
+            autoComplete="technical-experience"
+            variant="standard"
+            value={newUser?.technicalExperience || ""}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            inputProps={{ style: { textTransform: 'capitalize' } }}
+            InputProps={{
+              minRows: 10,
+            }}
+            multiline
+            id="skillSet"
+            name="skillSet"
+            label="Skill Set"
+            fullWidth
+            autoComplete="skill-Set"
+            variant="standard"
+            value={newUser?.skillSet || ""}
+          />
+        </Grid>
       </Grid>
     </Box>
   </>

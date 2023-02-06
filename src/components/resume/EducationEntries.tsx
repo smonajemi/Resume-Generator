@@ -1,7 +1,7 @@
 import { View, Text } from "@react-pdf/renderer";
 import { FunctionComponent } from "react";
 import { EducationTypes } from "../../types/Education.types";
-import { useStyles } from "../hooks/useStyles";
+import { styles } from "../hooks/styles";
 
 interface IEducationEntriesProps {
   education: EducationTypes[];
@@ -10,12 +10,10 @@ interface IEducationEntriesProps {
 const EducationEntries: FunctionComponent<IEducationEntriesProps> = ({
   education,
 }) => {
-  const {
-    styles
- } = useStyles()
+
   return (
     <>
-      <Text style={styles.text}>Education</Text>
+      <Text style={styles.text}>Education and Training</Text>
       <Text style={styles.divider}></Text>
       {education?.map((val, i) => (
         <View style={styles.entryContainer} key={i}>

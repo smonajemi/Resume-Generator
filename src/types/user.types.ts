@@ -9,6 +9,8 @@ export interface UserTypes {
     province?: string
     postalCode?: string
     summary?: string
+    technicalExperience?: string
+    skillSet?: string[]
 }
 
 export interface BackendUser {

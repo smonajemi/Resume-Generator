@@ -1,7 +1,7 @@
 import { View, Text } from "@react-pdf/renderer";
 import { FunctionComponent } from "react";
 import { JobExperience } from "../../types/jobExperience.types";
-import { useStyles } from "../hooks/useStyles";
+import { styles } from "../hooks/styles";
 import List, { Item } from "../List";
 
 interface IExperienceEntriesProps {
@@ -11,9 +11,7 @@ interface IExperienceEntriesProps {
 const ExperienceEntries: FunctionComponent<IExperienceEntriesProps> = ({
   jobExperience,
 }) => {
-  const {
-    styles
- } = useStyles()
+
   return (
     <>
       <Text style={styles.text}>Experience</Text>
@@ -38,43 +36,6 @@ const ExperienceEntries: FunctionComponent<IExperienceEntriesProps> = ({
           </List>
         </View>
       ))}
-      {/*       
-        <View style={styles.leftColumn}>
-          <Text style={styles.text}>Experience</Text>
-          <Text style={styles.divider}></Text>
-          <View style={styles.headerContainer}>
-          <Text style={styles.text}>Freelance Developer</Text>
-          <View style={styles.rightColumn}>
-            <Text style={styles.date}>March 2020</Text>
-          </View>
-        </View>
-        </View>
-        <View style={styles.leftColumn}>
-          <Text style={styles.text}>BPTN - Toronto, ON</Text>
-        </View>
-        <List>
-            {jobDetail?.map((detail, i) => (
-            <Item key={i} style={styles.detailContainer} >
-            {detail}
-          </Item>
-            ))}
-            </List>
-        <View style={styles.leftColumn}>
-          <Text style={styles.text}>Education</Text>
-          <Text style={styles.divider}></Text>
-        </View>
-        <View style={styles.headerContainer}>
-        <View style={styles.leftColumn}>
-          <Text style={styles.text}>Hospitality Management</Text>
-        </View>
-        <View style={styles.rightColumn}>
-          <Text style={styles.date}>March 2020</Text>
-        </View>
-        </View>
-        <View style={styles.leftColumn}>
-          <Text style={styles.text}>Seneca College - Toronto, ON</Text>
-        </View> */}
-
     </>
   );
 

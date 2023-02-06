@@ -21,6 +21,8 @@ interface IAddModalProps {
   activeStep: number
   isEdit: boolean
   setEdit: Function
+  setOpen: Function
+  isOpen: boolean
 }
 
 const AddModal: FunctionComponent<IAddModalProps> = ({
@@ -32,7 +34,9 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
   activeStep,
   education,
   isEdit,
-  setEdit
+  setEdit,
+  setOpen,
+  isOpen
 }) => {
 
   const [newExperience, setNewExperience] = useState(jobExperience);
@@ -112,12 +116,45 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
     if (jobExperience) {
       setNewExperience({ ...jobExperience });
 
-    }
+    }  else {
+      setNewExperience(undefined as any);
+    } 
     if (education) {
       setNewEducation({ ...education });
+    } else {
+      setNewEducation(undefined as any);
     }
   }, [jobExperience, education]);
 
+  const handleClick = () => {
+    switch (activeStep) {
+      case 1:
+        if (!newExperience?.jobTitle || !newExperience?.city || !newExperience?.company || !newExperience?.province || !newExperience?.startDate || !newExperience?.jobDetail) {
+          setOpen(true);
+          return;
+        } else {
+          onAdd(newExperience);
+          setNewExperience(undefined as any);
+          setView(false);
+          setOpen(false);
+        }
+        break;
+      case 2:
+        if (!newEducation?.program || !newEducation?.city || !newEducation?.schoolName || !newEducation?.province || !newEducation?.startDate) {
+          setOpen(true);
+          return;
+        } else {
+          onAdd(newEducation);
+          setNewEducation(undefined as any);
+          setView(false);
+          setOpen(false);
+        }
+      break;
+      default:
+        break;
+    }
+
+  };
 
   return (
     <>
@@ -237,11 +274,7 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
               ) : 
               <>
               <Button onClick={() => {setNewExperience(undefined as any); handleClose(); setEdit(false)}}>Cancel</Button>
-              <Button onClick={() => {
-                onAdd(newExperience);
-                setNewExperience(undefined as any);
-                setView(false);
-              }}>Add</Button>
+              <Button onClick={handleClick}>Add</Button>
               </>
               }
 
@@ -334,12 +367,22 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
               </Grid>
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleClose}>Cancel</Button>
+            {isEdit ? (
+                <>
+              <Button onClick={() => {handleClose(); setEdit(false)}}>Cancel</Button>
               <Button onClick={() => {
                 onAdd(newEducation);
                 setNewEducation(undefined as any);
                 setView(false);
+                setEdit(false)
               }}>Save</Button>
+                </>
+              ) : 
+              <>
+              <Button onClick={() => {setNewEducation(undefined as any); handleClose(); setEdit(false)}}>Cancel</Button>
+              <Button onClick={handleClick}>Add</Button>
+              </>
+              }
             </DialogActions>
           </Dialog>
         </Box>
