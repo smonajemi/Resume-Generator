@@ -28,13 +28,13 @@ const Education: FunctionComponent<IEducationProps> = ({
       <Center>
         <Box >
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-            {education?.map((value: EducationTypes) => (
-              <Grid item xs={2} sm={4} md={6} key={value?.key}>
-                <CardComponent setEdit={setEdit} education={value} onEdit={onEdit} onDelete={onDelete} activeStep={activeStep} />
-              </Grid>
-
+            {education && education?.map((value: EducationTypes) => (
+                value?.schoolName && (
+                  <Grid item xs={2} sm={4} md={6} key={value?.key}>
+                  <CardComponent setEdit={setEdit} education={value} onEdit={onEdit} onDelete={onDelete} activeStep={activeStep} />
+                </Grid>
+                )
             ))}
-
           </Grid>
         </Box>
       </Center>

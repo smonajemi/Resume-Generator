@@ -7,11 +7,42 @@ import { EducationTypes } from "../types/Education.types"
 import { UserTypes } from "../types/user.types"
 
 const Home = () => {
-  const [jobExperience, setJobExperience] = useState<JobExperience[]>([])
-  const [education, setEducation] = useState<EducationTypes[]>([])
-  const [user, setUser] = useState<UserTypes[]>([])
-
-
+  const [jobExperience, setJobExperience] = useState<JobExperience[]>([
+    {
+      jobTitle: '',
+      company: '',
+      startDate: '',
+      endDate: '',
+      jobDetail: [],
+      city: '',
+      province: ''
+    }
+  ])
+  const [education, setEducation] = useState<EducationTypes[]>([
+    {
+      program: '',
+      schoolName: '',
+      startDate: '',
+      endDate: '',
+      city: '',
+      province: ''
+    }
+  ])
+  const [user, setUser] = useState<UserTypes[]>([
+    {
+      firstName: '',
+      lastName: '',
+      phoneNumber: '',
+      email: '',
+      address: '',
+      city: '',
+      province: '',
+      postalCode: '',
+      summary: '',
+      technicalSkill: '',
+      skillSet: []
+    }
+  ])
     return (
         <MainContainer title={"Home"} >
             <Box>

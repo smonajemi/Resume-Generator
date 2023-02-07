@@ -287,7 +287,7 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
                     required
                     id="program"
                     name="program"
-                    label="program"
+                    label="Program"
                     fullWidth
                     autoComplete="program"
                     variant="standard"
@@ -309,6 +309,7 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
+                    required
                     id="province"
                     name="province"
                     label="Province/Territory"

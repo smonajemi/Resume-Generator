@@ -35,7 +35,7 @@ const ErrorToaster: FunctionComponent<IToasterProps> = ({
         open={isOpen}
         autoHideDuration={5000}
         onClose={() => handleClose()}
-        message="Error: Some fields are required."
+        message="Error: fields marked with asterisk are required."
       />
     </Box>
   );

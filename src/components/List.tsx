@@ -5,8 +5,8 @@ const List = ({ children }: any) => children;
 
 export const Item = ({ children }: any) => (
   <View style={styles.rowItem}>
-    <Text style={styles.bulletPoint}>•</Text>
-    <Text style={styles.itemContent}>{children}</Text>
+      <Text style={styles.bulletPoint}>•</Text>
+      <Text style={styles.itemContent}>{children}</Text>
   </View>
 );
 

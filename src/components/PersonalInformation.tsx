@@ -46,7 +46,7 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
       case 'summary':
         setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
         break;
-      case 'technicalExperience':
+      case 'technicalSkill':
         setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
         break;
       case 'skillSet':
@@ -65,11 +65,11 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
   }, [user, newUser]);
 
   return <>
-    <Box component="form" noValidate onChange={e => handleAddUser(e, (e?.target as HTMLTextAreaElement)?.name)}>
+    <Box component="form" noValidate onChange={e => handleAddUser(e, (e?.target as HTMLTextAreaElement)?.name)} >
       <Typography variant="h6" gutterBottom>
         Your Personal Information
       </Typography>
-      <Grid container spacing={3}>
+      <Grid container spacing={3} style={{maxHeight: '25em', overflow: 'auto'}}>
         <Grid item xs={12} sm={6}>
           <TextField
             required
@@ -195,13 +195,13 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
               minRows: 4,
             }}
             multiline
-            id="technicalExperience"
-            name="technicalExperience"
+            id="technicalSkill"
+            name="technicalSkill"
             label="Technical Experience"
             fullWidth
             autoComplete="technical-experience"
             variant="standard"
-            value={newUser?.technicalExperience || ""}
+            value={newUser?.technicalSkill || ""}
           />
         </Grid>
         <Grid item xs={12}>

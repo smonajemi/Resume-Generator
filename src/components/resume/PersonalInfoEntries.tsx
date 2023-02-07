@@ -14,7 +14,6 @@ const PersonalInfoEntries: FunctionComponent<IPersonalInfoEntriesProps> = ({
 
     return (
         <>
-
             <View key={userInfo?.key}>
                 <Text style={styles.resumeTitle}>{userInfo?.firstName + ' ' + userInfo?.lastName}</Text>
                 <Text style={styles.header}>{userInfo?.address + ', ' + userInfo?.city + ', ' + userInfo?.province + ', ' + userInfo?.postalCode + ' | ' + userInfo?.phoneNumber + ' | ' + userInfo?.email}</Text>
@@ -22,18 +21,18 @@ const PersonalInfoEntries: FunctionComponent<IPersonalInfoEntriesProps> = ({
                     <Text style={styles.text}>Summary</Text>
                     <Text style={styles.divider}></Text>
                     <Text style={styles.summary}>{userInfo?.summary}</Text>
-                    <Text style={styles.technicalSkills}>{userInfo?.technicalExperience}</Text>
+                    <Text style={styles.technicalSkills}>{userInfo?.technicalSkill}</Text>
                 </View>
-                <List>
-                    {userInfo?.skillSet?.map((detail: any, i: any) => (
-                        <Item key={i} style={styles.detailContainer}>
-                            {detail}
-                        </Item>
-                    ))}
-                </List>
+                {userInfo?.skillSet && (
+                    <List>
+                        {userInfo?.skillSet?.map((detail: any, i: any) => (
+                            <Item key={i} style={styles.detailContainer}>
+                                {detail}
+                            </Item>
+                        ))}
+                    </List>
+                )}
             </View>
-
-
         </>
     )
 };

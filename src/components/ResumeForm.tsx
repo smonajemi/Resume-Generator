@@ -9,7 +9,7 @@ import {
   Button,
   CircularProgress,
 } from "@mui/material";
-import { Fragment, FunctionComponent, useEffect } from "react";
+import React, { Fragment, FunctionComponent, useEffect } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import PersonalInformation from "./PersonalInformation";
 import Experience from "./Experience";
@@ -66,7 +66,6 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
       case 2:
         const editEducation = education?.find((x: any) => x.key === key);
         setCurrentEducation(editEducation);
-        console.log('editEducation', editEducation)
         setView(true);
         break;
 
@@ -81,13 +80,10 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
       case 1:
         if (value?.key) {
           const index = jobExperience?.findIndex((x) => x.key === value.key);
-          console.log('jobExperience', jobExperience)
-
           const newArray = jobExperience;
           newArray[index] = value;
           setJobExperience([...newArray]);
         } else {
-
           const uniqueKey = new Date().getTime().toString();
           const newDate = new Date().toDateString();
           setJobExperience([...jobExperience, { key: uniqueKey, date: newDate, ...value }]);
@@ -97,13 +93,11 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
       case 2:
 
         if (value?.key) {
-
           const index = education?.findIndex((x) => x.key === value.key);
           const newEducationArray = education;
           newEducationArray[index] = value;
           setEducation([...newEducationArray]);
         } else {
-
           const uniqueKey = new Date().getTime().toString();
           const newDate = new Date().toDateString();
           setEducation([...education, { key: uniqueKey, date: newDate, ...value }]);
@@ -164,15 +158,18 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
     }
   }, [currentExperience, isEdit, currentEducation]);
 
-  const handleClick = () => {
+  const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     if (!currentUser?.lastName || !currentUser?.city || !currentUser?.address || !currentUser?.postalCode || !currentUser?.summary) {
       setOpen(true);
       return;
     }
-    onAddUserInfo(currentUser)
-    setCurrentExperience(undefined as any);
-    setView(false);
-    setOpen(false);
+    if (!currentUser) {
+      onAddUserInfo(currentUser)
+      setCurrentExperience(undefined as any);
+      setView(false);
+      setOpen(false);
+    } else { handleNext() }
   }
   const getStepContent = (step: number) => {
     switch (step) {
@@ -243,7 +240,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
                     )}
                     <Button
                       variant="contained"
-                      onClick={() => { activeStep === 0 ? handleClick() : handleNext() }}
+                      onClick={(e: any) => { activeStep === 0 ? handleClick(e) : handleNext() }}
                       sx={{ mt: 3, ml: 1 }}
                     >
                       Next
