@@ -3,16 +3,16 @@ const express = require('express')
 const path = require("path");
 const app = express()
 
-// #############################################################################
-var options = {
-  dotfiles: 'ignore',
-  etag: false,
-  extensions: ['htm', 'html','css','js','ico','jpg','jpeg','png','svg'],
-  index: ['index.html'],
-  maxAge: '1m',
-  redirect: false
-}
-app.use(express.static('build', options))
+app.use(express.static(path.join(__dirname, "./build")))
+app.get("*", (_, res) => {
+    res.sendFile(
+        path.join(__dirname, "./build/index.html"),
+        function (error) {
+            res.status(500).send(error)
+            
+        }
+    )
+})
 
 const port = process.env.PORT || 4000
 
