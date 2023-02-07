@@ -13,7 +13,7 @@ const Home = () => {
       company: '',
       startDate: '',
       endDate: '',
-      jobDetail: [],
+      jobDetail: [''],
       city: '',
       province: ''
     }
@@ -40,7 +40,7 @@ const Home = () => {
       postalCode: '',
       summary: '',
       technicalSkill: '',
-      skillSet: []
+      skillSet: ['']
     }
   ])
     return (

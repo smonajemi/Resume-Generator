@@ -10,7 +10,7 @@ export interface UserTypes {
     postalCode?: string | ''
     summary?: string | ''
     technicalSkill?: string | ''
-    skillSet?: string[] | ''
+    skillSet?: string[] | ['']
 }
 
 export interface BackendUser {
