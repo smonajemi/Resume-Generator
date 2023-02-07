@@ -1,5 +1,0 @@
-name:   "name": "my-app",
-image: node: 14
-build: context: public
-command: ['npm', 'run', 'start']
-ports: - 3000:3000
