@@ -160,10 +160,10 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
 
   const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (!currentUser?.lastName || !currentUser?.city || !currentUser?.address || !currentUser?.postalCode || !currentUser?.summary) {
-      setOpen(true);
-      return;
-    }
+    // if (!currentUser?.lastName || !currentUser?.city || !currentUser?.address || !currentUser?.postalCode || !currentUser?.summary) {
+    //   setOpen(true);
+    //   return;
+    // }
     if (!currentUser) {
       onAddUserInfo(currentUser)
       setCurrentExperience(undefined as any);

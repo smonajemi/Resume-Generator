@@ -3,7 +3,7 @@ import { StyleSheet } from "@react-pdf/renderer";
 export const styles = StyleSheet.create({
   rowItem: {
     flexDirection: "row",
-    marginBottom: 5,
+    marginBottom: 3,
     marginLeft: 35,
   },
   bulletPoint: {
@@ -12,10 +12,10 @@ export const styles = StyleSheet.create({
   },
   itemContent: {
     flex: 1,
-    fontSize: 10,
+    fontSize: 7,
   },
   entryContainer: {
-    marginBottom: 10,
+    marginBottom: 6,
   },
 
   title: {
@@ -36,10 +36,10 @@ export const styles = StyleSheet.create({
     fontFamily: "Times-Roman",
     justifyContent: "center",
     display: "flex",
+    marginTop: 2
   },
   header: {
     fontSize: 10,
-    marginTop: 3,
     textAlign: "center",
     color: "grey",
   },
@@ -72,7 +72,7 @@ export const styles = StyleSheet.create({
   },
   headerContainer: {
     flexDirection: "row",
-    marginTop: 5,
+    marginTop: 3,
     marginBottom: 2,
   },
   summary: {
@@ -84,13 +84,12 @@ export const styles = StyleSheet.create({
     color: "#5A5A5A",
   },
   technicalSkills: {
-    padding: 3,
-    fontSize: 10,
+    padding: 4,
+    fontSize: 8,
     marginTop: 3,
-    marginBottom: 3,
+    marginBottom: 4,
     textAlign: "center",
   },
-
   detailContainer: {
     flexDirection: "row",
   },

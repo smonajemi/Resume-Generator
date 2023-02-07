@@ -25,28 +25,57 @@ const personalData = {
   address:
     "Richmond Hill, ON, L4B0H4 - +1-647-466-5659 - sina.monajemi@me.com",
   summary:
-    "Committed professional offering more than 3 years of experience in software development. Excellent communication skills and exceptional problem-solving abilities both in team-oriented and self-motivated settings.",
+    "I aspire to be a Full-Stack Developer at RBC, utilizing my exceptional interpersonal skills and strong ambition to secure a challenging and rewarding position. My three years of experience in frontend and backend web development and successful assessments on HackerRank and LeeCode showcase my mastery of the field. Furthermore, I possess basic knowledge of AWS development tools.",
+  technicalSkill: 'Technical Skills: Well-versed in TypeScript, JavaScript, Java, React, Angular, Express, Node.js, PostgreSQL, MySQL, and MongoDB,. Possessing a strong understanding of both SQL and No-SQL database queries.',
+  skillSet: ["Proficient in Object-Oriented programming principles", "Capable of juggling multiple tasks and adapting to change without sacrificing output", "Committed to personal growth through ongoing education in new technologies", "Possesses a robust work ethic and enthusiasm for technology, always seeking opportunities for advancement", "Passionate about guiding and supporting businesses in their processes"],
 
-  jobDetail: ["1", "2", "3"],
+  
 }
 
 const jobExperienceData = [
 {
   jobTitle: "Software Developer",
   company: "Freelance",
-  startDate: "March 2020",
+  startDate: "Mar. 2020",
   endDate: "",
-  jobDetail: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Ut enim ad minim veniam"],
+  jobDetail: ['Developed dynamic web applications using Node.js and MongoDB for a top bar in Toronto, resulting in a 60% increase in user engagement','Revamped websites for a few restaurants to improve navigation and aesthetic appeal','Provided consultancy to a new business in website creation'],
   city: "Toronto",
   province: "ON",
 },
 {
   jobTitle: "Junior Software Developer",
   company: "BPTN",
-  startDate: "July 2021",
-  endDate: "June 2022",
-  jobDetail: [" quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur", "llo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratio"],
+  startDate: "Jul. 2021",
+  endDate: "Jun. 2022",
+  jobDetail: ['Collaborated with team members to achieve project goals, create solutions, and meet project deadlines','Helped build the Obsidi social networking platform with the use of technologies like React and Material-UI','Balanced multiple projects and assignments to maintain high standards and meet deadlines', 'Handled both back-end and front-end aspects of the development process', 'Improved existing software systems to boost performance and introduce new capabilities'],
   city: "Toronto",
+  province: "ON",
+},
+{
+  jobTitle: "Junior Software Developer - Hackathon",
+  company: "Seneca",
+  startDate: "Jun. 2020",
+  endDate: "Jul. 2020",
+  jobDetail: ['Authored clear and well-structured code for project implementation','Contributed to the back-end development utilizing Java and MySQL','Worked with development teams to ensure seamless integration during build processes','Secured third place in a competition'],
+  city: "Toronto",
+  province: "ON",
+},
+// {
+//   jobTitle: "Guest Service Agent/Night Auditor ",
+//   company: "Hotel Le Germain",
+//   startDate: "Mar. 2017",
+//   endDate: "Mar. 2020",
+//   jobDetail: ['Collaborated with colleagues to promptly address guest issues and provide knowledgeable and friendly service','Demonstrated strong teamwork by effectively resolving guest challenges and complaints by applying creative and actionable solutions', 'Worked closely with the front desk team to manage guest check-in, check-out procedures, reservations, and payments efficiently'],
+//   city: "Toronto",
+//   province: "ON",
+// },
+{
+  jobTitle: "Front Desk Agent/Night Auditor/Regional Sales Coordinator ",
+  company: "Fairmont Hotels & Resorts",
+  startDate: "Sept. 2014",
+  endDate: "May 2016",
+  jobDetail: ['Demonstrated strong teamwork by effectively resolving guest challenges and complaints by applying creative and actionable solutions','Utilized interpersonal communication skills to increase room revenue by 10% through up-selling efforts','Effectively handled customer complaints and resolved issues to their complete satisfaction with patience and care'],
+  city: "Jasper",
   province: "ON",
 }
 ];
@@ -83,7 +112,7 @@ const PdfGenerator: FunctionComponent<IPdfGeneratorProps> = ({
       <Page style={styles.body} size="A4">
         <>
           <View>
-            <PersonalInfoEntries userInfo={userData} />
+            <PersonalInfoEntries userInfo={personalData} />
           </View>
           <View>
             <ExperienceEntries jobExperience={jobExperienceData} />
@@ -94,7 +123,7 @@ const PdfGenerator: FunctionComponent<IPdfGeneratorProps> = ({
         </>
         <Text
           style={styles.pageNumber}
-          render={({ pageNumber, totalPages }) =>
+          render={({ pageNumber, totalPages }: any) =>
             `${pageNumber} / ${totalPages}`
           }
         />
