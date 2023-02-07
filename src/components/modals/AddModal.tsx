@@ -105,7 +105,9 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
     }
   }, [jobExperience, education]);
 
-  const handleClick = () => {
+  const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    
     switch (activeStep) {
       case 1:
         if (!newExperience?.jobTitle || !newExperience?.city || !newExperience?.company || !newExperience?.province || !newExperience?.startDate || !newExperience?.jobDetail) {

@@ -22,8 +22,7 @@ interface IPdfGeneratorProps {
 const personalData = {
   firstName: "Sina",
   lastName: "Monajemi",
-  address:
-    "Richmond Hill, ON, L4B0H4 - +1-647-466-5659 - sina.monajemi@me.com",
+  address: '85 Oneida Cres', city: 'Richmond Hill', province: 'ON', postalCode: 'L4B0H4', phoneNumber: '6474665659', email: 'sina.monajemi@me.com',
   summary:
     "I aspire to be a Full-Stack Developer at RBC, utilizing my exceptional interpersonal skills and strong ambition to secure a challenging and rewarding position. My three years of experience in frontend and backend web development and successful assessments on HackerRank and LeeCode showcase my mastery of the field. Furthermore, I possess basic knowledge of AWS development tools.",
   technicalSkill: 'Technical Skills: Well-versed in TypeScript, JavaScript, Java, React, Angular, Express, Node.js, PostgreSQL, MySQL, and MongoDB,. Possessing a strong understanding of both SQL and No-SQL database queries.',

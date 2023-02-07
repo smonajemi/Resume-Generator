@@ -68,7 +68,7 @@ export const styles = StyleSheet.create({
     justifySelf: "flex-end",
   },
   date: {
-    fontSize: 8,
+    fontSize: 7,
   },
   headerContainer: {
     flexDirection: "row",
