@@ -255,7 +255,7 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
               ) : 
               <>
               <Button onClick={() => {setNewExperience(undefined as any); handleClose(); setEdit(false)}}>Cancel</Button>
-              <Button onClick={handleClick}>Add</Button>
+              <Button onClick={(e) => handleClick(e)}>Add</Button>
               </>
               }
 
@@ -362,7 +362,7 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
               ) : 
               <>
               <Button onClick={() => {setNewEducation(undefined as any); handleClose(); setEdit(false)}}>Cancel</Button>
-              <Button onClick={handleClick}>Add</Button>
+              <Button onClick={(e) => handleClick(e)}>Add</Button>
               </>
               }
             </DialogActions>
