@@ -3,10 +3,10 @@ const express = require('express')
 const path = require("path");
 const app = express()
 
-app.use(express.static(path.join(__dirname, "./build")))
+app.use(express.static(path.join(__dirname, "./public/build")))
 app.get("*", (_, res) => {
     res.sendFile(
-        path.join(__dirname, "./build/index.html"),
+        path.join(__dirname, "./public/build/index.html"),
         function (error) {
             res.status(500).send(error)
             
