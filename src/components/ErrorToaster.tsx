@@ -1,5 +1,5 @@
-import React, { Fragment, FunctionComponent, useState } from 'react';
-import { Box, Button, Snackbar } from '@mui/material';
+import { FunctionComponent } from 'react';
+import { Box, Snackbar } from '@mui/material';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: any) => ({
@@ -11,14 +11,14 @@ const useStyles = makeStyles((theme: any) => ({
   },
 }));
 
-interface IToasterProps { 
-    setOpen: Function
-    isOpen: boolean
+interface IToasterProps {
+  setOpen: Function
+  isOpen: boolean
 }
 
 const ErrorToaster: FunctionComponent<IToasterProps> = ({
-    setOpen,
-    isOpen
+  setOpen,
+  isOpen
 }) => {
   const classes = useStyles();
   const handleClose = () => {

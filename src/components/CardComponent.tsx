@@ -67,7 +67,7 @@ const CardComponent: FunctionComponent<ICardComponentProps> = ({
             <Button
               size="small"
               color="primary"
-              onClick={() => {onEdit(jobExperience?.key); setEdit(true)}}
+              onClick={() => { onEdit(jobExperience?.key); setEdit(true) }}
             >
               Edit
             </Button>
@@ -85,7 +85,7 @@ const CardComponent: FunctionComponent<ICardComponentProps> = ({
             <Button
               size="small"
               color="primary"
-              onClick={() => onEdit(education?.key)}
+              onClick={() => { onEdit(education?.key); setEdit(true) }}
             >
               Edit
             </Button>

@@ -1,6 +1,5 @@
 import { Typography, Grid, TextField } from "@mui/material";
 import { Box } from "@mui/system";
-import { Dayjs } from "dayjs";
 import { FunctionComponent, useEffect, useState } from "react";
 import { UserTypes } from "../types/user.types";
 
@@ -20,22 +19,20 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
   const handleAddUser = (e: any, type: string) => {
     switch (type) {
       case 'firstName':
-        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
+        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value?.toUpperCase() });
         break;
       case 'lastName':
-        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
+        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value?.toUpperCase() });
 
         break;
       case 'email':
         setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
-
         break;
       case 'phoneNumber':
         setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
         break;
       case 'address':
         setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
-
         break;
       case 'city':
         setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
@@ -54,8 +51,8 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
         break;
       case 'skillSet':
         let temp = new Array()
-        temp = e?.target?.value.split(",")
-        setNewUser({ ...newUser, [e?.target?.name]: temp });
+        temp = (e?.target?.value[0]?.toUpperCase() + e?.target?.value?.substring(1))?.split(",")
+        setNewUser({ ...newUser, [e?.target?.name]: !e?.target?.value ? null : temp });
         break;
 
 
@@ -82,7 +79,7 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             fullWidth
             autoComplete="first-name"
             variant="standard"
-            inputProps={{ style: { textTransform: 'capitalize' } }}
+            // inputProps={{ style: { textTransform: 'capitalize' } }}
             value={newUser?.firstName || ""}
           />
         </Grid>
@@ -95,7 +92,7 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             fullWidth
             autoComplete="last-name"
             variant="standard"
-            inputProps={{ style: { textTransform: 'capitalize' } }}
+            // inputProps={{ style: { textTransform: 'capitalize' } }}
             value={newUser?.lastName || ""}
           />
         </Grid>

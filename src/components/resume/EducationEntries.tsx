@@ -17,16 +17,16 @@ const EducationEntries: FunctionComponent<IEducationEntriesProps> = ({
       <Text style={styles.divider}></Text>
       {education?.map((val, i) => (
         <View style={styles.entryContainer} key={i}>
-        <View style={styles.leftColumn}>
-          <View style={styles.headerContainer}>
-            <Text style={styles.title}>{val?.program}</Text>
-            <View style={styles.rightColumn}>
-              <Text style={styles.date}>{val?.startDate} - {!val?.endDate ? 'present' : val?.endDate}</Text>
+          <View style={styles.leftColumn}>
+            <View style={styles.headerContainer}>
+              <Text style={styles.title}>{val?.program}</Text>
+              <View style={styles.rightColumn}>
+                <Text style={styles.date}>{val?.startDate} - {!val?.endDate ? 'present' : val?.endDate}</Text>
+              </View>
             </View>
+            <Text style={styles.subHeader}>{val?.schoolName} - {val?.city}, {val?.province}</Text>
           </View>
-          <Text style={styles.subHeader}>{val?.schoolName} - {val?.city}, {val?.province}</Text>
         </View>
-      </View>
       ))}
     </>
   );

@@ -18,25 +18,25 @@ export const useForm = () => {
     const [activeStep, setActiveStep] = useState(0);
     const theme = createTheme();
     const [isOpen, setOpen] = useState(false);
-  
-   
+
+
 
     return {
         isView,
         setView,
         handleCloseModal,
-        activeStep, 
+        activeStep,
         setActiveStep,
         theme,
-        currentExperience, 
+        currentExperience,
         setCurrentExperience,
-        currentUser, 
+        currentUser,
         setCurrentUser,
         currentEducation,
         setCurrentEducation,
-        isEdit, 
+        isEdit,
         setEdit,
-        isOpen, 
+        isOpen,
         setOpen
     } as const
 }

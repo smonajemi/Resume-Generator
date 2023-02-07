@@ -52,7 +52,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
     setActiveStep,
     isEdit,
     setEdit,
-    isOpen, 
+    isOpen,
     setOpen
   } = useForm();
 
@@ -66,53 +66,54 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
       case 2:
         const editEducation = education?.find((x: any) => x.key === key);
         setCurrentEducation(editEducation);
+        console.log('editEducation', editEducation)
         setView(true);
         break;
-    
+
       default:
         break;
     }
-   
+
   };
 
   const onAdd = (value: any) => {
-   switch (activeStep) {
-    case 1:
-      if (value?.key) {
-        const index = jobExperience?.findIndex((x) => x.key === value.key);
-        console.log('jobExperience', jobExperience)
+    switch (activeStep) {
+      case 1:
+        if (value?.key) {
+          const index = jobExperience?.findIndex((x) => x.key === value.key);
+          console.log('jobExperience', jobExperience)
 
-        const newArray = jobExperience;
-        newArray[index] = value;
-        setJobExperience([...newArray]);
-      } else {
-  
-        const uniqueKey = new Date().getTime().toString();
-        const newDate = new Date().toDateString();
-        setJobExperience([...jobExperience, { key: uniqueKey, date: newDate, ...value }]);
-      }
-      setCurrentExperience(undefined);
-      break;
-    case 2:
+          const newArray = jobExperience;
+          newArray[index] = value;
+          setJobExperience([...newArray]);
+        } else {
 
-      if (value?.key) {
-    
-        const index = education?.findIndex((x) => x.key === value.key);
-        const newEducationArray = education;
-        newEducationArray[index] = value;
-        setEducation([...newEducationArray]);
-      } else {
-    
-        const uniqueKey = new Date().getTime().toString();
-        const newDate = new Date().toDateString();
-        setEducation([...education, { key: uniqueKey, date: newDate, ...value }]);
-      }
-      setCurrentEducation(undefined);
-      break;
-    default:
-      break;
-   }
-  
+          const uniqueKey = new Date().getTime().toString();
+          const newDate = new Date().toDateString();
+          setJobExperience([...jobExperience, { key: uniqueKey, date: newDate, ...value }]);
+        }
+        setCurrentExperience(undefined);
+        break;
+      case 2:
+
+        if (value?.key) {
+
+          const index = education?.findIndex((x) => x.key === value.key);
+          const newEducationArray = education;
+          newEducationArray[index] = value;
+          setEducation([...newEducationArray]);
+        } else {
+
+          const uniqueKey = new Date().getTime().toString();
+          const newDate = new Date().toDateString();
+          setEducation([...education, { key: uniqueKey, date: newDate, ...value }]);
+        }
+        setCurrentEducation(undefined);
+        break;
+      default:
+        break;
+    }
+
   };
 
   const onAddUserInfo = (value: any) => {
@@ -130,12 +131,12 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
     handleNext()
   };
 
-      
+
   const handleNext = () => {
     setActiveStep(activeStep + 1);
   };
 
-  
+
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
@@ -143,31 +144,31 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
   const onDelete = (key: string | undefined) => {
     switch (activeStep) {
       case 1:
-        const experienceListItem = jobExperience.filter((x) => x.key != key);
+        const experienceListItem = jobExperience.filter((x) => x.key !== key);
         setJobExperience([...experienceListItem]);
         break;
-        case 2:
-          const educationListItem = education.filter((x) => x.key != key);
-          setEducation([...educationListItem]);
+      case 2:
+        const educationListItem = education.filter((x) => x.key !== key);
+        setEducation([...educationListItem]);
         break;
       default:
         break;
     }
-   
+
   };
 
   useEffect(() => {
     if (!isEdit) {
       setCurrentExperience(undefined);
       setCurrentEducation(undefined);
-    }  
+    }
   }, [currentExperience, isEdit, currentEducation]);
 
   const handleClick = () => {
-    if ( !currentUser?.lastName || !currentUser?.city || !currentUser?.address || !currentUser?.postalCode || !currentUser?.summary) {
+    if (!currentUser?.lastName || !currentUser?.city || !currentUser?.address || !currentUser?.postalCode || !currentUser?.summary) {
       setOpen(true);
       return;
-    } 
+    }
     onAddUserInfo(currentUser)
     setCurrentExperience(undefined as any);
     setView(false);
@@ -182,7 +183,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
       case 2:
         return <Education setEdit={setEdit} education={education} onEdit={onEdit} onDelete={onDelete} activeStep={activeStep} />;
       default:
-        throw new Error("Unknown step");  
+        throw new Error("Unknown step");
     }
   };
   return (
@@ -231,7 +232,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
                         <PlaylistAdd />
                       </Button>
                     )}
-                  
+
 
                   </Box>
                   <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
@@ -242,7 +243,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
                     )}
                     <Button
                       variant="contained"
-                      onClick={() => {activeStep === 0  ? handleClick() : handleNext()}}
+                      onClick={() => { activeStep === 0 ? handleClick() : handleNext() }}
                       sx={{ mt: 3, ml: 1 }}
                     >
                       Next
@@ -255,7 +256,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
           </Paper>
         </Container>
       </ThemeProvider>
-      <AddModal isOpen={isOpen} setOpen={setOpen} setEdit= {setEdit} isEdit ={isEdit} isView={isView} handleClose={handleCloseModal} jobExperience={currentExperience} setView={setView} onAdd={onAdd} education={currentEducation} activeStep={activeStep} />
+      <AddModal isOpen={isOpen} setOpen={setOpen} setEdit={setEdit} isEdit={isEdit} isView={isView} handleClose={handleCloseModal} jobExperience={currentExperience} setView={setView} onAdd={onAdd} education={currentEducation} activeStep={activeStep} />
       <ErrorToaster setOpen={setOpen} isOpen={isOpen} />
     </>
   );

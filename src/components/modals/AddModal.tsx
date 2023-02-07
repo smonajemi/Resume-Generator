@@ -41,46 +41,30 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
 
   const [newExperience, setNewExperience] = useState(jobExperience);
   const [newEducation, setNewEducation] = useState(education);
-
-  const [jobTitle, setJobTitle] = useState('')
-  const [company, setCompany] = useState('')
-  const [startDate, setStartDate] = useState('')
-  const [endDate, setEndDate] = useState('')
-  const [jobDetail, setJobDetail] = useState('')
-  const [city, setCity] = useState('')
-  const [province, setProvince] = useState('')
-
   const handleAddExperience = (e: any, type: string) => {
     switch (type) {
       case 'jobTitle':
         setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value });
-        setJobTitle(e?.target?.value)
         break;
       case 'company':
         setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value });
-        setCompany(e?.target?.value)
         break;
       case 'city':
         setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value });
-        setCity(e?.target?.value)
         break;
       case 'province':
         setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value?.toUpperCase() });
-        setProvince(e?.target?.value)
         break;
       case 'startDate':
         setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value });
-        setStartDate(e?.target?.value)
         break;
       case 'endDate':
         setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value });
-        setEndDate(e?.target?.value)
         break;
       case 'jobDetail':
         let temp = new Array()
-        temp = e?.target?.value.split(",")
+        temp = (e?.target?.value[0]?.toUpperCase() + e?.target?.value?.substring(1))?.split(",")
         setNewExperience({ ...newExperience, [e?.target?.name]: temp });
-        setJobDetail(e?.target?.value)
         break;
     }
   };
@@ -88,26 +72,21 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
     switch (type) {
       case 'schoolName':
         setNewEducation({ ...newEducation, [e?.target?.name]: e?.target?.value });
-
         break;
       case 'program':
         setNewEducation({ ...newEducation, [e?.target?.name]: e?.target?.value });
-
         break;
       case 'startDate':
         setNewEducation({ ...newEducation, [e?.target?.name]: e?.target?.value });
-
         break;
       case 'endDate':
         setNewEducation({ ...newEducation, [e?.target?.name]: e?.target?.value });
         break;
       case 'city':
         setNewEducation({ ...newEducation, [e?.target?.name]: e?.target?.value });
-
         break;
       case 'province':
         setNewEducation({ ...newEducation, [e?.target?.name]: e?.target?.value?.toUpperCase() });
-
         break;
 
     }
