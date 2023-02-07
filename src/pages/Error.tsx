@@ -8,7 +8,7 @@ const Error = () => {
         <Box flexDirection='column'>
             <Box flexDirection='column' display='flex' justifyContent='center'>
                 <Typography gutterBottom>This page was not found</Typography>
-                <Button color='primary' variant='contained' component={Link} to='/select'> Return to Home Page</Button>
+                <Button color='primary' variant='contained' component={Link} to='/'> Return to Home Page</Button>
             </Box>
         </Box>
     </MainContainer>
