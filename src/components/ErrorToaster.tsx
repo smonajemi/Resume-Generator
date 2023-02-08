@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
-import { Box, makeStyles, Snackbar } from '@mui/material';
-
+import { Box, Snackbar } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+ 
 const useStyles = makeStyles((theme: any) => ({
   root: {
     width: '100%',
