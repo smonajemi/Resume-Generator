@@ -74,9 +74,6 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
         setCurrentEducation(editEducation);
         setView(true);
         break;
-
-      default:
-        break;
     }
 
   };

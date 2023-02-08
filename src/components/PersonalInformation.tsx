@@ -158,7 +158,6 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
         </Grid>
         <Grid item xs={12}>
           <TextField
-            inputProps={{ style: { textTransform: 'capitalize' } }}
             required
             InputProps={{
               minRows: 5,
