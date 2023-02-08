@@ -191,7 +191,7 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
-                    inputProps={{ style: { textTransform: 'capitalize' } }}
+                    inputProps={{ style: { textTransform: 'uppercase' } }}
                     required
                     id="startDate"
                     name="startDate"
@@ -214,7 +214,7 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
                     inputProps={{ 'aria-label': 'controlled' }}
                   />
                     <TextField
-                      inputProps={{ style: { textTransform: 'capitalize' } }}
+                      inputProps={{ style: { textTransform: 'uppercase' } }}
                       id="endDate"
                       name="endDate"
                       label="End Date"
@@ -333,7 +333,7 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
-                    inputProps={{ style: { textTransform: 'capitalize' } }}
+                    inputProps={{ style: { textTransform: 'uppercase' } }}
                     required
                     id="startDate"
                     name="startDate"
@@ -349,10 +349,14 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
                 <Grid item xs={12} sm={6}>
                 <Box display='flex'>
                   <Checkbox
-                    checked={newEducation?.isChecked}
+                    name="isChecked"
+                    id='isChecked'
+                    checked={isChecked}
+                    onChange={handleChange}
                     inputProps={{ 'aria-label': 'controlled' }}
                   />
                <TextField
+                    inputProps={{ style: { textTransform: 'uppercase' } }}
                     id="endDate"
                     name="endDate"
                     label="End Date"
