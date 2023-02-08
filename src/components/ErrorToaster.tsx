@@ -1,15 +1,15 @@
 import { FunctionComponent } from 'react';
 import { Box, Snackbar } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+// import { makeStyles } from '@mui/styles';
  
-const useStyles = makeStyles((theme: any) => ({
-  root: {
-    width: '100%',
-    '& > * + *': {
-      marginTop: theme.spacing(2),
-    },
-  },
-}));
+// const useStyles = makeStyles((theme: any) => ({
+//   root: {
+//     width: '100%',
+//     '& > * + *': {
+//       marginTop: theme.spacing(2),
+//     },
+//   },
+// }));
 
 interface IToasterProps {
   setOpen: Function
@@ -20,13 +20,13 @@ const ErrorToaster: FunctionComponent<IToasterProps> = ({
   setOpen,
   isOpen
 }) => {
-  const classes = useStyles();
+  // const classes = useStyles();
   const handleClose = () => {
     setOpen(false);
   };
 
   return (
-    <Box className={classes.root}>
+    <Box>
       <Snackbar
         anchorOrigin={{
           vertical: 'bottom',
