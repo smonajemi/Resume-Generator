@@ -18,8 +18,10 @@ export const useForm = () => {
     const [activeStep, setActiveStep] = useState(0);
     const theme = createTheme();
     const [isOpen, setOpen] = useState(false);
-
-
+    const [isChecked, setChecked] = useState(false);
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setChecked(e.target.checked);
+    }; 
 
     return {
         isView,
@@ -37,7 +39,10 @@ export const useForm = () => {
         isEdit,
         setEdit,
         isOpen,
-        setOpen
+        setOpen,
+        isChecked,
+        handleChange,
+        setChecked
     } as const
 }
 

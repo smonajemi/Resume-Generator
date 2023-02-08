@@ -8,53 +8,31 @@ interface IPersonalInformationProps {
 
 }
 
-
 const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
   user,
   setUser
 }) => {
   const [newUser, setNewUser] = useState(user);
-
   const handleAddUser = (e: any, type: string) => {
     switch (type) {
-      case 'firstName':
-        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value?.toUpperCase() });
-        break;
-      case 'lastName':
-        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value?.toUpperCase() });
-
-        break;
-      case 'email':
-        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
-        break;
-      case 'phoneNumber':
-        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
-        break;
-      case 'address':
-        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
-        break;
-      case 'city':
-        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
-        break;
       case 'province':
         setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value?.toUpperCase() });
         break;
       case 'postalCode':
         setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value?.toUpperCase() });
         break;
-      case 'summary':
-        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
-        break;
-      case 'technicalSkill':
-        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
-        break;
       case 'skillSet':
-        let temp = new Array()
+        let temp = []
         temp = (e?.target?.value[0]?.toUpperCase() + e?.target?.value?.substring(1))?.split(",")
         setNewUser({ ...newUser, [e?.target?.name]: !e?.target?.value ? null : temp });
         break;
-
-
+      default:
+        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
+    }
+  };
+  const handleEnterKey = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
     }
   };
   useEffect(() => {
@@ -65,11 +43,8 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
 
   return <>
     <Box component="form" noValidate onChange={e => handleAddUser(e, (e?.target as HTMLTextAreaElement)?.name)} >
-      <Typography variant="h6" gutterBottom>
-        Your Personal Information
-      </Typography>
-      <Grid container spacing={3} style={{maxHeight: '25em', overflow: 'auto'}}>
-        <Grid item xs={12} sm={6}>
+      <Grid container spacing={3} style={{ maxHeight: '25em', overflow: 'auto' }}>
+        <Grid item xs={12} sm={6} >
           <TextField
             required
             id="firstName"
@@ -77,8 +52,9 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             label="First name"
             fullWidth
             autoComplete="first-name"
-            variant="standard"
-            // inputProps={{ style: { textTransform: 'capitalize' } }}
+            variant="outlined"
+            InputLabelProps={{ shrink: true }}
+            inputProps={{ style: { textTransform: 'capitalize' } }}
             value={newUser?.firstName || ""}
           />
         </Grid>
@@ -90,8 +66,9 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             label="Last name"
             fullWidth
             autoComplete="last-name"
-            variant="standard"
-            // inputProps={{ style: { textTransform: 'capitalize' } }}
+            variant="outlined"
+            InputLabelProps={{ shrink: true }}
+            inputProps={{ style: { textTransform: 'capitalize' } }}
             value={newUser?.lastName || ""}
           />
         </Grid>
@@ -104,19 +81,23 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             fullWidth
             inputProps={{ maxLength: 10 }}
             autoComplete="phone-number"
-            variant="standard"
+            variant="outlined"
+            InputLabelProps={{ shrink: true }}
             value={newUser?.phoneNumber || ""}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
             required
+            inputProps={{ style: { textTransform: 'capitalize' } }}
             id="email"
             name="email"
             label="Email"
+            type="email"
             fullWidth
             autoComplete="email"
-            variant="standard"
+            variant="outlined"
+            InputLabelProps={{ shrink: true }}
             value={newUser?.email || ""}
           />
         </Grid>
@@ -125,10 +106,12 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             required
             id="address"
             name="address"
+            inputProps={{ style: { textTransform: 'capitalize' } }}
             label="Address line"
             fullWidth
             autoComplete="address-line"
-            variant="standard"
+            variant="outlined"
+            InputLabelProps={{ shrink: true }}
             value={newUser?.address || ""}
           />
         </Grid>
@@ -140,7 +123,8 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             label="City"
             fullWidth
             autoComplete="city"
-            variant="standard"
+            variant="outlined"
+            InputLabelProps={{ shrink: true }}
             inputProps={{ style: { textTransform: 'capitalize' } }}
             value={newUser?.city || ""}
           />
@@ -153,7 +137,8 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             label="Province/Territory"
             fullWidth
             inputProps={{ maxLength: 2 }}
-            variant="standard"
+            variant="outlined"
+            InputLabelProps={{ shrink: true }}
             value={newUser?.province || ""}
           />
         </Grid>
@@ -166,7 +151,8 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             fullWidth
             autoComplete="postal-code"
             inputProps={{ maxLength: 6 }}
-            variant="standard"
+            variant="outlined"
+            InputLabelProps={{ shrink: true }}
             value={newUser?.postalCode || ""}
           />
         </Grid>
@@ -183,7 +169,8 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             label="Summary"
             fullWidth
             autoComplete="summary"
-            variant="standard"
+            variant="outlined"
+            InputLabelProps={{ shrink: true }}
             value={newUser?.summary || ""}
           />
         </Grid>
@@ -199,7 +186,8 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             label="Technical Experience"
             fullWidth
             autoComplete="technical-experience"
-            variant="standard"
+            variant="outlined"
+            InputLabelProps={{ shrink: true }}
             value={newUser?.technicalSkill || ""}
           />
         </Grid>
@@ -207,7 +195,7 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
           <TextField
             inputProps={{ style: { textTransform: 'capitalize' } }}
             InputProps={{
-              minRows: 10,
+              minRows: 2,
             }}
             multiline
             id="skillSet"
@@ -215,9 +203,12 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             label="Skill Set"
             fullWidth
             autoComplete="skill-Set"
-            variant="standard"
+            onKeyPress={(e: any) => { handleEnterKey(e) }} // prevent new line
+            variant="outlined"
+            InputLabelProps={{ shrink: true }}
             value={newUser?.skillSet || ""}
           />
+          <Typography variant="caption">*separate by comma</Typography>
         </Grid>
       </Grid>
     </Box>

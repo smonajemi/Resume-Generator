@@ -1,14 +1,15 @@
 import { View, Text } from "@react-pdf/renderer";
+import moment from "moment";
 import { FunctionComponent } from "react";
 import { EducationTypes } from "../../types/Education.types";
 import { styles } from "../hooks/styles";
 
 interface IEducationEntriesProps {
-  education: EducationTypes[];
+  education: EducationTypes[]
 }
 
 const EducationEntries: FunctionComponent<IEducationEntriesProps> = ({
-  education,
+  education
 }) => {
 
   return (
@@ -21,7 +22,7 @@ const EducationEntries: FunctionComponent<IEducationEntriesProps> = ({
             <View style={styles.headerContainer}>
               <Text style={styles.title}>{val?.program}</Text>
               <View style={styles.rightColumn}>
-                <Text style={styles.date}>{val?.startDate} - {!val?.endDate ? 'present' : val?.endDate}</Text>
+              <Text style={styles.date}>{moment(val?.startDate)?.format("MMM YYYY")} - {val?.isChecked ? 'present': moment(val?.endDate)?.format("MMM YYYY")}</Text>
               </View>
             </View>
             <Text style={styles.subHeader}>{val?.schoolName} - {val?.city}, {val?.province}</Text>

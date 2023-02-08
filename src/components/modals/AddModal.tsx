@@ -1,12 +1,13 @@
 import {
   Box,
   Button,
+  Checkbox,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogTitle,
   Grid, TextField
 } from "@mui/material";
+import moment from "moment";
 import { FunctionComponent, useEffect, useState } from "react";
 import { EducationTypes } from "../../types/Education.types";
 import { JobExperience } from "../../types/jobExperience.types";
@@ -23,6 +24,9 @@ interface IAddModalProps {
   setEdit: Function
   setOpen: Function
   isOpen: boolean
+  isChecked: boolean
+  handleChange: any
+  setChecked: Function
 }
 
 const AddModal: FunctionComponent<IAddModalProps> = ({
@@ -36,68 +40,52 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
   isEdit,
   setEdit,
   setOpen,
-  isOpen
+  isOpen,
+  isChecked,
+  handleChange,
+  setChecked
 }) => {
 
   const [newExperience, setNewExperience] = useState(jobExperience);
   const [newEducation, setNewEducation] = useState(education);
   const handleAddExperience = (e: any, type: string) => {
     switch (type) {
-      case 'jobTitle':
-        setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value });
-        break;
-      case 'company':
-        setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value });
-        break;
-      case 'city':
-        setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value });
+      case 'isChecked':
+        setNewExperience({ ...newExperience, [e?.target?.name]: !isChecked });
         break;
       case 'province':
         setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value?.toUpperCase() });
         break;
-      case 'startDate':
-        setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value });
-        break;
-      case 'endDate':
-        setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value });
-        break;
       case 'jobDetail':
-        let temp = new Array()
+        let temp = []
         temp = (e?.target?.value[0]?.toUpperCase() + e?.target?.value?.substring(1))?.split(",")
         setNewExperience({ ...newExperience, [e?.target?.name]: temp });
+        break;
+      default:
+        setNewExperience({ ...newExperience, [e?.target?.name]: e?.target?.value });
         break;
     }
   };
   const handleAddEducation = (e: any, type: string) => {
     switch (type) {
-      case 'schoolName':
-        setNewEducation({ ...newEducation, [e?.target?.name]: e?.target?.value });
-        break;
-      case 'program':
-        setNewEducation({ ...newEducation, [e?.target?.name]: e?.target?.value });
-        break;
-      case 'startDate':
-        setNewEducation({ ...newEducation, [e?.target?.name]: e?.target?.value });
-        break;
-      case 'endDate':
-        setNewEducation({ ...newEducation, [e?.target?.name]: e?.target?.value });
-        break;
-      case 'city':
-        setNewEducation({ ...newEducation, [e?.target?.name]: e?.target?.value });
+      case 'isChecked':
+        setNewEducation({ ...newEducation, [e?.target?.name]: !isChecked });
         break;
       case 'province':
         setNewEducation({ ...newEducation, [e?.target?.name]: e?.target?.value?.toUpperCase() });
         break;
-
+      default:
+        setNewEducation({ ...newEducation, [e?.target?.name]: e?.target?.value });
+        break;
     }
   };
+
   useEffect(() => {
     if (jobExperience) {
       setNewExperience({ ...jobExperience });
-
-    }  else {
+    } else {
       setNewExperience(undefined as any);
-    } 
+    }
     if (education) {
       setNewEducation({ ...education });
     } else {
@@ -107,13 +95,13 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
 
   const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    
     switch (activeStep) {
       case 1:
         if (!newExperience?.jobTitle || !newExperience?.city || !newExperience?.company || !newExperience?.province || !newExperience?.startDate || !newExperience?.jobDetail) {
           setOpen(true);
           return;
         } else {
+          setChecked(false)
           onAdd(newExperience);
           setNewExperience(undefined as any);
           setView(false);
@@ -125,12 +113,13 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
           setOpen(true);
           return;
         } else {
+          setChecked(false)
           onAdd(newEducation);
           setNewEducation(undefined as any);
           setView(false);
           setOpen(false);
         }
-      break;
+        break;
       default:
         break;
     }
@@ -142,11 +131,9 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
 
       {activeStep === 1 && (
         <Box component="form" noValidate onChange={e => handleAddExperience(e, (e?.target as HTMLTextAreaElement)?.name)} sx={{ mt: 3 }}>
-
-          <Dialog open={isView} onClose={() => {handleClose(); setEdit(false)}}>
-            <DialogTitle>Your Experience</DialogTitle>
+          <Dialog open={isView} onClose={() => { handleClose(); setEdit(false); setChecked(false)}}>
             <DialogContent>
-              <Grid container spacing={3}>
+              <Grid container spacing={3} style={{padding: 10}}>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     inputProps={{ style: { textTransform: 'capitalize' } }}
@@ -156,7 +143,8 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
                     label="Job Title"
                     fullWidth
                     autoComplete="job-title"
-                    variant="standard"
+                    variant="outlined"
+                    InputLabelProps={{ shrink: true }}
                     value={newExperience?.jobTitle || ""}
                   />
                 </Grid>
@@ -169,7 +157,8 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
                     label="Company"
                     fullWidth
                     autoComplete="company"
-                    variant="standard"
+                    variant="outlined"
+                    InputLabelProps={{ shrink: true }}
                     value={newExperience?.company || ""}
                   />
                 </Grid>
@@ -182,7 +171,8 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
                     label="City"
                     fullWidth
                     autoComplete="city"
-                    variant="standard"
+                    variant="outlined"
+                    InputLabelProps={{ shrink: true }}
                     value={newExperience?.city || ""}
                   />
                 </Grid>
@@ -193,7 +183,8 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
                     name="province"
                     label="Province/Territory"
                     fullWidth
-                    variant="standard"
+                    variant="outlined"
+                    InputLabelProps={{ shrink: true }}
                     inputProps={{ maxLength: 2 }}
                     value={newExperience?.province || ""}
                   />
@@ -206,22 +197,36 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
                     name="startDate"
                     label="Start Date"
                     fullWidth
+                    type="date"
                     autoComplete="start-date"
-                    variant="standard"
+                    variant="outlined"
+                    InputLabelProps={{ shrink: true }}
                     value={newExperience?.startDate || ""}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <TextField
-                    inputProps={{ style: { textTransform: 'capitalize' } }}
-                    id="endDate"
-                    name="endDate"
-                    label="End Date"
-                    fullWidth
-                    autoComplete="endDate"
-                    variant="standard"
-                    value={newExperience?.endDate || ""}
+                  <Box display='flex'>
+                    <Checkbox
+                    name="isChecked"
+                    id='isChecked'
+                    checked={isChecked}
+                    onChange={handleChange}
+                    inputProps={{ 'aria-label': 'controlled' }}
                   />
+                    <TextField
+                      inputProps={{ style: { textTransform: 'capitalize' } }}
+                      id="endDate"
+                      name="endDate"
+                      label="End Date"
+                      fullWidth
+                      type="date"
+                      autoComplete="endDate"
+                      variant="outlined"
+                      disabled={newExperience?.isChecked}
+                      InputLabelProps={{ shrink: true }}
+                      value={newExperience?.endDate || ""}
+                    />
+                    </Box>
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -236,7 +241,8 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
                     label="Job Detail"
                     fullWidth
                     autoComplete="job-detail"
-                    variant="standard"
+                    variant="outlined"
+                    InputLabelProps={{ shrink: true }}
                     value={newExperience?.jobDetail || ""}
                   />
                 </Grid>
@@ -245,18 +251,18 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
             <DialogActions>
               {isEdit ? (
                 <>
-              <Button onClick={() => {handleClose(); setEdit(false)}}>Cancel</Button>
-              <Button onClick={() => {
-                onAdd(newExperience);
-                setNewExperience(undefined as any);
-                setView(false);
-              }}>Save</Button>
+                  <Button onClick={() => { handleClose(); setEdit(false) }}>Cancel</Button>
+                  <Button onClick={() => {
+                    onAdd(newExperience);
+                    setNewExperience(undefined as any);
+                    setView(false);
+                  }}>Save</Button>
                 </>
-              ) : 
-              <>
-              <Button onClick={() => {setNewExperience(undefined as any); handleClose(); setEdit(false)}}>Cancel</Button>
-              <Button onClick={(e: any) => handleClick(e)}>Add</Button>
-              </>
+              ) :
+                <>
+                  <Button onClick={() => { setNewExperience(undefined as any); handleClose(); setEdit(false) }}>Cancel</Button>
+                  <Button onClick={(e: any) => handleClick(e)}>Add</Button>
+                </>
               }
 
             </DialogActions>
@@ -266,10 +272,10 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
 
       {activeStep === 2 && (
         <Box component="form" noValidate onChange={e => handleAddEducation(e, (e?.target as HTMLTextAreaElement)?.name)} sx={{ mt: 3 }}>
-      <Dialog open={isView} onClose={() => {handleClose(); setEdit(false)}}>
-            <DialogTitle>Your Education</DialogTitle>
+          <Dialog open={isView} onClose={() => { handleClose(); setEdit(false); setChecked(false) }}>
+           
             <DialogContent>
-              <Grid container spacing={3}>
+              <Grid container spacing={3} style={{padding: 10}}>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     inputProps={{ style: { textTransform: 'capitalize' } }}
@@ -279,7 +285,8 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
                     label="School Name"
                     fullWidth
                     autoComplete="school-name"
-                    variant="standard"
+                    variant="outlined"
+                    InputLabelProps={{ shrink: true }}
                     value={newEducation?.schoolName || ""}
                   />
                 </Grid>
@@ -292,7 +299,8 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
                     label="Program"
                     fullWidth
                     autoComplete="program"
-                    variant="standard"
+                    variant="outlined"
+                    InputLabelProps={{ shrink: true }}
                     value={newEducation?.program || ""}
                   />
                 </Grid>
@@ -305,7 +313,8 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
                     label="City"
                     fullWidth
                     autoComplete="city"
-                    variant="standard"
+                    variant="outlined"
+                    InputLabelProps={{ shrink: true }}
                     value={newEducation?.city || ""}
                   />
                 </Grid>
@@ -316,7 +325,8 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
                     name="province"
                     label="Province/Territory"
                     fullWidth
-                    variant="standard"
+                    variant="outlined"
+                    InputLabelProps={{ shrink: true }}
                     inputProps={{ maxLength: 2 }}
                     value={newEducation?.province || ""}
                   />
@@ -329,41 +339,52 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
                     name="startDate"
                     label="Start Date"
                     fullWidth
+                    type="date"
                     autoComplete="start-date"
-                    variant="standard"
+                    variant="outlined"
+                    InputLabelProps={{ shrink: true }}
                     value={newEducation?.startDate || ""}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <TextField
+                <Box display='flex'>
+                  <Checkbox
+                    checked={newEducation?.isChecked}
+                    inputProps={{ 'aria-label': 'controlled' }}
+                  />
+               <TextField
                     id="endDate"
                     name="endDate"
                     label="End Date"
                     fullWidth
+                    type="date"
                     autoComplete="endDate"
-                    variant="standard"
+                    variant="outlined"
+                    disabled={newEducation?.isChecked}
+                    InputLabelProps={{ shrink: true }}
                     value={newEducation?.endDate || ""}
                   />
+                    </Box>
                 </Grid>
 
               </Grid>
             </DialogContent>
             <DialogActions>
-            {isEdit ? (
+              {isEdit ? (
                 <>
-              <Button onClick={() => {handleClose(); setEdit(false)}}>Cancel</Button>
-              <Button onClick={() => {
-                onAdd(newEducation);
-                setNewEducation(undefined as any);
-                setView(false);
-                setEdit(false)
-              }}>Save</Button>
+                  <Button onClick={() => { handleClose(); setEdit(false); setChecked(false)}}>Cancel</Button>
+                  <Button onClick={() => {
+                    onAdd(newEducation);
+                    setNewEducation(undefined as any);
+                    setView(false);
+                    setEdit(false)
+                  }}>Save</Button>
                 </>
-              ) : 
-              <>
-              <Button onClick={() => {setNewEducation(undefined as any); handleClose(); setEdit(false)}}>Cancel</Button>
-              <Button onClick={(e: any) => handleClick(e)}>Add</Button>
-              </>
+              ) :
+                <>
+                  <Button onClick={() => { setNewEducation(undefined as any); handleClose(); setEdit(false); setChecked(false) }}>Cancel</Button>
+                  <Button onClick={(e: any) => handleClick(e)}>Add</Button>
+                </>
               }
             </DialogActions>
           </Dialog>

@@ -6,4 +6,5 @@ export interface EducationTypes {
     endDate?: string | ''
     city?: string | ''
     province?: string | ''
+    isChecked?: boolean
 }

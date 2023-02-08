@@ -1,15 +1,16 @@
 import { View, Text } from "@react-pdf/renderer";
+import moment from "moment";
 import { FunctionComponent } from "react";
 import { JobExperience } from "../../types/jobExperience.types";
 import { styles } from "../hooks/styles";
 import List, { Item } from "../List";
 
 interface IExperienceEntriesProps {
-  jobExperience: JobExperience[];
+  jobExperience: JobExperience[]
 }
 
 const ExperienceEntries: FunctionComponent<IExperienceEntriesProps> = ({
-  jobExperience,
+  jobExperience
 }) => {
 
   return (
@@ -22,7 +23,7 @@ const ExperienceEntries: FunctionComponent<IExperienceEntriesProps> = ({
             <View style={styles.headerContainer}>
               <Text style={styles.title}>{val?.jobTitle}</Text>
               <View style={styles.rightColumn}>
-                <Text style={styles.date}>{val?.startDate} - {!val?.endDate ? 'present' : val?.endDate}</Text>
+                <Text style={styles.date}>{moment(val?.startDate)?.format("MMM YYYY")} - {val?.isChecked ? 'present': moment(val?.endDate)?.format("MMM YYYY")}</Text>
               </View>
             </View>
             <Text style={styles.subHeader}>{val?.company} - {val?.city}, {val?.province}</Text>

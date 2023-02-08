@@ -18,7 +18,6 @@ interface IPdfGeneratorProps {
   userData: UserTypes
 }
 
-
 const personalData = {
   firstName: "Sina",
   lastName: "Monajemi",
@@ -27,13 +26,11 @@ const personalData = {
     "I aspire to be a Full-Stack Developer at RBC, utilizing my exceptional interpersonal skills and strong ambition to secure a challenging and rewarding position. My three years of experience in frontend and backend web development and successful assessments on HackerRank and LeeCode showcase my mastery of the field. Furthermore, I possess basic knowledge of AWS development tools.",
   technicalSkill: 'Technical Skills: Well-versed in TypeScript, JavaScript, Java, React, Angular, Express, Node.js, PostgreSQL, MySQL, and MongoDB,. Possessing a strong understanding of both SQL and No-SQL database queries.',
   skillSet: ["Proficient in Object-Oriented programming principles", "Capable of juggling multiple tasks and adapting to change without sacrificing output", "Committed to personal growth through ongoing education in new technologies", "Possesses a robust work ethic and enthusiasm for technology, always seeking opportunities for advancement", "Passionate about guiding and supporting businesses in their processes"],
-
-  
 }
 
 const jobExperienceData = [
 {
-  jobTitle: "Software Developer",
+  jobTitle: "Full-Stack Developer",
   company: "Freelance",
   startDate: "Mar. 2020",
   endDate: "",
@@ -55,7 +52,7 @@ const jobExperienceData = [
   company: "Seneca",
   startDate: "Jun. 2020",
   endDate: "Jul. 2020",
-  jobDetail: ['Authored clear and well-structured code for project implementation','Contributed to the back-end development utilizing Java and MySQL','Worked with development teams to ensure seamless integration during build processes','Secured third place in a competition'],
+  jobDetail: ['Authored clear and well-structured code for project implementation','Contributed to the back-end development utilizing Java and MySQL','Worked with development teams to ensure seamless integration during build processes','Secured third place in the competition'],
   city: "Toronto",
   province: "ON",
 },
@@ -79,31 +76,31 @@ const jobExperienceData = [
 }
 ];
 
-const educationEntriesData = [
-{
-  program: 'Software Programming',
-  schoolName: 'Seneca',
-  startDate: 'Jan 2018',
-  endDate: 'string',
-  city: 'Toronto',
-  province: 'ON',
-},
-{
-  program: 'Hospitality Management',
-  schoolName: 'Seneca',
-  startDate: 'Jan 2013',
-  endDate: 'August 2014',
-  city: 'Markham',
-  province: 'ON',
-},
-];
+// const educationEntriesData = [
+// {
+//   program: 'Software Programming',
+//   schoolName: 'Seneca',
+//   startDate: 'Jan. 2018',
+//   endDate: '',
+//   city: 'Toronto',
+//   province: 'ON',
+// },
+// {
+//   program: 'Hospitality Management',
+//   schoolName: 'Seneca',
+//   startDate: 'Jan. 2013',
+//   endDate: 'Aug. 2014',
+//   city: 'Markham',
+//   province: 'ON',
+// },
+// ];
 
 
 
 const PdfGenerator: FunctionComponent<IPdfGeneratorProps> = ({
   experienceData,
   educationData,
-  userData
+  userData,
 }) => {
 
   return (
@@ -114,10 +111,10 @@ const PdfGenerator: FunctionComponent<IPdfGeneratorProps> = ({
             <PersonalInfoEntries userInfo={personalData} />
           </View>
           <View>
-            <ExperienceEntries jobExperience={jobExperienceData} />
+            <ExperienceEntries jobExperience={experienceData} />
           </View>
           <View>
-            <EducationEntries education={educationEntriesData} />
+            <EducationEntries education={educationData} />
           </View>
         </>
         <Text

@@ -23,6 +23,7 @@ import { EducationTypes } from "../types/Education.types";
 import { UserTypes } from "../types/user.types";
 import AddModal from "./modals/AddModal";
 import ErrorToaster from "./ErrorToaster";
+import moment from "moment";
 
 
 interface IResumeFormProps {
@@ -53,18 +54,23 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
     isEdit,
     setEdit,
     isOpen,
-    setOpen
+    setOpen,
+    isChecked,
+    handleChange,
+    setChecked
   } = useForm();
 
   const onEdit = (key: string | undefined) => {
     switch (activeStep) {
       case 1:
         const editJobExperience = jobExperience?.find((x: any) => x.key === key);
+        editJobExperience?.isChecked ? setChecked(true) : setChecked(false)
         setCurrentExperience(editJobExperience);
         setView(true);
         break;
       case 2:
         const editEducation = education?.find((x: any) => x.key === key);
+        editEducation?.isChecked ? setChecked(true) : setChecked(false)
         setCurrentEducation(editEducation);
         setView(true);
         break;
@@ -160,10 +166,10 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
 
   const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (!currentUser?.lastName || !currentUser?.city || !currentUser?.address || !currentUser?.postalCode || !currentUser?.summary) {
-      setOpen(true);
-      return;
-    }
+    // if (!currentUser?.lastName || !currentUser?.city || !currentUser?.address || !currentUser?.postalCode || !currentUser?.summary) {
+    //   setOpen(true);
+    //   return;
+    // }
     if (!currentUser) {
       onAddUserInfo(currentUser)
       setCurrentExperience(undefined as any);
@@ -212,7 +218,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
                       Back
                     </Button>
                   )}
-                  <PDFDownloadLink document={<PdfGenerator experienceData={jobExperience} educationData={education} userData={currentUser} />} fileName={currentUser?.firstName?.concat(' ')?.concat(currentUser?.lastName) + ' - Resume ' + new Date().getFullYear()}>
+                  <PDFDownloadLink document={<PdfGenerator experienceData={jobExperience} educationData={education} userData={currentUser} />} fileName={currentUser?.firstName?.concat(' ')?.concat(currentUser?.lastName) + ' - Resume ' + moment().year()}>
                     {({ loading }) => (loading ? <Box sx={{ mt: 3, ml: 1 }}><CircularProgress /></Box> : <Button sx={{ mt: 3, ml: 1 }} variant="contained">Download</Button>)}
                   </PDFDownloadLink>
                 </Box>
@@ -253,7 +259,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
           </Paper>
         </Container>
       </ThemeProvider>
-      <AddModal isOpen={isOpen} setOpen={setOpen} setEdit={setEdit} isEdit={isEdit} isView={isView} handleClose={handleCloseModal} jobExperience={currentExperience} setView={setView} onAdd={onAdd} education={currentEducation} activeStep={activeStep} />
+      <AddModal isChecked={isChecked} handleChange={handleChange} setChecked={setChecked} isOpen={isOpen} setOpen={setOpen} setEdit={setEdit} isEdit={isEdit} isView={isView} handleClose={handleCloseModal} jobExperience={currentExperience} setView={setView} onAdd={onAdd} education={currentEducation} activeStep={activeStep} />
       <ErrorToaster setOpen={setOpen} isOpen={isOpen} />
     </>
   );

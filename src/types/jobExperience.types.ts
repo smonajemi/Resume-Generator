@@ -7,4 +7,5 @@ export interface JobExperience {
     jobDetail?: string[] | ['']
     city?: string | ''
     province?: string | ''
+    isChecked?: boolean
 }
