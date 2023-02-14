@@ -8,11 +8,11 @@ export const styles = StyleSheet.create({
   },
   bulletPoint: {
     width: 10,
-    fontSize: 10,
+    fontSize: 7,
   },
   itemContent: {
     flex: 1,
-    fontSize: 7,
+    fontSize: 8,
   },
   entryContainer: {
     marginBottom: 6,
