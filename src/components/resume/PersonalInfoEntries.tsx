@@ -20,14 +20,14 @@ const PersonalInfoEntries: FunctionComponent<IPersonalInfoEntriesProps> = ({
                 <View style={styles.leftColumn}>
                     <Text style={styles.text}>Summary</Text>
                     <Text style={styles.divider}></Text>
-                    <Text style={styles.summary}>{userInfo?.summary}</Text>
-                    <Text style={styles.technicalSkills}>{userInfo?.technicalSkill}</Text>
+                    <Text style={styles.summary}>{userInfo?.summary?.toUpperCase()}</Text>
+                    <Text style={styles.technicalSkills}>{userInfo?.technicalSkill?.toUpperCase()}</Text>
                 </View>
                 {userInfo?.skillSet && (
                     <List>
                         {userInfo?.skillSet?.map((detail: any, i: any) => (
                             <Item key={i} style={styles.detailContainer}>
-                                {detail}
+                                {detail?.toUpperCase()}
                             </Item>
                         ))}
                     </List>

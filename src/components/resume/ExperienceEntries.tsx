@@ -21,17 +21,17 @@ const ExperienceEntries: FunctionComponent<IExperienceEntriesProps> = ({
         <View style={styles.entryContainer} key={i}>
           <View style={styles.leftColumn}>
             <View style={styles.headerContainer}>
-              <Text style={styles.title}>{val?.jobTitle}</Text>
+              <Text style={styles.title}>{val?.jobTitle?.toUpperCase()}</Text>
               <View style={styles.rightColumn}>
                 <Text style={styles.date}>{moment(val?.startDate)?.format("MMM YYYY")} - {val?.isChecked ? 'present': moment(val?.endDate)?.format("MMM YYYY")}</Text>
               </View>
             </View>
-            <Text style={styles.subHeader}>{val?.company} - {val?.city}, {val?.province}</Text>
+            <Text style={styles.subHeader}>{val?.company?.toUpperCase()} - {val?.city?.toUpperCase()}, {val?.province?.toUpperCase()}</Text>
           </View>
           <List>
             {val?.jobDetail?.map((detail: any, i: any) => (
               <Item key={i} style={styles.detailContainer}>
-                {detail}
+                {detail?.toUpperCase()}
               </Item>
             ))}
           </List>
