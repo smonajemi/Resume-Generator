@@ -5,7 +5,6 @@ const app = express();
 const port = process.env.PORT || 9000;
 const cors = require('cors');
 
-
 app.use(express.json())
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'build')));
@@ -20,13 +19,19 @@ app.get('/', (req, res) => {
 
 app.post('/api/:apiName', async (req, res) => {
   const param = req.params.apiName
+  console.log(req.body.prompt)
   const apiKey = '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'
   switch (param) {
       case 'correct-grammar':
               try {
                   const response = await axios.post('https://api.openai.com/v1/completions',{
                     model: 'text-davinci-003',
-                    prompt: `correct the grammar: ${req.body.prompt}`
+                    prompt: `Correct this to standard English:${req.body.prompt}`,
+                    temperature: 0,
+                    max_tokens: 60,
+                    top_p: 1.0,
+                    frequency_penalty: 0.0,
+                    presence_penalty: 0.0,
                   }, {
                     headers: {
                       'Content-Type': 'application/json',
