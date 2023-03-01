@@ -19,7 +19,6 @@ app.get('/', (req, res) => {
 
 app.post('/api/:apiName', async (req, res) => {
   const param = req.params.apiName
-  console.log(req.body.prompt)
   const apiKey = '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'
   switch (param) {
       case 'correct-grammar':
