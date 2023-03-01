@@ -24,6 +24,7 @@ import { UserTypes } from "../types/user.types";
 import AddModal from "./modals/AddModal";
 import ErrorToaster from "./ErrorToaster";
 import moment from "moment";
+import { useApi } from "./hooks/useApi";
 
 
 interface IResumeFormProps {
@@ -59,7 +60,9 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
     handleChange,
     setChecked
   } = useForm();
-
+ 
+  const {correctGrammar} = useApi()
+  
   const onEdit = (key: string | undefined) => {
     switch (activeStep) {
       case 1:
@@ -113,14 +116,13 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
 
   };
 
-  const onAddUserInfo = (value: any) => {
+  const onAddUserInfo = async (value: any) => {
     if (value?.key) {
       const index = user?.findIndex((x) => x.key === value.key)
       const newArray = user
       newArray[index] = value
       setUser([...newArray])
     } else {
-
       const uniqueKey = new Date().getTime().toString()
       const newDate = new Date().toDateString()
       setUser([...user, { key: uniqueKey, date: newDate, ...value }])
@@ -129,7 +131,12 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
   };
 
 
-  const handleNext = () => {
+  const handleNext = async () => {
+    const updatedUser = {
+      ...currentUser,
+      summary: await correctGrammar(currentUser?.summary)
+    }
+    setCurrentUser(updatedUser)
     setActiveStep(activeStep + 1)
   };
 
