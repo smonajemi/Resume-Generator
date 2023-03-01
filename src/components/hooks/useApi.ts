@@ -1,6 +1,6 @@
 export const useApi = () => {
   const correctGrammar = async (prompt: string) => {
-    const response = await fetch('http://localhost:9000/api/correct-grammar', {
+    const response = await fetch('https://rich-erin-magpie-wig.cyclic.app/api/correct-grammar', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

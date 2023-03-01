@@ -17,36 +17,37 @@ app.get('/', function (req, res) {
 //   res.send('API is working...')
 // })
 
-app.post('/api/:apiName', async (req, res) => {
-  const param = req.params.apiName
-  const apiKey = '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'
-  switch (param) {
-      case 'correct-grammar':
-              try {
-                  const response = await axios.post('https://api.openai.com/v1/completions',{
-                    model: 'text-davinci-003',
-                    prompt: `Correct this to standard English:${req.body.prompt}`,
-                    temperature: 0,
-                    max_tokens: 60,
-                    top_p: 1.0,
-                    frequency_penalty: 0.0,
-                    presence_penalty: 0.0,
-                  }, {
-                    headers: {
-                      'Content-Type': 'application/json',
-                      'Authorization': `Bearer ${apiKey}`
-                    }
-                  });
-                  res.send(response.data.choices[0])
-                } catch (error) {
-                  res.status(500).send({ error: 'Failed to correct sentence' + error });
-                }
-          break;
-      default:
-          res.send('not found')
-          break;
-  }
-});
+// app.post('/api/:apiName', async (req, res) => {
+//   const param = req.params.apiName
+//   const apiKey = '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'
+//   const apiUrl = 'https://api.openai.com/v1/completions'
+//   switch (param) {
+//       case 'correct-grammar':
+//               try {
+//                   const response = await axios.post(apiUrl,{
+//                     model: 'text-davinci-003',
+//                     prompt: `Correct this to standard English:${req.body.prompt}`,
+//                     temperature: 0,
+//                     max_tokens: 60,
+//                     top_p: 1.0,
+//                     frequency_penalty: 0.0,
+//                     presence_penalty: 0.0,
+//                   }, {
+//                     headers: {
+//                       'Content-Type': 'application/json',
+//                       'Authorization': `Bearer ${apiKey}`
+//                     }
+//                   });
+//                   res.send(response.data.choices[0])
+//                 } catch (error) {
+//                   res.status(500).send({ error: 'Failed to correct sentence' + error });
+//                 }
+//           break;
+//       default:
+//           res.send('not found')
+//           break;
+//   }
+// });
 
 
 
