@@ -9,7 +9,7 @@ import {
   Button,
   CircularProgress,
 } from "@mui/material";
-import React, { Fragment, FunctionComponent, useEffect } from "react";
+import React, { Fragment, FunctionComponent, useEffect, useState } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import PersonalInformation from "./PersonalInformation";
 import Experience from "./Experience";
@@ -25,6 +25,7 @@ import AddModal from "./modals/AddModal";
 import ErrorToaster from "./ErrorToaster";
 import moment from "moment";
 import { useApi } from "./hooks/useApi";
+import CoverLetterForm from "./CoverLetterForm";
 
 
 interface IResumeFormProps {
@@ -61,7 +62,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
     setChecked
   } = useForm();
  
-  const {correctGrammar} = useApi()
+  const {correctGrammar, generatedCoverLetter} = useApi()
   
   const onEdit = (key: string | undefined) => {
     switch (activeStep) {
@@ -130,6 +131,11 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
     handleNext()
   };
 
+  const coverLetter = {
+    company: 'rbc',
+    jobTitle: 'software developer',
+    skills: 'c++'
+}
 
   const handleNext = async () => {
     const updatedUser = {
@@ -140,6 +146,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
     setActiveStep(activeStep + 1)
   };
 
+  
 
   const handleBack = () => {
     setActiveStep(activeStep - 1)
@@ -170,10 +177,10 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
 
   const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (!currentUser?.firstName || !currentUser?.lastName || !currentUser?.city || !currentUser?.address || !currentUser?.postalCode || !currentUser?.summary) {
-      setOpen(true);
-      return;
-    }
+    // if (!currentUser?.firstName || !currentUser?.lastName || !currentUser?.city || !currentUser?.address || !currentUser?.postalCode || !currentUser?.summary) {
+    //   setOpen(true);
+    //   return;
+    // }
     if (!currentUser) {
       onAddUserInfo(currentUser)
       setCurrentExperience(undefined as any);
@@ -182,14 +189,27 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
     } else { handleNext() }
   }
 
+  const dummy = {
+    company: 'rbc',
+    jobTitle: 'software developer',
+    skills: 'c++'
+}
+
+// const handleCoverLetter = () => {
+//   setCoverLetter({ ...newUser, [e?.target?.name]: e?.target?.value });
+// }
   const getStepContent = (step: number) => {
     switch (step) {
       case 0:
-        return <PersonalInformation user={currentUser} setUser={setCurrentUser} />
+        // return <PersonalInformation user={currentUser} setUser={setCurrentUser} />
+        return <CoverLetterForm />
       case 1:
         return <Experience setEdit={setEdit} jobExperience={jobExperience} onEdit={onEdit} onDelete={onDelete} activeStep={activeStep} />
       case 2:
         return <Education setEdit={setEdit} education={education} onEdit={onEdit} onDelete={onDelete} activeStep={activeStep} />
+      case 3:
+        // return <CoverLetterForm onSubmit={handleSubmit} />
+        break;
       default:
         throw new Error("Unknown step")
     }
