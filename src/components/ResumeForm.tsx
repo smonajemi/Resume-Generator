@@ -8,6 +8,7 @@ import {
   Box,
   Button,
   CircularProgress,
+  Switch,
 } from "@mui/material";
 import React, { Fragment, FunctionComponent, useEffect } from "react";
 import { ThemeProvider } from "@mui/material/styles";
@@ -24,141 +25,172 @@ import { UserTypes } from "../types/user.types";
 import AddModal from "./modals/AddModal";
 import ErrorToaster from "./ErrorToaster";
 import moment from "moment";
-import { useApi } from "./hooks/useApi";
-
+import CoverLetterForm from "./CoverLetterForm";
 
 interface IResumeFormProps {
   jobExperience: JobExperience[];
   setJobExperience: Function;
   education: EducationTypes[];
-  setEducation: Function
-  user: UserTypes[]
-  setUser: Function
+  setEducation: Function;
+  user: UserTypes[];
+  setUser: Function;
 }
 
-const steps = ["Personal Information", "Experience", "Education"];
-
-const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJobExperience, education, setEducation, user, setUser }) => {
+const ResumeForm: FunctionComponent<IResumeFormProps> = ({
+  jobExperience,
+  setJobExperience,
+  education,
+  setEducation,
+  user,
+  setUser,
+}) => {
   const {
-    activeStep,
-    theme,
-    setView,
     isView,
+    setView,
     handleCloseModal,
+    activeStep,
+    setActiveStep,
+    theme,
     currentExperience,
     setCurrentExperience,
+    currentUser,
+    setCurrentUser,
     currentEducation,
     setCurrentEducation,
-    setCurrentUser,
-    currentUser,
-    setActiveStep,
     isEdit,
     setEdit,
     isOpen,
     setOpen,
     isChecked,
     handleChange,
-    setChecked
+    setChecked,
+    currentCoverLetter,
+    setCurrentCoverLetter,
+    steps,
+    isLoading,
+    setIsLoading,
+    showInputs,
+    setShowInputs,
+    coverLetterData,
+    setCoverLetterData,
+    correctGrammar,
+    generatedCoverLetter,
   } = useForm();
- 
-  const {correctGrammar} = useApi()
-  
+
+  const handleNext = async () => {
+    const updatedUser = {
+      ...currentUser,
+      summary: await correctGrammar(currentUser?.summary),
+    };
+    setCurrentUser(updatedUser);
+    setActiveStep(activeStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep(activeStep - 1);
+  };
+
   const onEdit = (key: string | undefined) => {
     switch (activeStep) {
       case 1:
-        const editJobExperience = jobExperience?.find((x: any) => x.key === key)
-        editJobExperience?.isChecked ? setChecked(true) : setChecked(false)
-        setCurrentExperience(editJobExperience)
-        setView(true)
+        const editJobExperience = jobExperience?.find(
+          (x: any) => x.key === key
+        );
+        editJobExperience?.isChecked ? setChecked(true) : setChecked(false);
+        setCurrentExperience(editJobExperience);
+        setView(true);
         break;
       case 2:
-        const editEducation = education?.find((x: any) => x.key === key)
-        editEducation?.isChecked ? setChecked(true) : setChecked(false)
-        setCurrentEducation(editEducation)
-        setView(true)
+        const editEducation = education?.find((x: any) => x.key === key);
+        editEducation?.isChecked ? setChecked(true) : setChecked(false);
+        setCurrentEducation(editEducation);
+        setView(true);
         break;
     }
-
   };
 
   const onAdd = (value: any) => {
     switch (activeStep) {
       case 1:
         if (value?.key) {
-          const index = jobExperience?.findIndex((x) => x.key === value.key)
-          const newArray = jobExperience
-          newArray[index] = value
-          setJobExperience([...newArray])
+          const index = jobExperience?.findIndex((x) => x.key === value.key);
+          const newArray = jobExperience;
+          newArray[index] = value;
+          setJobExperience([...newArray]);
         } else {
-          const uniqueKey = new Date().getTime().toString()
-          const newDate = new Date().toDateString()
-          setJobExperience([...jobExperience, { key: uniqueKey, date: newDate, ...value }])
+          const uniqueKey = new Date().getTime().toString();
+          const newDate = new Date().toDateString();
+          setJobExperience([
+            ...jobExperience,
+            { key: uniqueKey, date: newDate, ...value },
+          ]);
         }
-        setCurrentExperience(undefined)
+        setCurrentExperience(undefined);
         break;
       case 2:
-
         if (value?.key) {
-          const index = education?.findIndex((x) => x.key === value.key)
-          const newEducationArray = education
+          const index = education?.findIndex((x) => x.key === value.key);
+          const newEducationArray = education;
           newEducationArray[index] = value;
-          setEducation([...newEducationArray])
+          setEducation([...newEducationArray]);
         } else {
-          const uniqueKey = new Date().getTime().toString()
-          const newDate = new Date().toDateString()
-          setEducation([...education, { key: uniqueKey, date: newDate, ...value }])
+          const uniqueKey = new Date().getTime().toString();
+          const newDate = new Date().toDateString();
+          setEducation([
+            ...education,
+            { key: uniqueKey, date: newDate, ...value },
+          ]);
         }
-        setCurrentEducation(undefined)
+        setCurrentEducation(undefined);
         break;
       default:
         break;
     }
-
   };
 
   const onAddUserInfo = async (value: any) => {
     if (value?.key) {
-      const index = user?.findIndex((x) => x.key === value.key)
-      const newArray = user
-      newArray[index] = value
-      setUser([...newArray])
+      const index = user?.findIndex((x) => x.key === value.key);
+      const newArray = user;
+      newArray[index] = value;
+      setUser([...newArray]);
     } else {
-      const uniqueKey = new Date().getTime().toString()
-      const newDate = new Date().toDateString()
-      setUser([...user, { key: uniqueKey, date: newDate, ...value }])
+      const uniqueKey = new Date().getTime().toString();
+      const newDate = new Date().toDateString();
+      setUser([...user, { key: uniqueKey, date: newDate, ...value }]);
     }
-    handleNext()
-  };
-
-
-  const handleNext = async () => {
-    const updatedUser = {
-      ...currentUser,
-      summary: await correctGrammar(currentUser?.summary)
-    }
-    setCurrentUser(updatedUser)
-    setActiveStep(activeStep + 1)
-  };
-
-
-  const handleBack = () => {
-    setActiveStep(activeStep - 1)
+    handleNext();
   };
 
   const onDelete = (key: string | undefined) => {
     switch (activeStep) {
       case 1:
         const experienceListItem = jobExperience.filter((x) => x.key !== key);
-        setJobExperience([...experienceListItem])
+        setJobExperience([...experienceListItem]);
         break;
       case 2:
         const educationListItem = education.filter((x) => x.key !== key);
-        setEducation([...educationListItem])
+        setEducation([...educationListItem]);
         break;
       default:
         break;
     }
+  };
 
+  const handleSwitchChange = async (event: any) => {
+    setShowInputs(event.target.checked);
+    setIsLoading(true);
+    let data = "";
+    if (event.target.checked) {
+      try {
+        data = (await generatedCoverLetter({ ...currentCoverLetter })) ?? "";
+      } catch (error) {
+        console.error(error);
+        setCoverLetterData("");
+      }
+    }
+    setCoverLetterData(data ?? "");
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -169,105 +201,226 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({ jobExperience, setJob
   }, [currentExperience, isEdit, currentEducation]);
 
   const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if (!currentUser?.firstName || !currentUser?.lastName || !currentUser?.city || !currentUser?.address || !currentUser?.postalCode || !currentUser?.summary) {
-      setOpen(true);
-      return;
-    }
+    e.preventDefault();
     if (!currentUser) {
-      onAddUserInfo(currentUser)
+      onAddUserInfo(currentUser);
       setCurrentExperience(undefined as any);
       setView(false);
       setOpen(false);
-    } else { handleNext() }
-  }
+    } else {
+      handleNext();
+    }
+  };
 
   const getStepContent = (step: number) => {
     switch (step) {
       case 0:
-        return <PersonalInformation user={currentUser} setUser={setCurrentUser} />
+        return (
+          <PersonalInformation user={currentUser} setUser={setCurrentUser} />
+        );
       case 1:
-        return <Experience setEdit={setEdit} jobExperience={jobExperience} onEdit={onEdit} onDelete={onDelete} activeStep={activeStep} />
+        return (
+          <Experience
+            setEdit={setEdit}
+            jobExperience={jobExperience}
+            onEdit={onEdit}
+            onDelete={onDelete}
+            activeStep={activeStep}
+          />
+        );
       case 2:
-        return <Education setEdit={setEdit} education={education} onEdit={onEdit} onDelete={onDelete} activeStep={activeStep} />
+        return (
+          <Education
+            setEdit={setEdit}
+            education={education}
+            onEdit={onEdit}
+            onDelete={onDelete}
+            activeStep={activeStep}
+          />
+        );
       default:
-        throw new Error("Unknown step")
+        throw new Error("Unknown step");
     }
-  }
- 
+  };
+
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
-          <Paper
-            variant="outlined"
-            sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 }, boxShadow: "5px 10px #262626" }}
-          >
-            <Typography component="h1" variant="h4" align="center">
-              Resume Form
-            </Typography>
-            <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
-              {steps.map((label) => (
-                <Step key={label}>
-                  <StepLabel>{label}</StepLabel>
-                </Step>
-              ))}
-            </Stepper>
-            {activeStep === steps.length ? (
-              <Fragment>
-                <Typography variant="h5" gutterBottom>
-                  Download now!
-                </Typography>
-                <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                  {activeStep !== 0 && (
-                    <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
-                      Back
-                    </Button>
-                  )}
-                  <PDFDownloadLink document={<PdfGenerator experienceData={jobExperience} educationData={education} userData={currentUser} />} fileName={(currentUser?.firstName?.concat(' ')?.concat(currentUser?.lastName))?.toUpperCase() + ' - Resume ' + moment().year()}>
-                    {({ loading }) => (loading ? <Box sx={{ mt: 3, ml: 1 }}><CircularProgress /></Box> : <Button sx={{ mt: 3, ml: 1 }} variant="contained">Download</Button>)}
-                  </PDFDownloadLink>
-                </Box>
-              </Fragment>
-            ) : (
-              <Fragment>
-                {getStepContent(activeStep)}
-                <Box
-                  style={{ display: "flex", justifyContent: "space-between" }}
+      <Box
+        position="relative"
+        minHeight="100vh"
+        display="flex"
+        flexDirection="column"
+      >
+        <Box
+          flex={1}
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+        >
+          {isLoading ? (
+            <CircularProgress disableShrink />
+          ) : (
+            <ThemeProvider theme={theme}>
+              <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+                <Paper
+                  variant="outlined"
+                  sx={{
+                    my: { xs: 3, md: 6 },
+                    p: { xs: 2, md: 3 },
+                    boxShadow: "5px 10px #262626",
+                  }}
                 >
-                  <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
-                    {activeStep !== 0 && (
-                      <Button onClick={() => setView(true)} sx={{ mt: 3, ml: 1 }}>
-                        <PlaylistAdd />
-                      </Button>
-                    )}
+                  <Typography component="h1" variant="h4" align="center">
+                    Resume Form
+                  </Typography>
+                  <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
+                    {steps.map((label) => (
+                      <Step key={label}>
+                        <StepLabel>{label}</StepLabel>
+                      </Step>
+                    ))}
+                  </Stepper>
+                  {activeStep === steps.length ? (
+                    <Fragment>
+                      <CoverLetterForm
+                        coverLetter={currentCoverLetter}
+                        setCoverLetter={setCurrentCoverLetter}
+                        userData={currentUser}
+                        showInputs={showInputs}
+                      />
+                      <Box
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Box
+                          sx={{ display: "flex", justifyContent: "flex-start" }}
+                        >
+                          <Box sx={{ mt: 3, ml: 1 }}>
+                            <Typography component="span">Add CV</Typography>
+                            <Switch
+                              checked={showInputs}
+                              onChange={handleSwitchChange}
+                            />
+                          </Box>
+                        </Box>
+                        <Box
+                          sx={{ display: "flex", justifyContent: "flex-end" }}
+                        >
+                          {activeStep !== 0 && (
+                            <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
+                              Back
+                            </Button>
+                          )}
+                          <PDFDownloadLink
+                            document={
+                              <PdfGenerator
+                                experienceData={jobExperience}
+                                educationData={education}
+                                userData={currentUser}
+                                coverLetter={coverLetterData}
+                              />
+                            }
+                            fileName={
+                              `${currentUser?.firstName} ${currentUser?.lastName}`.toUpperCase() +
+                              ` - ${currentCoverLetter?.company} - ${currentCoverLetter?.jobTitle
+                              } - Resume${moment().year()}`
+                            }
+                          >
+                            {({ loading }) =>
+                              loading && !coverLetterData ? (
+                                <Box sx={{ mt: 3, ml: 1 }}>
+                                  <CircularProgress />
+                                </Box>
+                              ) : (
+                                <Button
+                                  sx={{ mt: 3, ml: 1 }}
+                                  variant="contained"
+                                  disabled={
+                                    !showInputs &&
+                                    (!currentCoverLetter?.company ||
+                                      !currentCoverLetter?.jobTitle)
+                                  }
+                                >
+                                  Download
+                                </Button>
+                              )
+                            }
+                          </PDFDownloadLink>
+                        </Box>
+                      </Box>
+                    </Fragment>
+                  ) : (
+                    <Fragment>
+                      {getStepContent(activeStep)}
+                      <Box
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Box
+                          sx={{ display: "flex", justifyContent: "flex-start" }}
+                        >
+                          {activeStep !== 0 && (
+                            <Button
+                              onClick={() => setView(true)}
+                              sx={{ mt: 3, ml: 1 }}
+                            >
+                              <PlaylistAdd />
+                            </Button>
+                          )}
+                        </Box>
 
-                  </Box>
-                  <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                    {activeStep !== 0 && (
-                      <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
-                        Back
-                      </Button>
-                    )}
-                    <Button
-                      variant="contained"
-                      onClick={(e: any) => { activeStep === 0 ? handleClick(e) : handleNext() }}
-                      sx={{ mt: 3, ml: 1 }}
-                    >
-                      Next
-                    </Button>
+                        <Box
+                          sx={{ display: "flex", justifyContent: "flex-end" }}
+                        >
+                          {activeStep !== 0 && (
+                            <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
+                              Back
+                            </Button>
+                          )}
+                          <Button
+                            variant="contained"
+                            onClick={(e: any) => {
+                              activeStep === 0 ? handleClick(e) : handleNext();
+                            }}
+                            sx={{ mt: 3, ml: 1 }}
+                          >
+                            Next
+                          </Button>
+                        </Box>
+                      </Box>
+                    </Fragment>
+                  )}
+                </Paper>
+              </Container>
+            </ThemeProvider>
+          )}
+        </Box>
+      </Box>
 
-                  </Box>
-                </Box>
-              </Fragment>
-            )}
-          </Paper>
-        </Container>
-      </ThemeProvider>
-      <AddModal isChecked={isChecked} handleChange={handleChange} setChecked={setChecked} isOpen={isOpen} setOpen={setOpen} setEdit={setEdit} isEdit={isEdit} isView={isView} handleClose={handleCloseModal} jobExperience={currentExperience} setView={setView} onAdd={onAdd} education={currentEducation} activeStep={activeStep} />
+      <AddModal
+        isChecked={isChecked}
+        handleChange={handleChange}
+        setChecked={setChecked}
+        isOpen={isOpen}
+        setOpen={setOpen}
+        setEdit={setEdit}
+        isEdit={isEdit}
+        isView={isView}
+        handleClose={handleCloseModal}
+        jobExperience={currentExperience}
+        setView={setView}
+        onAdd={onAdd}
+        education={currentEducation}
+        activeStep={activeStep}
+      />
       <ErrorToaster setOpen={setOpen} isOpen={isOpen} />
     </>
   );
 };
 
-export default ResumeForm
+export default ResumeForm;
