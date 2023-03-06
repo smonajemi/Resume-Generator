@@ -23,7 +23,7 @@ import PdfGenerator from "./resume/PdfGenerator";
 import { EducationTypes } from "../types/Education.types";
 import { UserTypes } from "../types/user.types";
 import AddModal from "./modals/AddModal";
-import ErrorToaster from "./ErrorToaster";
+import DefaultToaster from "./DefaultToaster";
 import moment from "moment";
 import CoverLetterForm from "./CoverLetterForm";
 
@@ -422,7 +422,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({
         education={currentEducation}
         activeStep={activeStep}
       />
-      <ErrorToaster setOpen={setOpen} isOpen={isOpen} />
+      <DefaultToaster setOpen={setOpen} isOpen={isOpen} severity="error" message="Error: fields marked with asterisk are required."/>
     </>
   );
 };
