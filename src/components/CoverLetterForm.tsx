@@ -1,50 +1,44 @@
-import { FunctionComponent, useState } from 'react';
+import { useState } from 'react';
 import { TextField, Button, Box } from '@mui/material';
 import { CoverLetterTypes } from '../types/coverLetter.types';
-import { useApi } from './hooks/useApi';
+
+import { UserTypes } from '../types/user.types';
 
 interface ICoverLetterFormProps {
+  coverLetter: CoverLetterTypes
+  userData: UserTypes
+  setCoverLetter: any
+  showInputs: boolean
 }
 
-const CoverLetterForm: FunctionComponent<ICoverLetterFormProps> = () => {
-    const [newCoverLetter, setNewCoverLetter] = useState<CoverLetterTypes>({});
-    const {generatedCoverLetter} = useApi()
-    const handleSubmission = (e: any, type: string) => {
-        setNewCoverLetter({ ...newCoverLetter, [e?.target?.name]: e?.target?.value });
-      };
-    const handleCoverLetter = async () => {
-        const test = await generatedCoverLetter(newCoverLetter as any)
-        console.log('test', test)
-    }
-
+const CoverLetterForm = ({ userData, coverLetter, setCoverLetter, showInputs }: ICoverLetterFormProps) => {
+      
+    const handleSubmission = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setCoverLetter({ ...coverLetter, [e.target.name]: e.target.value, skills: userData?.technicalSkill, fullName: `${userData?.firstName} ${userData?.lastName}` });
+    };
+  
     return (
-        <Box component="form" noValidate onChange={e => handleSubmission(e, (e?.target as HTMLTextAreaElement)?.name)}>
-            <TextField
-                label="Company name"
-                value={newCoverLetter?.company}
-                required
-                fullWidth
-                margin="normal"
-            />
-            <TextField
-                label="Job title"
-                value={newCoverLetter?.jobTitle}
-                required
-                fullWidth
-                margin="normal"
-            />
-            <TextField
-                label="Skills required"
-                value={newCoverLetter?.skills}
-                required
-                fullWidth
-                margin="normal"
-            />
-            <Button type="button" variant="contained" onClick={() => handleCoverLetter()}>
-                Generate Cover Letter
-            </Button>
-        </Box>
+      <Box component="form" noValidate onChange={(e:any)=> handleSubmission(e)}>
+        <TextField
+          label="Company name"
+          name="company"
+          value={coverLetter?.company}
+          required
+          fullWidth
+          margin="normal"
+          disabled={showInputs}
+        />
+        <TextField
+          label="Job title"
+          name="jobTitle"
+          value={coverLetter?.jobTitle}
+          required
+          fullWidth
+          margin="normal"
+          disabled={showInputs}
+        />
+      </Box>
     );
-}
-
-export default CoverLetterForm
+  };
+  
+  export default CoverLetterForm;

@@ -16,7 +16,7 @@ export const useApi = () => {
       body: JSON.stringify({ prompt }),
     });
     const data = await response.json();
-    return data.text?.replace('\n', '');
+    return prompt ? data.text?.replace('\n', '') : null
   };
 
   const generatedCoverLetter  = async (prompt: CoverLetterTypes): Promise<string | undefined> => {
@@ -25,10 +25,9 @@ export const useApi = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ prompt })
+      body: JSON.stringify({ ...prompt })
     });
     const data = await response.json();
-    console.log('data', data.text)
     return data.text
   }
 

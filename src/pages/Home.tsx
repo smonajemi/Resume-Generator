@@ -5,6 +5,7 @@ import { useState } from "react"
 import { JobExperience } from "../types/jobExperience.types"
 import { EducationTypes } from "../types/Education.types"
 import { UserTypes } from "../types/user.types"
+import { CoverLetterTypes } from "../types/coverLetter.types"
 
 const Home = () => {
   const [jobExperience, setJobExperience] = useState<JobExperience[]>([])
