@@ -122,7 +122,7 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
               pattern: "[0-9]*", // Only allow numeric values
             }}
             InputLabelProps={{ shrink: true }}
-            value={newUser?.phoneNumber | ''}
+            value={newUser?.phoneNumber || ''}
             error={phoneNumberError}
             helperText={phoneNumberError ? "Please enter only numeric characters" : ""}
           />
