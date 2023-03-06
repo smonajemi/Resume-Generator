@@ -3,43 +3,79 @@ import { FunctionComponent, useEffect, useState } from "react";
 import { UserTypes } from "../types/user.types";
 
 interface IPersonalInformationProps {
-  user: UserTypes
-  setUser: Function
-
+  user: UserTypes;
+  setUser: Function;
+  isValidated: boolean
+  setValidation: Function
 }
 
 const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
   user,
-  setUser
+  setUser,
+  isValidated,
+  setValidation
 }) => {
   const [newUser, setNewUser] = useState(user);
+  const [phoneNumberError, setPhoneNumberError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+
   const handleAddUser = (e: any, type: string) => {
     switch (type) {
-      case 'province':
-        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value?.toUpperCase() });
+      case "province":
+        setNewUser({
+          ...newUser,
+          [e?.target?.name]: e?.target?.value?.toUpperCase(),
+        });
         break;
-      case 'postalCode':
-        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value?.toUpperCase() });
+      case "postalCode":
+        setNewUser({
+          ...newUser,
+          [e?.target?.name]: e?.target?.value?.toUpperCase(),
+        });
         break;
-      case 'skillSet':
-        let temp = []
-        temp = (e?.target?.value[0]?.toUpperCase() + e?.target?.value?.substring(1))?.split(",")
-        setNewUser({ ...newUser, [e?.target?.name]: !e?.target?.value ? null : temp });
+      case "skillSet":
+        let temp = [];
+        temp = (
+          e?.target?.value[0]?.toUpperCase() + e?.target?.value?.substring(1)
+        )?.split(",");
+        setNewUser({
+          ...newUser,
+          [e?.target?.name]: !e?.target?.value ? null : temp,
+        });
+        break;
+      case "phoneNumber":
+        const phoneNumber = e?.target?.value;
+        setNewUser({ ...newUser, [e?.target?.name]: phoneNumber });
+        setPhoneNumberError(!/^\d+$/.test(phoneNumber));
+        break;
+      case "email":
+        const email = e?.target?.value;
+        setNewUser({ ...newUser, [e?.target?.name]: email });
+        setEmailError(
+          !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/.test(email)
+        );
         break;
       default:
         setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
     }
   };
+
   const handleEnterKey = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
     }
   };
+
   useEffect(() => {
     if (newUser) {
       setUser({ ...newUser });
     }
-  }, [user, newUser]);
+    if (phoneNumberError || emailError) {
+      setValidation(false);
+    } else {
+      setValidation(true);
+    }
+  }, [phoneNumberError, emailError, user, newUser]);
 
   return <>
     <Box component="form" noValidate onChange={e => handleAddUser(e, (e?.target as HTMLTextAreaElement)?.name)} >
@@ -79,11 +115,16 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             name="phoneNumber"
             label="Phone"
             fullWidth
-            inputProps={{ maxLength: 10 }}
             autoComplete="phone-number"
             variant="outlined"
+            inputProps={{
+              maxLength: 10,
+              pattern: "[0-9]*", // Only allow numeric values
+            }}
             InputLabelProps={{ shrink: true }}
-            value={newUser?.phoneNumber || ""}
+            value={newUser?.phoneNumber | ''}
+            error={phoneNumberError}
+            helperText={phoneNumberError ? "Please enter only numeric characters" : ""}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -99,6 +140,8 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             variant="outlined"
             InputLabelProps={{ shrink: true }}
             value={newUser?.email || ""}
+            error={emailError}
+            helperText={emailError ? "Please enter a valid email address" : ""}
           />
         </Grid>
         <Grid item xs={12}>

@@ -10,7 +10,7 @@ import {
   CircularProgress,
   Switch,
 } from "@mui/material";
-import React, { Fragment, FunctionComponent, useEffect } from "react";
+import React, { Fragment, FunctionComponent, useEffect, useState } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import PersonalInformation from "./PersonalInformation";
 import Experience from "./Experience";
@@ -75,8 +75,11 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({
     setCoverLetterData,
     correctGrammar,
     generatedCoverLetter,
+    isValidated, 
+    setValidation
   } = useForm();
 
+  
   const handleNext = async () => {
     const updatedUser = {
       ...currentUser,
@@ -206,6 +209,9 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({
       setOpen(true);
       return;
     }
+    if (!isValidated) {
+      return
+    }
     if (!currentUser) {
       onAddUserInfo(currentUser);
       setCurrentExperience(undefined as any);
@@ -220,7 +226,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({
     switch (step) {
       case 0:
         return (
-          <PersonalInformation user={currentUser} setUser={setCurrentUser} />
+          <PersonalInformation user={currentUser} setUser={setCurrentUser} isValidated={isValidated} setValidation={setValidation}/>
         );
       case 1:
         return (
@@ -305,6 +311,10 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({
                           <Box sx={{ mt: 3, ml: 1 }}>
                             <Typography component="span">Add CV</Typography>
                             <Switch
+                              disabled={
+                                (!currentCoverLetter?.company ||
+                                  !currentCoverLetter?.jobTitle)
+                              }
                               checked={showInputs}
                               onChange={handleSwitchChange}
                             />
@@ -391,6 +401,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({
                             onClick={(e: any) => {
                               activeStep === 0 ? handleClick(e) : handleNext();
                             }}
+                            // disabled={!isValidated}
                             sx={{ mt: 3, ml: 1 }}
                           >
                             Next

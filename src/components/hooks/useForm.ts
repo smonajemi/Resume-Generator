@@ -38,6 +38,7 @@ export const useForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showInputs, setShowInputs] = useState(false);
   const [coverLetterData, setCoverLetterData] = useState("");
+  const [isValidated, setValidation] = useState(false);
 
   const steps = ["Personal Information", "Experience", "Education"];
 
@@ -73,5 +74,7 @@ export const useForm = () => {
     steps,
     correctGrammar,
     generatedCoverLetter,
+    isValidated, 
+    setValidation
   } as const;
 };
