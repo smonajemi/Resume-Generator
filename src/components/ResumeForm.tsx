@@ -201,7 +201,11 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({
   }, [currentExperience, isEdit, currentEducation]);
 
   const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
+    if (!currentUser?.firstName || !currentUser?.lastName || !currentUser?.city || !currentUser?.address || !currentUser?.postalCode || !currentUser?.summary) {
+      setOpen(true);
+      return;
+    }
     if (!currentUser) {
       onAddUserInfo(currentUser);
       setCurrentExperience(undefined as any);
