@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import moment from "moment";
 import { FunctionComponent, useEffect, useState } from "react";
-import { EducationTypes } from "../../types/Education.types";
+import { EducationTypes } from "../../types/education.types";
 import { JobExperience } from "../../types/jobExperience.types";
 
 interface IAddModalProps {

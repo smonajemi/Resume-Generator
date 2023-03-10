@@ -10,7 +10,7 @@ import {
   CircularProgress,
   Switch,
 } from "@mui/material";
-import React, { Fragment, FunctionComponent, useEffect, useState } from "react";
+import React, { Fragment, FunctionComponent, useEffect } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import PersonalInformation from "./PersonalInformation";
 import Experience from "./Experience";
@@ -20,7 +20,7 @@ import { useForm } from "./hooks/useForm";
 import { JobExperience } from "../types/jobExperience.types";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import PdfGenerator from "./resume/PdfGenerator";
-import { EducationTypes } from "../types/Education.types";
+import { EducationTypes } from "../types/education.types";
 import { UserTypes } from "../types/user.types";
 import AddModal from "./modals/AddModal";
 import DefaultToaster from "./DefaultToaster";

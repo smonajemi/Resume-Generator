@@ -1,6 +1,6 @@
 import { Typography, Grid, Box } from "@mui/material";
 import { Fragment, FunctionComponent } from "react";
-import { EducationTypes } from "../types/Education.types";
+import { EducationTypes } from "../types/education.types";
 import CardComponent from "./CardComponent";
 import Center from "./utils/Center";
 
