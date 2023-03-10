@@ -4,6 +4,7 @@ import DefaultToaster from "../components/DefaultToaster";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Copyright, LockClockOutlined } from "@mui/icons-material";
 import Game from "../components/Game";
+import { MainContainer } from "../components/MainContainer";
 
 const Login = () => {
  
@@ -37,7 +38,7 @@ const Login = () => {
 
 
   return (
-    <>
+    <MainContainer title={"Login"} >
       <ThemeProvider theme={theme}>
         <Grid container component="main" sx={{ height: '100vh' }}>
           <CssBaseline />
@@ -128,8 +129,9 @@ const Login = () => {
           </Grid>
         </Grid>
       </ThemeProvider>
+    
       <DefaultToaster setOpen={setShowToaster} isOpen={showToaster} severity={toasterMessage.severity as any} message={toasterMessage.message} />
-    </>
+      </MainContainer>
   );
 };
 

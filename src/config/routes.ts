@@ -23,10 +23,10 @@ const routes: RouteType[] = [
     protected: true,
   },
   {
-    path: "/Login",
+    path: "/login",
     component: LoginPage,
     name: "Login Page",
-    protected: true,
+    protected: false,
   },
 ];
 
