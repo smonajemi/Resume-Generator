@@ -7,7 +7,7 @@ import {
 import { UserTypes } from "../../types/user.types";
 import { JobExperience } from "../../types/jobExperience.types";
 import EducationEntries from "./EducationEntries";
-import { EducationTypes } from "../../types/Education.types";
+import { EducationTypes } from "../../types/education.types";
 import ExperienceEntries from "./ExperienceEntries";
 import PersonalInfoEntries from "./PersonalInfoEntries";
 import { styles } from "../hooks/styles";

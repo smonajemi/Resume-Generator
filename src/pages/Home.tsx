@@ -3,9 +3,8 @@ import { MainContainer } from "../components/MainContainer"
 import ResumeForm from "../components/ResumeForm"
 import { useState } from "react"
 import { JobExperience } from "../types/jobExperience.types"
-import { EducationTypes } from "../types/Education.types"
+import { EducationTypes } from "../types/education.types"
 import { UserTypes } from "../types/user.types"
-import { CoverLetterTypes } from "../types/coverLetter.types"
 
 const Home = () => {
   const [jobExperience, setJobExperience] = useState<JobExperience[]>([])

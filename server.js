@@ -3,6 +3,18 @@ const path = require('path')
 const app = express()
 const port = process.env.REACT_APP_PORT || 9000
 const cors = require('cors')
+const connectDB = require('./db');
+
+async function startServer() {
+    try {
+      const data =  await connectDB();
+      if (!data) throw new Error("hello")
+      // your server code here
+    } catch (error) {
+      console.log('sina', error)
+    }
+}
+startServer()
 
 app.use(express.json())
 app.use(cors())

@@ -7,7 +7,7 @@ import {
   CardActionArea,
 } from "@mui/material";
 import { FunctionComponent } from "react";
-import { EducationTypes } from "../types/Education.types";
+import { EducationTypes } from "../types/education.types";
 import { JobExperience } from "../types/jobExperience.types";
 
 interface ICardComponentProps {

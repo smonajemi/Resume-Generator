@@ -1,7 +1,7 @@
 import { View, Text } from "@react-pdf/renderer";
 import moment from "moment";
 import { FunctionComponent } from "react";
-import { EducationTypes } from "../../types/Education.types";
+import { EducationTypes } from "../../types/education.types";
 import { styles } from "../hooks/styles";
 
 interface IEducationEntriesProps {

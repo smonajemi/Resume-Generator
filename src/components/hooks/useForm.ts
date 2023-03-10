@@ -1,7 +1,7 @@
-import { createTheme } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
 import { useState } from "react";
 import { CoverLetterTypes } from "../../types/coverLetter.types";
-import { EducationTypes } from "../../types/Education.types";
+import { EducationTypes } from "../../types/education.types";
 import { JobExperience } from "../../types/jobExperience.types";
 import { UserTypes } from "../../types/user.types";
 import { useApi } from "./useApi";
