@@ -11,31 +11,36 @@ interface IPersonalInfoEntriesProps {
 const PersonalInfoEntries: FunctionComponent<IPersonalInfoEntriesProps> = ({
     userInfo,
 }) => {
-
-    return (
-        <>
-            <View key={userInfo?.key}>
-                <Text style={styles.resumeTitle}>{userInfo?.firstName + ' ' + userInfo?.lastName}</Text>
-                <Text style={styles.header}>{userInfo?.address + ', ' + userInfo?.city + ', ' + userInfo?.province + ', ' + userInfo?.postalCode + ' | ' + userInfo?.phoneNumber + ' | ' + userInfo?.email}</Text>
-                <View style={styles.leftColumn}>
-                    <Text style={styles.text}>Summary</Text>
-                    <Text style={styles.divider}></Text>
-                    <Text style={styles.summary}>{userInfo?.summary?.toUpperCase()}</Text>
-                    <Text style={styles.technicalSkills}>{userInfo?.technicalSkill?.toUpperCase()}</Text>
-                </View>
-                {userInfo?.skillSet && (
-                    <List>
-                        {userInfo?.skillSet?.map((detail: any, i: any) => (
-                            <Item key={i} style={styles.detailContainer}>
-                                {detail?.toUpperCase()}
-                            </Item>
-                        ))}
-                    </List>
-                )}
-            </View>
-        </>
-    )
-};
+    const capitalize = (string: any) => {
+        return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+      };
+    
+      return (
+        <View key={userInfo?.key}>
+          <Text style={styles.resumeTitle}>
+            {capitalize(userInfo?.firstName)} {capitalize(userInfo?.lastName)}
+          </Text>
+          <Text style={styles.header}>
+            {capitalize(userInfo?.address)}, {capitalize(userInfo?.city)}, {capitalize(userInfo?.province)}, {userInfo?.postalCode?.toUpperCase()} | {userInfo?.phoneNumber} | {userInfo?.email?.toLowerCase()}
+          </Text>
+          <View style={styles.leftColumn}>
+            <Text style={styles.text}>Summary</Text>
+            <Text style={styles.divider}></Text>
+            <Text style={styles.summary}>{userInfo?.summary?.toUpperCase()}</Text>
+            <Text style={styles.technicalSkills}>{capitalize(userInfo?.technicalSkill)}</Text>
+          </View>
+          {userInfo?.skillSet && (
+            <List>
+              {userInfo?.skillSet?.map((detail, i) => (
+                <Item key={i} style={styles.detailContainer}>
+                  {capitalize(detail)}
+                </Item>
+              ))}
+            </List>
+          )}
+        </View>
+      );
+    };
 
 export default PersonalInfoEntries;
 

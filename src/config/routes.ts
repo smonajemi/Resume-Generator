@@ -26,7 +26,7 @@ const routes: RouteType[] = [
     path: "/login",
     component: LoginPage,
     name: "Login Page",
-    protected: false,
+    protected: true,
   },
 ];
 
