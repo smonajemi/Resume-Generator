@@ -20,6 +20,7 @@ interface IPdfGeneratorProps {
   coverLetter: string
 }
 
+
 const PdfGenerator: FunctionComponent<IPdfGeneratorProps> = ({
   userData,
   experienceData,
@@ -47,12 +48,12 @@ const PdfGenerator: FunctionComponent<IPdfGeneratorProps> = ({
      
          
         </>
-        <Text
+        {/* <Text
           style={styles.pageNumber}
           render={({ pageNumber, totalPages }: any) =>
             `${pageNumber} / ${totalPages}`
           }
-        />
+        /> */}
       </Page>
     </Document>
   );

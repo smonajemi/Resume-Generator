@@ -11,8 +11,12 @@ interface IEducationEntriesProps {
 const EducationEntries: FunctionComponent<IEducationEntriesProps> = ({
   education
 }) => {
-  const capitalize = (string: any) => {
-    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  const capitalize = (string: string | any): string => {
+    let words: string[] = string.split(" ");
+    for (let i: number = 0; i < words.length; i++) {
+      words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+    }
+    return words.join(" ");
   };
   return (
     <>
@@ -22,7 +26,7 @@ const EducationEntries: FunctionComponent<IEducationEntriesProps> = ({
         <View style={styles.entryContainer} key={i}>
           <View style={styles.leftColumn}>
             <View style={styles.headerContainer}>
-              <Text style={styles.title}>{capitalize(val?.program)}</Text>
+              <Text style={styles.title}>{val?.program?.toUpperCase()}</Text>
               <View style={styles.rightColumn}>
               <Text style={styles.date}>
                 {moment(val?.startDate)?.format('MMM YYYY')} - {val?.isChecked ? 'present' : moment(val?.endDate)?.format('MMM YYYY')}
@@ -30,7 +34,7 @@ const EducationEntries: FunctionComponent<IEducationEntriesProps> = ({
               </View>
             </View>
             <Text style={styles.subHeader}>
-              {capitalize(val?.schoolName)} - {capitalize(val?.city)}, {capitalize(val?.province)}
+              {capitalize(val?.schoolName)} - {capitalize(val?.city)}, {val?.province?.toUpperCase()}
             </Text>
           </View>
         </View>

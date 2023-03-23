@@ -8,7 +8,7 @@ import {
   Box,
   Button,
   CircularProgress,
-  Switch,
+  Switch
 } from "@mui/material";
 import React, { Fragment, FunctionComponent, useEffect } from "react";
 import { ThemeProvider } from "@mui/material/styles";
@@ -24,8 +24,8 @@ import { EducationTypes } from "../types/education.types";
 import { UserTypes } from "../types/user.types";
 import AddModal from "./modals/AddModal";
 import DefaultToaster from "./DefaultToaster";
-import moment from "moment";
 import CoverLetterForm from "./CoverLetterForm";
+import CustomLoader from "./CustomLoader";
 
 interface IResumeFormProps {
   jobExperience: JobExperience[];
@@ -76,17 +76,40 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({
     correctGrammar,
     generatedCoverLetter,
     isValidated, 
-    setValidation
+    setValidation,
+    isNextLoading, 
+    setIsNextLoading,
+    progress, 
+    setProgress
   } = useForm();
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + 10));
+    }, 800);
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
   
   const handleNext = async () => {
-    const updatedUser = {
-      ...currentUser,
-      summary: await correctGrammar(currentUser?.summary),
-    };
-    setCurrentUser(updatedUser);
-    setActiveStep(activeStep + 1);
+    try {
+      await new Promise<void>(async resolve => {
+        setIsNextLoading(true)
+        const updatedUser = {
+          ...currentUser,
+          summary: await correctGrammar(currentUser?.summary),
+        };
+        setCurrentUser(updatedUser);
+        resolve();
+      });
+  
+      setActiveStep(activeStep + 1);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsNextLoading(false);
+    }
   };
 
   const handleBack = () => {
@@ -339,8 +362,8 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({
                             }
                             fileName={
                               `${currentUser?.firstName} ${currentUser?.lastName}`.toUpperCase() +
-                              ` - ${currentCoverLetter?.company} - ${currentCoverLetter?.jobTitle
-                              } - Resume${moment().year()}`
+                              ` - ${currentCoverLetter?.company} (Resume) - ${currentCoverLetter?.jobTitle
+                              }`
                             }
                           >
                             {({ loading }) =>
@@ -396,16 +419,19 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({
                               Back
                             </Button>
                           )}
+                  
                           <Button
-                            variant="contained"
-                            onClick={(e: any) => {
-                              activeStep === 0 ? handleClick(e) : handleNext();
-                            }}
-                            // disabled={!isValidated}
-                            sx={{ mt: 3, ml: 1 }}
-                          >
-                            Next
-                          </Button>
+                          variant="contained"
+                          onClick={(e: any) => {
+                            activeStep === 0 ? handleClick(e) : handleNext();
+                          }}
+                          // disabled={!isValidated}
+                          sx={{ mt: 3, ml: 1 }}
+                        >
+                          {isNextLoading ?  <CustomLoader value={progress} size={24}/> : 'Next'}
+                        </Button>
+                       
+                        
                         </Box>
                       </Box>
                     </Fragment>

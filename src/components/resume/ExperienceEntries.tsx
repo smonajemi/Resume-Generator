@@ -13,8 +13,12 @@ const ExperienceEntries: FunctionComponent<IExperienceEntriesProps> = ({
   jobExperience
 }) => {
 
-  const capitalize = (string: any) => {
-    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  const capitalize = (string: string | any): string => {
+    let words: string[] = string.split(" ");
+    for (let i: number = 0; i < words.length; i++) {
+      words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+    }
+    return words.join(" ");
   };
   return (
     <>
@@ -24,7 +28,7 @@ const ExperienceEntries: FunctionComponent<IExperienceEntriesProps> = ({
         <View style={styles.entryContainer} key={i}>
           <View style={styles.leftColumn}>
             <View style={styles.headerContainer}>
-              <Text style={styles.title}>{capitalize(val?.jobTitle)}</Text>
+              <Text style={styles.title}>{val?.jobTitle?.toUpperCase()}</Text>
               <View style={styles.rightColumn}>
                 <Text style={styles.date}>
                   {moment(val?.startDate)?.format('MMM YYYY')} - {val?.isChecked ? 'present' : moment(val?.endDate)?.format('MMM YYYY')}
@@ -32,7 +36,7 @@ const ExperienceEntries: FunctionComponent<IExperienceEntriesProps> = ({
               </View>
             </View>
             <Text style={styles.subHeader}>
-              {capitalize(val?.company)} - {capitalize(val?.city)}, {capitalize(val?.province)}
+              {capitalize(val?.company)} - {capitalize(val?.city)}, {val?.province?.toUpperCase()}
             </Text>
           </View>
           <List>

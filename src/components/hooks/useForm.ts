@@ -36,6 +36,8 @@ export const useForm = () => {
     setChecked(e.target.checked);
   };
   const [isLoading, setIsLoading] = useState(false);
+  const [isNextLoading, setIsNextLoading] = useState(false);
+  const [progress, setProgress] = useState(10);
   const [showInputs, setShowInputs] = useState(false);
   const [coverLetterData, setCoverLetterData] = useState("");
   const [isValidated, setValidation] = useState(false);
@@ -75,6 +77,10 @@ export const useForm = () => {
     correctGrammar,
     generatedCoverLetter,
     isValidated, 
-    setValidation
+    setValidation,
+    isNextLoading, 
+    setIsNextLoading,
+    progress, 
+    setProgress
   } as const;
 };

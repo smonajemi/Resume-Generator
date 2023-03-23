@@ -11,9 +11,13 @@ interface IPersonalInfoEntriesProps {
 const PersonalInfoEntries: FunctionComponent<IPersonalInfoEntriesProps> = ({
     userInfo,
 }) => {
-    const capitalize = (string: any) => {
-        return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-      };
+  const capitalize = (string: string | any): string => {
+    let words: string[] = string.split(" ");
+    for (let i: number = 0; i < words.length; i++) {
+      words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+    }
+    return words.join(" ");
+  };
     
       return (
         <View key={userInfo?.key}>
@@ -21,13 +25,13 @@ const PersonalInfoEntries: FunctionComponent<IPersonalInfoEntriesProps> = ({
             {capitalize(userInfo?.firstName)} {capitalize(userInfo?.lastName)}
           </Text>
           <Text style={styles.header}>
-            {capitalize(userInfo?.address)}, {capitalize(userInfo?.city)}, {capitalize(userInfo?.province)}, {userInfo?.postalCode?.toUpperCase()} | {userInfo?.phoneNumber} | {userInfo?.email?.toLowerCase()}
+            {capitalize(userInfo?.address)}, {capitalize(userInfo?.city)}, {userInfo?.province?.toUpperCase()}, {userInfo?.postalCode?.toUpperCase()} | {userInfo?.phoneNumber} | {userInfo?.email?.toLowerCase()}
           </Text>
           <View style={styles.leftColumn}>
             <Text style={styles.text}>Summary</Text>
             <Text style={styles.divider}></Text>
             <Text style={styles.summary}>{userInfo?.summary?.toUpperCase()}</Text>
-            <Text style={styles.technicalSkills}>{capitalize(userInfo?.technicalSkill)}</Text>
+            <Text style={styles.technicalSkills}>{userInfo?.technicalSkill?.toUpperCase()}</Text>
           </View>
           {userInfo?.skillSet && (
             <List>
