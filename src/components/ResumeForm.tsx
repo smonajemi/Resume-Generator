@@ -8,8 +8,7 @@ import {
   Box,
   Button,
   CircularProgress,
-  Switch,
-  CircularProgressProps,
+  Switch
 } from "@mui/material";
 import React, { Fragment, FunctionComponent, useEffect } from "react";
 import { ThemeProvider } from "@mui/material/styles";
@@ -25,9 +24,7 @@ import { EducationTypes } from "../types/education.types";
 import { UserTypes } from "../types/user.types";
 import AddModal from "./modals/AddModal";
 import DefaultToaster from "./DefaultToaster";
-import moment from "moment";
 import CoverLetterForm from "./CoverLetterForm";
-import LinearProgress from '@mui/material/LinearProgress';
 import CustomLoader from "./CustomLoader";
 
 interface IResumeFormProps {
