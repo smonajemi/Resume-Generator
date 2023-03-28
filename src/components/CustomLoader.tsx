@@ -5,7 +5,7 @@ interface CustomLoaderProps extends CircularProgressProps {
   value: number;
 }
 
-export const CustomLoader: FunctionComponent<CustomLoaderProps> = (props: any) => {
+const CustomLoader: FunctionComponent<CustomLoaderProps> = (props: any) => {
   const { value, ...circularProgressProps } = props;
 
   return (
