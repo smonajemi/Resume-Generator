@@ -425,7 +425,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({
                           onClick={(e: any) => {
                             activeStep === 0 ? handleClick(e) : handleNext();
                           }}
-                          // disabled={!isValidated}
+                          disabled={isNextLoading}
                           sx={{ mt: 3, ml: 1 }}
                         >
                           {isNextLoading ?  <CustomLoader value={progress} size={24}/> : 'Next'}
