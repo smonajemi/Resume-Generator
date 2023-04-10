@@ -13,24 +13,7 @@ import React from "react";
 import { useNavBar } from "./hooks/useNavbar";
 
 const Navbar = () => {
-    const { handleProfileOption, navigate, settings, isAuthenticated } =
-        useNavBar();
-    const [auth, setAuth] = React.useState(true);
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setAuth(event.target.checked);
-    };
-
-    const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-    const handleLogout = () => { };
+    const { handleProfileOption, settings, handleClose, handleMenu, anchorEl, setAnchorEl} = useNavBar();
 
     return (
         <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -52,7 +35,6 @@ const Navbar = () => {
                         </Typography>
                     </Box>
 
-                    {auth && (
                         <Box sx={{ ml: "auto" }}>
                             <IconButton
                                 size="large"
@@ -89,7 +71,6 @@ const Navbar = () => {
                                 ))}
                             </Menu>
                         </Box>
-                    )}
                 </Toolbar>
             </AppBar>
         </Box>
