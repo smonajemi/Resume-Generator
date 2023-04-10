@@ -5,7 +5,7 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  Grid, TextField
+  Grid, TextField, Typography
 } from "@mui/material";
 import moment from "moment";
 import { FunctionComponent, useEffect, useState } from "react";
@@ -245,6 +245,7 @@ const AddModal: FunctionComponent<IAddModalProps> = ({
                     InputLabelProps={{ shrink: true }}
                     value={newExperience?.jobDetail || ""}
                   />
+                  <Typography variant="caption">*separate by comma</Typography>
                 </Grid>
               </Grid>
             </DialogContent>

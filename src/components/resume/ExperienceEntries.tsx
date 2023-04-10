@@ -28,7 +28,7 @@ const ExperienceEntries: FunctionComponent<IExperienceEntriesProps> = ({
         <View style={styles.entryContainer} key={i}>
           <View style={styles.leftColumn}>
             <View style={styles.headerContainer}>
-              <Text style={styles.title}>{val?.jobTitle?.toUpperCase()}</Text>
+              <Text style={styles.title}>{capitalize(val?.jobTitle)}</Text>
               <View style={styles.rightColumn}>
                 <Text style={styles.date}>
                   {moment(val?.startDate)?.format('MMM YYYY')} - {val?.isChecked ? 'present' : moment(val?.endDate)?.format('MMM YYYY')}

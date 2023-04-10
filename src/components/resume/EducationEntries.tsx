@@ -26,7 +26,7 @@ const EducationEntries: FunctionComponent<IEducationEntriesProps> = ({
         <View style={styles.entryContainer} key={i}>
           <View style={styles.leftColumn}>
             <View style={styles.headerContainer}>
-              <Text style={styles.title}>{val?.program?.toUpperCase()}</Text>
+              <Text style={styles.title}>{capitalize(val?.program)}</Text>
               <View style={styles.rightColumn}>
               <Text style={styles.date}>
                 {moment(val?.startDate)?.format('MMM YYYY')} - {val?.isChecked ? 'present' : moment(val?.endDate)?.format('MMM YYYY')}

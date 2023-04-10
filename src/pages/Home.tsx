@@ -25,7 +25,7 @@ const Home = () => {
     }
   ])
     return (
-        <MainContainer title={"Home"} >
+        <MainContainer title={"ResumeGenie"} >
             <Box>
             <ResumeForm jobExperience={jobExperience} setJobExperience={setJobExperience} education={education} setEducation={setEducation} user={user} setUser={setUser}  />
           </Box>

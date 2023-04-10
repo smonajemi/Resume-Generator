@@ -228,10 +228,10 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({
 
   const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (!currentUser?.firstName || !currentUser?.lastName || !currentUser?.city || !currentUser?.address || !currentUser?.postalCode || !currentUser?.summary) {
-      setOpen(true);
-      return;
-    }
+    // if (!currentUser?.firstName || !currentUser?.lastName || !currentUser?.city || !currentUser?.address || !currentUser?.postalCode || !currentUser?.summary || !currentUser?.phoneNumber || !currentUser?.email) {
+    //   setOpen(true);
+    //   return;
+    // }
     if (!isValidated) {
       return
     }
@@ -305,7 +305,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({
                   }}
                 >
                   <Typography component="h1" variant="h4" align="center">
-                    Resume Form
+                    ResumeGenie
                   </Typography>
                   <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
                     {steps.map((label) => (

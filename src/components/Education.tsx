@@ -21,6 +21,9 @@ const Education: FunctionComponent<IEducationProps> = ({
 }) => {
   return <>
     <Fragment>
+    <Typography variant="h6" gutterBottom style={{marginBottom: '2em'}}>
+          Education and Training
+      </Typography>
       <Center>
         <Box >
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>

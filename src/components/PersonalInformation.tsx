@@ -79,6 +79,9 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
 
   return <>
     <Box component="form" noValidate onChange={e => handleAddUser(e, (e?.target as HTMLTextAreaElement)?.name)} >
+    <Typography variant="h6" gutterBottom style={{marginBottom: '2em'}}>
+        Personal Information
+      </Typography>
       <Grid container spacing={3} style={{ maxHeight: '25em', overflow: 'auto' }}>
         <Grid item xs={12} sm={6} >
           <TextField
