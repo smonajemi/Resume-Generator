@@ -56,26 +56,6 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
           !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/.test(email)
         );
         break;
-      // case "linkedIn":
-      //   const targetValue = e?.target?.value 
-      //   setNewUser({ ...newUser, [e?.target?.name]: targetValue});
-      //   console.log(newUser?.linkedIn)
-      //   fetch(`https://www.linkedin.com/in/${targetValue}`)
-      //   .then(response => {
-      //     if (response.status === 404) {
-      //       setWebError(false);
-      //     } else if (!response.ok) {
-      //       throw new Error('Network response was not ok');
-      //     } else {
-      //       setWebError(true);
-      //     }
-      //   })
-      //   .catch(error => {
-      //     setNewUser({ ...newUser, [e?.target?.name]: ''});
-      //     console.error('Error checking website status:', error);
-      //   });
-
-      //   break;
       default:
       setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
     }
