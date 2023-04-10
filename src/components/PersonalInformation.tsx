@@ -202,6 +202,20 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             value={newUser?.postalCode || ""}
           />
         </Grid>
+          <Grid item xs={12}>
+          <TextField
+            required
+            id="LinkedIn"
+            name="LinkedIn"
+            inputProps={{ style: { textTransform: 'capitalize' } }}
+            label="LinkedIn"
+            fullWidth
+            autoComplete="LinkedIn"
+            variant="outlined"
+            InputLabelProps={{ shrink: true }}
+            value={newUser?.LinkedIn || ""}
+          />
+        </Grid>
         <Grid item xs={12}>
           <TextField
             required

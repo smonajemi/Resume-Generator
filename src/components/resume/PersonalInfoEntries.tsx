@@ -1,4 +1,4 @@
-import { View, Text } from "@react-pdf/renderer";
+import { View, Text, Link} from "@react-pdf/renderer";
 import { FunctionComponent } from "react";
 import { UserTypes } from "../../types/user.types";
 import { styles } from "../hooks/styles";
@@ -13,6 +13,11 @@ const PersonalInfoEntries: FunctionComponent<IPersonalInfoEntriesProps> = ({
     userInfo,
     capitalize
 }) => {
+
+  const setHyperlink = (url: string, text: string ) => {
+    return <Link style={styles.header} src={url} >{text}</Link>
+  };
+  
     
       return (
         <View key={userInfo?.key}>
@@ -20,7 +25,7 @@ const PersonalInfoEntries: FunctionComponent<IPersonalInfoEntriesProps> = ({
             {capitalize(userInfo?.firstName)} {capitalize(userInfo?.lastName)}
           </Text>
           <Text style={styles.header}>
-            {capitalize(userInfo?.address)}, {capitalize(userInfo?.city)}, {userInfo?.province?.toUpperCase()}, {userInfo?.postalCode?.toUpperCase()} | {userInfo?.phoneNumber} | {userInfo?.email?.toLowerCase()}
+            {capitalize(userInfo?.address)}, {capitalize(userInfo?.city)}, {userInfo?.province?.toUpperCase()}, {userInfo?.postalCode?.toUpperCase()} | {userInfo?.phoneNumber} | {userInfo?.email?.toLowerCase()} | {setHyperlink(userInfo?.LinkedIn as string, "LinkedIn")}
           </Text>
           <View style={styles.leftColumn}>
             <Text style={styles.text}>Summary</Text>
