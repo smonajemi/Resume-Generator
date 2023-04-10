@@ -229,7 +229,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({
 
   const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (!currentUser?.firstName || !currentUser?.lastName || !currentUser?.city || !currentUser?.address || !currentUser?.LinkedIn || !currentUser?.postalCode || !currentUser?.summary || !currentUser?.phoneNumber || !currentUser?.email) {
+    if (!currentUser?.firstName || !currentUser?.lastName || !currentUser?.city || !currentUser?.address || !currentUser?.linkedIn || !currentUser?.postalCode || !currentUser?.summary || !currentUser?.phoneNumber || !currentUser?.email) {
       setOpen(true);
       return;
     }
