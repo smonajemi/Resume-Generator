@@ -31,7 +31,7 @@ const PdfGenerator: FunctionComponent<IPdfGeneratorProps> = ({
   capitalize
 }) => {
   const setHyperlink = (url: string, text: string ) => {
-    return <Text><Link src={url}>{text}</Link></Text>;
+    return <Text style={styles.footer}>This resume was generated using <Link src={url}>{text}</Link></Text>;
   };
   
   return (
@@ -51,12 +51,8 @@ const PdfGenerator: FunctionComponent<IPdfGeneratorProps> = ({
           <View>
           <CoverLetterEntries coverLetter={coverLetter} />
           </View>
-     
-         
         </>
-        <Text
-          style={styles.footer}
-        >This resume was generated using {setHyperlink('https://smonajemi.netlify.app', 'smonajemi - ResumeGenie')}</Text>
+        {setHyperlink('https://smonajemi.netlify.app', 'smonajemi - ResumeGenie')}
       </Page>
     </Document>
   );
