@@ -6,18 +6,13 @@ import List, { Item } from "../List";
 
 interface IPersonalInfoEntriesProps {
     userInfo: UserTypes | null
+    capitalize: Function
 }
 
 const PersonalInfoEntries: FunctionComponent<IPersonalInfoEntriesProps> = ({
     userInfo,
+    capitalize
 }) => {
-  const capitalize = (string: string | any): string => {
-    let words: string[] = string.split(" ");
-    for (let i: number = 0; i < words.length; i++) {
-      words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
-    }
-    return words.join(" ");
-  };
     
       return (
         <View key={userInfo?.key}>
@@ -30,7 +25,7 @@ const PersonalInfoEntries: FunctionComponent<IPersonalInfoEntriesProps> = ({
           <View style={styles.leftColumn}>
             <Text style={styles.text}>Summary</Text>
             <Text style={styles.divider}></Text>
-            <Text style={styles.summary}>{userInfo?.summary?.toUpperCase()}</Text>
+            <Text style={styles.summary}>{capitalize(userInfo?.summary)}</Text>
             <Text style={styles.technicalSkills}>{userInfo?.technicalSkill?.toUpperCase()}</Text>
           </View>
           {userInfo?.skillSet && (

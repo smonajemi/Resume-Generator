@@ -6,18 +6,14 @@ import { styles } from "../hooks/styles";
 
 interface IEducationEntriesProps {
   education: EducationTypes[]
+  capitalize: Function
 }
 
 const EducationEntries: FunctionComponent<IEducationEntriesProps> = ({
-  education
+  education,
+  capitalize
 }) => {
-  const capitalize = (string: string | any): string => {
-    let words: string[] = string.split(" ");
-    for (let i: number = 0; i < words.length; i++) {
-      words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
-    }
-    return words.join(" ");
-  };
+
   return (
     <>
       <Text style={styles.text}>Education and Training</Text>

@@ -43,6 +43,13 @@ export const useForm = () => {
   const [isValidated, setValidation] = useState(false);
 
   const steps = ["Personal Information", "Experience", "Education"];
+  const capitalize = (string: string | any): string => {
+    let words: string[] = string.split(" ");
+    for (let i: number = 0; i < words.length; i++) {
+      words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+    }
+    return words.join(" ");
+  };
 
   const { correctGrammar, generatedCoverLetter } = useApi();
   return {
@@ -81,6 +88,7 @@ export const useForm = () => {
     isNextLoading, 
     setIsNextLoading,
     progress, 
-    setProgress
+    setProgress,
+    capitalize
   } as const;
 };

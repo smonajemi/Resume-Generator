@@ -18,6 +18,7 @@ interface IPdfGeneratorProps {
   educationData: EducationTypes[];
   userData: UserTypes
   coverLetter: string
+  capitalize: Function
 }
 
 
@@ -25,7 +26,8 @@ const PdfGenerator: FunctionComponent<IPdfGeneratorProps> = ({
   userData,
   experienceData,
   educationData,
-  coverLetter
+  coverLetter,
+  capitalize
 }) => {
 
   return (
@@ -33,17 +35,17 @@ const PdfGenerator: FunctionComponent<IPdfGeneratorProps> = ({
       <Page style={styles.body} size="A4">
         <>
           <View>
-            <PersonalInfoEntries userInfo={userData} />
+            <PersonalInfoEntries userInfo={userData} capitalize={capitalize} />
           </View>
           <View>
-            <ExperienceEntries jobExperience={experienceData} />
+            <ExperienceEntries jobExperience={experienceData} capitalize={capitalize}/>
           </View>
           <View>
-            <EducationEntries education={educationData} />
+            <EducationEntries education={educationData} capitalize={capitalize}/>
           </View>
     
           <View>
-          <CoverLetterEntries coverLetter={coverLetter}/>
+          <CoverLetterEntries coverLetter={coverLetter} />
           </View>
      
          

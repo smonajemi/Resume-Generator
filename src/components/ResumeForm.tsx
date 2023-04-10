@@ -80,7 +80,8 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({
     isNextLoading, 
     setIsNextLoading,
     progress, 
-    setProgress
+    setProgress,
+    capitalize
   } = useForm();
 
   useEffect(() => {
@@ -358,6 +359,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({
                                 educationData={education}
                                 userData={currentUser}
                                 coverLetter={coverLetterData}
+                                capitalize={capitalize}
                               />
                             }
                             fileName={
