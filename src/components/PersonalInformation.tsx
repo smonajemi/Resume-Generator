@@ -1,4 +1,4 @@
-import { Typography, Grid, TextField, Box } from "@mui/material";
+import { Typography, Grid, TextField, Box, InputAdornment } from "@mui/material";
 import { FunctionComponent, useEffect, useState } from "react";
 import { UserTypes } from "../types/user.types";
 
@@ -203,18 +203,7 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             value={newUser?.postalCode || ""}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-             disabled
-             id="LinkedIn-prf"
-             fullWidth
-             autoComplete="LinkedIn"
-             variant="outlined"
-             InputLabelProps={{ shrink: true }}
-             value={`https://www.linkedin.com/in/`}
-          />
-        </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12}>
           <TextField
             required
             id="linkedIn"
@@ -226,6 +215,9 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             InputLabelProps={{ shrink: true }}
             error={isWebError}
             helperText={isWebError ? "LinkedIn does not exist" : ""}
+            InputProps={{
+              startAdornment: <InputAdornment position="start" style={{marginRight: '0em'}}>https://www.linkedin.com/in/</InputAdornment>,
+            }}
             value={newUser?.linkedIn || ""}
           />
         </Grid>
