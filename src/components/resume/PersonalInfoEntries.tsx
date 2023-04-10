@@ -15,7 +15,7 @@ const PersonalInfoEntries: FunctionComponent<IPersonalInfoEntriesProps> = ({
 }) => {
 
   const setHyperlink = (url: string, text: string ) => {
-    return <Link style={styles.header} src={url} >{text}</Link>
+    return <Link style={styles.header} src={"https://www.linkedin.com/in/" + url} >{text}</Link>
   };
   
     

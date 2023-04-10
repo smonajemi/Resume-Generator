@@ -56,11 +56,11 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
         );
         break;
       default:
-        setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
+      setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
     }
   };
 
-  const handleEnterKey = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+  const handleCustomKey = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
     }
@@ -202,18 +202,29 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             value={newUser?.postalCode || ""}
           />
         </Grid>
-          <Grid item xs={12}>
+        <Grid item xs={12} sm={6}>
+          <TextField
+             disabled
+             id="LinkedIn-prf"
+             name="LinkedIn-prf"
+             fullWidth
+             autoComplete="LinkedIn"
+             variant="outlined"
+             InputLabelProps={{ shrink: true }}
+             value={`https://www.linkedin.com/in/`}
+          />
+        </Grid>
+          <Grid item xs={12} sm={6}>
           <TextField
             required
             id="LinkedIn"
             name="LinkedIn"
-            inputProps={{ style: { textTransform: 'capitalize' } }}
             label="LinkedIn"
             fullWidth
             autoComplete="LinkedIn"
             variant="outlined"
             InputLabelProps={{ shrink: true }}
-            value={newUser?.LinkedIn || ""}
+            value={newUser?.LinkedIn || ''}
           />
         </Grid>
         <Grid item xs={12}>
@@ -262,7 +273,7 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             label="Skill Set"
             fullWidth
             autoComplete="skill-Set"
-            onKeyPress={(e: any) => { handleEnterKey(e) }} // prevent new line
+            onKeyPress={(e: any) => { handleCustomKey(e) }} // prevent new line
             variant="outlined"
             InputLabelProps={{ shrink: true }}
             value={newUser?.skillSet || ""}
