@@ -225,7 +225,7 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
             variant="outlined"
             InputLabelProps={{ shrink: true }}
             error={isWebError}
-            helperText={isWebError ? "Linked does not exist" : ""}
+            helperText={isWebError ? "LinkedIn does not exist" : ""}
             value={newUser?.linkedIn || ""}
           />
         </Grid>
