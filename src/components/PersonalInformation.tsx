@@ -18,7 +18,8 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
   const [newUser, setNewUser] = useState(user);
   const [phoneNumberError, setPhoneNumberError] = useState(false);
   const [emailError, setEmailError] = useState(false);
-
+  const [isWebError, setWebError] = useState(false);
+  
   const handleAddUser = (e: any, type: string) => {
     switch (type) {
       case "province":
@@ -55,6 +56,26 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
           !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/.test(email)
         );
         break;
+      // case "linkedIn":
+      //   const targetValue = e?.target?.value 
+      //   setNewUser({ ...newUser, [e?.target?.name]: targetValue});
+      //   console.log(newUser?.linkedIn)
+      //   fetch(`https://www.linkedin.com/in/${targetValue}`)
+      //   .then(response => {
+      //     if (response.status === 404) {
+      //       setWebError(false);
+      //     } else if (!response.ok) {
+      //       throw new Error('Network response was not ok');
+      //     } else {
+      //       setWebError(true);
+      //     }
+      //   })
+      //   .catch(error => {
+      //     setNewUser({ ...newUser, [e?.target?.name]: ''});
+      //     console.error('Error checking website status:', error);
+      //   });
+
+      //   break;
       default:
       setNewUser({ ...newUser, [e?.target?.name]: e?.target?.value });
     }
@@ -206,7 +227,6 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
           <TextField
              disabled
              id="LinkedIn-prf"
-             name="LinkedIn-prf"
              fullWidth
              autoComplete="LinkedIn"
              variant="outlined"
@@ -217,14 +237,16 @@ const PersonalInformation: FunctionComponent<IPersonalInformationProps> = ({
           <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="LinkedIn"
-            name="LinkedIn"
+            id="linkedIn"
+            name="linkedIn"
             label="LinkedIn"
             fullWidth
             autoComplete="LinkedIn"
             variant="outlined"
             InputLabelProps={{ shrink: true }}
-            value={newUser?.LinkedIn || ''}
+            error={isWebError}
+            helperText={isWebError ? "Linked does not exist" : ""}
+            value={newUser?.linkedIn || ""}
           />
         </Grid>
         <Grid item xs={12}>

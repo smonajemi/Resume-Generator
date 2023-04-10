@@ -11,7 +11,7 @@ export interface UserTypes {
     summary?: string | ''
     technicalSkill?: string | ''
     skillSet?: string[] | ['']
-    LinkedIn?: string | ''
+    linkedIn?: string | ''
 }
 
 export interface BackendUser {
