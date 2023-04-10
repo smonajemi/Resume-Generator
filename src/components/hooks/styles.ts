@@ -57,6 +57,15 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     color: "grey",
   },
+  footer: {
+    position: "absolute",
+    fontSize: 9,
+    bottom: 30,
+    left: 0,
+    right: 0,
+    textAlign: "center",
+    color: "grey",
+  },
   leftColumn: {
     flexDirection: "column",
     flexGrow: 9,

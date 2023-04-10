@@ -2,7 +2,8 @@ import { FunctionComponent } from "react";
 import {
   Page,
   Text, Document,
-  View
+  View,
+  Link
 } from "@react-pdf/renderer";
 import { UserTypes } from "../../types/user.types";
 import { JobExperience } from "../../types/jobExperience.types";
@@ -29,7 +30,10 @@ const PdfGenerator: FunctionComponent<IPdfGeneratorProps> = ({
   coverLetter,
   capitalize
 }) => {
-
+  const setHyperlink = (url: string, text: string ) => {
+    return <Text><Link src={url}>{text}</Link></Text>;
+  };
+  
   return (
     <Document>
       <Page style={styles.body} size="A4">
@@ -50,12 +54,9 @@ const PdfGenerator: FunctionComponent<IPdfGeneratorProps> = ({
      
          
         </>
-        {/* <Text
-          style={styles.pageNumber}
-          render={({ pageNumber, totalPages }: any) =>
-            `${pageNumber} / ${totalPages}`
-          }
-        /> */}
+        <Text
+          style={styles.footer}
+        >This resume was generated using {setHyperlink('https://smonajemi.netlify.app', 'smonajemi - ResumeGenie')}</Text>
       </Page>
     </Document>
   );
