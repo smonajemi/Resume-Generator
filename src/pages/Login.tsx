@@ -5,12 +5,16 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Copyright, LockClockOutlined } from "@mui/icons-material";
 import Game from "../components/Game";
 import { MainContainer } from "../components/MainContainer";
+import { useLocalStorage } from "../components/hooks/useLocalStorage";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
  
   const [toasterMessage, setToasterMessage] = useState({ severity: '', message: '' });
   const [showToaster, setShowToaster] = useState(false);
   const theme = createTheme();
+  const navigate = useNavigate();
+  const {setItem} = useLocalStorage()
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
@@ -20,8 +24,10 @@ const Login = () => {
       if (!username || !password) {
         throw new Error("Please enter your username and password to continue.");
       } else {
-        setToasterMessage({ ...toasterMessage, message: 'Successful', severity: 'success' });
-        setShowToaster(true);
+        // setToasterMessage({ ...toasterMessage, message: 'Successful', severity: 'success' });
+        // setShowToaster(true);
+        setItem('userId', username)
+        navigate('/')
       }
 
     } catch (error) {

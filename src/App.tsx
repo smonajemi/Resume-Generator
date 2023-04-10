@@ -2,6 +2,7 @@ import React, {} from 'react';
 import { Box } from "@mui/material";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import routes from "./config/routes";
+import AuthChecker from './config/AuthCheker';
 
 function App() {
   return (
@@ -13,7 +14,13 @@ function App() {
             key={index}
             path={route.path}
             element={
-              <route.component />
+              route.protected ? (
+                <AuthChecker>
+                  <route.component />
+                </AuthChecker>
+              ) : (
+                <route.component />
+              )
             }
           />
         ))}
