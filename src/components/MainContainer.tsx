@@ -12,7 +12,7 @@ export const MainContainer: FunctionComponent<IMainContainerProps> = ({ title, c
     }, [title])
 
     return (
-        <Box style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', position: 'fixed', overflow: 'none' }}>
+        <Box style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', position: 'fixed', overflow: 'auto' }}>
         {children}
     </Box>
     
