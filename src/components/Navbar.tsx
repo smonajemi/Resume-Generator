@@ -8,17 +8,18 @@ import {
     MenuItem,
     Avatar,
     Typography,
+    CircularProgress,
 } from "@mui/material";
 import React from "react";
 import { useNavBar } from "./hooks/useNavbar";
 import { useAuth } from "./hooks/useAuth";
 
 const Navbar = () => {
-    const { handleProfileOption, settings, handleClose, handleMenu, anchorEl, setAnchorEl } = useNavBar();
+    const { handleProfileOption, settings, handleClose, handleMenu, anchorEl, setAnchorEl, isLoggingOut } = useNavBar();
     const { isAuthenticated } = useAuth()
     return (
         <Box sx={{ display: "flex", alignItems: "center" }}>
-            <AppBar position="static">
+            <AppBar position="sticky">
                 <Toolbar>
                     <Box
                         component="a"
@@ -35,6 +36,23 @@ const Navbar = () => {
                             ResumeGenie
                         </Typography>
                     </Box>
+                    { isLoggingOut && (
+                         <Box
+                         style={{
+                           position: "absolute",
+                           top: 0,
+                           left: 0,
+                           right: 0,
+                           bottom: 0,
+                           background: "rgba(0, 0, 0, 0.5)",
+                           display: "flex",
+                           alignItems: "center",
+                           justifyContent: "center",
+                         }}
+                       >
+                         <CircularProgress color="secondary" />
+                       </Box>
+                    )}
                     {isAuthenticated && (
                         <Box sx={{ ml: "auto" }}>
                             <IconButton
@@ -73,6 +91,7 @@ const Navbar = () => {
                             </Menu>
                         </Box>
                     )}
+                    
 
                 </Toolbar>
             </AppBar>

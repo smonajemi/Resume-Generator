@@ -6,6 +6,7 @@ import { useState, MouseEvent } from "react";
 export const useNavBar = () => {
   const { logout } = useLogout();
   const { isAuthenticated } = useAuth()
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const navigate = useNavigate();
   const settings = ["Profile", "Logout"];
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -16,18 +17,18 @@ export const useNavBar = () => {
         setAnchorEl(null);
     };
 
-  const handleProfileOption = (src: any) => {
-    switch (src) {
-      case "Profile":
-        navigate("/profile");
-        break;
-      case "Logout":
-        logout();
-        break;
+  const handleProfileOption = async (src: any) => {
+    if (src === "Profile") {
+      navigate("/profile");
+    } else if (src === "Logout") {
+      setIsLoggingOut(true); 
+      await logout(); 
+      setIsLoggingOut(false); 
     }
   };
 
   return {
-    handleProfileOption, settings, handleClose, handleMenu, anchorEl, setAnchorEl
+    handleProfileOption, settings, handleClose, handleMenu, anchorEl, setAnchorEl,
+    isLoggingOut
   } as const;
 };
