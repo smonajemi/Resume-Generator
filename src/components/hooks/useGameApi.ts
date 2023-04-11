@@ -7,7 +7,10 @@ export const useGameApi = () => {
     const [xIsNext, setXIsNext] = useState<boolean>(true);
     const [isOpen, setOpen] = useState<boolean>(false);
     const [toasterMessage, setToasterMessage] = useState({ severity: 'success', message: '' });
-    
+    const isBoardFull = (board: BoardType): boolean => {
+        return board.every(square => square !== null);
+      }
+      
     const handleClick = (index: number) => {
         const newBoard = [...board];
         if (newBoard[index] || calculateWinner(newBoard)) {
@@ -21,7 +24,7 @@ export const useGameApi = () => {
         if (winner) {
             setToasterMessage({ ...toasterMessage, severity: 'success', message: `Congratulations Player ${winner}.` });
             setOpen(true)
-        } else if (newBoard.every(square => square !== null)) {
+        } else if (isBoardFull(newBoard)) {
             status = ''
             setToasterMessage({ ...toasterMessage, severity: 'warning', message: `Draw!` });
             setOpen(true)
@@ -53,9 +56,8 @@ export const useGameApi = () => {
     };
     
     
-    const winner = calculateWinner(board);
-    let status = winner ? `Winner: ${winner}` : `Next player: ${xIsNext ? 'X' : 'O'}`;
-    
+    const winner = calculateWinner(board)   
+    let status = winner ? `Winner: ${winner}` : (isBoardFull(board) ? "Draw" : `Next player: ${xIsNext ? 'X' : 'O'}`);
 
 
     return {

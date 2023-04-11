@@ -15,7 +15,7 @@ const AuthChecker = ({ children }: Props) => {
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  return <><Navbar /> {children}</>;
+  return <>{children}</>;
 };
 
 export default AuthChecker;

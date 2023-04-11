@@ -11,10 +11,11 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useNavBar } from "./hooks/useNavbar";
+import { useAuth } from "./hooks/useAuth";
 
 const Navbar = () => {
-    const { handleProfileOption, settings, handleClose, handleMenu, anchorEl, setAnchorEl} = useNavBar();
-
+    const { handleProfileOption, settings, handleClose, handleMenu, anchorEl, setAnchorEl } = useNavBar();
+    const { isAuthenticated } = useAuth()
     return (
         <Box sx={{ display: "flex", alignItems: "center" }}>
             <AppBar position="static">
@@ -34,7 +35,7 @@ const Navbar = () => {
                             ResumeGenie
                         </Typography>
                     </Box>
-
+                    {isAuthenticated && (
                         <Box sx={{ ml: "auto" }}>
                             <IconButton
                                 size="large"
@@ -71,6 +72,8 @@ const Navbar = () => {
                                 ))}
                             </Menu>
                         </Box>
+                    )}
+
                 </Toolbar>
             </AppBar>
         </Box>
