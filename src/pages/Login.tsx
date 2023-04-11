@@ -104,8 +104,12 @@ const Login = () => {
         </Box>
         <Box sx={{ p: 3 }}>
         {value === 1 && <>
-          <Button variant="contained" onClick={handleGuestLogin}>Continue</Button>
-          <Box style={{padding: 0}}>
+          <Button     type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }} onClick={handleGuestLogin}>Continue</Button>
+   
+          <Box style={{padding: 0, marginTop: '2em'}}>
               <Game />
           </Box>
         </>}
