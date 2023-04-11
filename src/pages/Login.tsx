@@ -8,62 +8,27 @@ import { useLocalStorage } from "../components/hooks/useLocalStorage";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import Game from "../components/Game";
+import { useLogin } from "../components/hooks/useLogin";
 
 const Login = () => {
-  const [value, setValue] = React.useState(0);
+  const { value,
+    setValue,
+    handleChange,
+    tabs,
+    toasterMessage,
+    setToasterMessage,
+    showToaster,
+    setShowToaster,
+    currentImageIndex,
+    setCurrentImageIndex,
+    theme,
+    navigate,
+    setItem,
+    handleGuestLogin,
+    handleSubmit,
+    incompleteTask,
+    images } = useLogin()
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
-
-  const tabs = ['Login', 'Continue as a guest']
-
-  const [toasterMessage, setToasterMessage] = useState({ severity: '', message: '' });
-  const [showToaster, setShowToaster] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const theme = createTheme();
-  const navigate = useNavigate();
-  const { setItem } = useLocalStorage()
-  const handleGuestLogin = () => {
-    setItem('userId', 'guest')
-    navigate('/')
-  }
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    try {
-      const data = new FormData(event.currentTarget);
-      const username = data.get("email");
-      const password = data.get("password");
-      if (!username || !password) {
-        throw new Error("Please enter your username and password to continue.");
-      } else {
-        // setToasterMessage({ ...toasterMessage, message: 'Successful', severity: 'success' });
-        // setShowToaster(true);
-        setItem('userId', username)
-        navigate('/')
-      }
-
-    } catch (error) {
-      if (typeof error === "string") {
-        setToasterMessage({ ...toasterMessage, message: error, severity: 'error' });
-      } else if (error instanceof Error) {
-        setToasterMessage({ ...toasterMessage, message: error.message, severity: 'error' });
-      } else {
-        setToasterMessage({ ...toasterMessage, message: 'An error occurred.', severity: 'error' });
-      }
-      setShowToaster(true);
-    }
-  };
-
-  const incompleteTask = () => {
-    setToasterMessage({ ...toasterMessage, severity: 'info', message: `Button not implemented` })
-    setShowToaster(true)
-  }
-  const images = [];
-  for (let i = 1; i <= 10; i++) {
-    images.push(`./image/random/img-${i}.jpg`);
-  }
-  
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentImageIndex((currentIndex) =>
@@ -80,18 +45,18 @@ const Login = () => {
         <Grid container component="main" sx={{ height: '100vh' }}>
           <CssBaseline />
           <Grid
-  item
-  xs={false}
-  sm={4}
-  md={7}
-  sx={{
-    backgroundImage: `url(${images[currentImageIndex]})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundColor: (t) => (t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900]),
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-  }}
-/>
+            item
+            xs={false}
+            sm={4}
+            md={7}
+            sx={{
+              backgroundImage: `url(${images[currentImageIndex]})`,
+              backgroundRepeat: 'no-repeat',
+              backgroundColor: (t) => (t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900]),
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          />
 
           <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
             <Box
@@ -109,7 +74,7 @@ const Login = () => {
               <Typography component="h1" variant="h5">
                 Sign in
               </Typography>
-              <Box sx={{ width: '100%', bgcolor: 'background.paper', marginTop: '2em'}}>
+              <Box sx={{ width: '100%', bgcolor: 'background.paper', marginTop: '2em' }}>
                 <Tabs value={value} onChange={handleChange} centered>
                   {tabs.map((tab) => (
                     <Tab
