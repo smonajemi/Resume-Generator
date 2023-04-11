@@ -7,6 +7,7 @@ import { MainContainer } from "../components/MainContainer";
 import { useLocalStorage } from "../components/hooks/useLocalStorage";
 import { useNavigate } from "react-router-dom";
 import React from "react";
+import Game from "../components/Game";
 
 const Login = () => {
   const [value, setValue] = React.useState(0);
@@ -102,7 +103,12 @@ const Login = () => {
           </Tabs>
         </Box>
         <Box sx={{ p: 3 }}>
-        {value === 1 && <Button variant="contained" onClick={handleGuestLogin}>Continue</Button>}
+        {value === 1 && <>
+          <Button variant="contained" onClick={handleGuestLogin}>Continue</Button>
+          <Box style={{padding: 0}}>
+              <Game />
+          </Box>
+        </>}
         {value === 0 && <>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                 <TextField
@@ -155,9 +161,7 @@ const Login = () => {
       </Box>
 
               
-                 {/* <Box style={{padding: 0}}>
-              <Game />
-            </Box> */}
+        
             </Box>
          
           </Grid>
