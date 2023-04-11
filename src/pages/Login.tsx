@@ -15,7 +15,7 @@ const Login = () => {
     setValue(newValue);
   };
 
-  const tabs = ['Login', 'Continue as as guest']
+  const tabs = ['Login', 'Continue as a guest']
 
   const [toasterMessage, setToasterMessage] = useState({ severity: '', message: '' });
   const [showToaster, setShowToaster] = useState(false);
