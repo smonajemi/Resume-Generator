@@ -1,6 +1,6 @@
 import {
   Typography,
-  Container,
+  // Container,
   Paper,
   Stepper,
   Step,
@@ -26,6 +26,14 @@ import AddModal from "./modals/AddModal";
 import DefaultToaster from "./DefaultToaster";
 import CoverLetterForm from "./CoverLetterForm";
 import CustomLoader from "./CustomLoader";
+import { makeStyles, Container } from "@material-ui/core";
+
+const useStyles = makeStyles({
+  container: {
+    paddingLeft: 0,
+    marginBottom: '3.5em'
+  },
+});
 
 interface IResumeFormProps {
   jobExperience: JobExperience[];
@@ -83,7 +91,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({
     setProgress,
     capitalize
   } = useForm();
-
+  const classes = useStyles();
   useEffect(() => {
     const timer = setInterval(() => {
       setProgress((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + 10));
@@ -296,12 +304,12 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({
             <CircularProgress disableShrink />
           ) : (
             <ThemeProvider theme={theme}>
-              <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+              <Container className={classes.container}>
                 <Paper
                   variant="outlined"
                   sx={{
                     my: { xs: 3, md: 6 },
-                    p: { xs: 2, md: 3 },
+                    p: { xs: 1, md: 3 },
                     boxShadow: "5px 10px #262626",
                   }}
                 >
@@ -428,7 +436,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({
                             activeStep === 0 ? handleClick(e) : handleNext();
                           }}
                           disabled={isNextLoading}
-                          sx={{ mt: 3, ml: 1 }}
+                          sx={{ mt: 3, ml: 1, mb: 1 }}
                         >
                           {isNextLoading ?  <CustomLoader value={progress} size={24}/> : 'Next'}
                         </Button>

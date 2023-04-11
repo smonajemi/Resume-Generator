@@ -1,20 +1,31 @@
 import { useState } from "react";
-import { Avatar, Box, Button, Checkbox, CircularProgress, CssBaseline, FormControlLabel, Grid, Link, Paper, TextField, Typography } from "@mui/material";
+import { Avatar, Box, Button, Checkbox, CssBaseline, FormControlLabel, Grid, Paper, Tab, Tabs, TextField, Typography, Link } from "@mui/material";
 import DefaultToaster from "../components/DefaultToaster";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Copyright, LockClockOutlined } from "@mui/icons-material";
-import Game from "../components/Game";
+import { LockClockOutlined } from "@mui/icons-material";
 import { MainContainer } from "../components/MainContainer";
 import { useLocalStorage } from "../components/hooks/useLocalStorage";
 import { useNavigate } from "react-router-dom";
+import React from "react";
 
 const Login = () => {
- 
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
+  const tabs = ['Login', 'Continue as as guest']
+
   const [toasterMessage, setToasterMessage] = useState({ severity: '', message: '' });
   const [showToaster, setShowToaster] = useState(false);
   const theme = createTheme();
   const navigate = useNavigate();
-  const {setItem} = useLocalStorage()
+  const { setItem } = useLocalStorage()
+  const handleGuestLogin = () => {
+    setItem('userId', 'guest')
+    navigate('/')
+  }
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
@@ -80,7 +91,20 @@ const Login = () => {
               <Typography component="h1" variant="h5">
                 Sign in
               </Typography>
-              <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+              <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
+          <Tabs value={value} onChange={handleChange} centered>
+            {tabs.map((tab) => (
+              <Tab
+                key={tab}
+                label={tab}
+              />
+            ))}
+          </Tabs>
+        </Box>
+        <Box sx={{ p: 3 }}>
+        {value === 1 && <Button variant="contained" onClick={handleGuestLogin}>Continue</Button>}
+        {value === 0 && <>
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                 <TextField
                   margin="normal"
                   required
@@ -127,17 +151,21 @@ const Login = () => {
                 </Grid>
               
               </Box>
-                 <Box style={{padding: 0}}>
+        </>}
+      </Box>
+
+              
+                 {/* <Box style={{padding: 0}}>
               <Game />
-            </Box>
+            </Box> */}
             </Box>
          
           </Grid>
         </Grid>
       </ThemeProvider>
-    
+
       <DefaultToaster setOpen={setShowToaster} isOpen={showToaster} severity={toasterMessage.severity as any} message={toasterMessage.message} />
-      </MainContainer>
+    </MainContainer>
   );
 };
 
