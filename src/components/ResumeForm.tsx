@@ -313,9 +313,12 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({
                     boxShadow: "5px 10px #262626",
                   }}
                 >
-                  <Typography component="h1" variant="h4" align="center">
-                    ResumeGenie
-                  </Typography>
+                  {steps.map((label, step) => (
+                       <Typography component="h1" variant="h6" align="center" key={label}>
+                       {step === activeStep && label}
+                     </Typography>
+                  ))}
+                 
                   <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
                     {steps.map((label) => (
                       <Step key={label}>

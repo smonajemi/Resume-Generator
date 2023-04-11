@@ -42,7 +42,7 @@ export const useForm = () => {
   const [coverLetterData, setCoverLetterData] = useState("");
   const [isValidated, setValidation] = useState(false);
 
-  const steps = ["Personal Information", "Experience", "Education"];
+  const steps = ["Personal Information", "Experience", "Education and Training"];
   const capitalize = (string: string | any): string => {
     let words: string[] = string.split(" ");
     for (let i: number = 0; i < words.length; i++) {

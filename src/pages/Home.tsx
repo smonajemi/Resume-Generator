@@ -26,7 +26,7 @@ const Home = () => {
   ])
     return (
         <MainContainer title={"ResumeGenie"} >
-            <Box style={{ overflowX: 'hidden' }}>
+            <Box>
             <ResumeForm jobExperience={jobExperience} setJobExperience={setJobExperience} education={education} setEducation={setEducation} user={user} setUser={setUser}  />
           </Box>
       </MainContainer>
