@@ -1,4 +1,4 @@
-import { Grid, Paper, Box, Typography, Tabs, Tab, ThemeProvider } from "@mui/material"
+import { Paper, Tabs, Tab, ThemeProvider } from "@mui/material"
 import { MainContainer } from "../components/MainContainer"
 import { useProfile } from "../components/hooks/useProfile"
 import { makeStyles, Container } from "@material-ui/core";

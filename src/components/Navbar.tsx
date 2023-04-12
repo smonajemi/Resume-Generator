@@ -13,8 +13,21 @@ import {
 import React from "react";
 import { useNavBar } from "./hooks/useNavbar";
 import { useAuth } from "./hooks/useAuth";
+import { makeStyles } from "@material-ui/core";
 
+const useStyles = makeStyles({
+    root: {
+      '& .MuiList-root': {
+        padding: '0', 
+      },
+      '& .MuiPaper-root': {
+        margin: '3em 0 0 1em', 
+      },
+    },
+  });
+  
 const Navbar = () => {
+    const classes = useStyles();
     const { handleProfileOption, settings, handleClose, handleMenu, anchorEl, setAnchorEl, isLoggingOut } = useNavBar();
     const { isAuthenticated, isGuestAuth, isNotProfile, isMemberProfile } = useAuth()
     return (
@@ -55,7 +68,7 @@ const Navbar = () => {
                     )}
              
              {isAuthenticated && !isNotProfile && (
-                        <Box sx={{ ml: "auto" }}>
+                        <Box sx={{ ml: "auto" }} >
                             <IconButton
                                 size="large"
                                 aria-label="account of current user"
@@ -80,6 +93,7 @@ const Navbar = () => {
                                 }}
                                 open={Boolean(anchorEl)}
                                 onClose={handleClose}
+                                className={classes.root}
                             >
                                 {isGuestAuth && settings.map((setting) => (
                                     <MenuItem
