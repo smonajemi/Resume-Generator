@@ -13,24 +13,31 @@ const AuthChecker = ({ children }: Props) => {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
   const { pathname } = useLocation();
-  const [isNavigating, setIsNavigating] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(true);
 
   useEffect(() => {
     const navigateToLoginPage = async () => {
-      if (!getItem('userId')) {
+      const userId = getItem('userId');
+      if (!userId) {
         setIsNavigating(true);
-        await navigate("/login")
-        setIsNavigating(false)
-      }
-      else if (isAuthenticated && (pathname === "/login" || pathname === "/signup")) {
+        await navigate("/login");
+      } else if (pathname === "/profile" && userId?.includes('guest')) {
+        setIsNavigating(true);
+        await navigate('/');
+      } else if (pathname === "/login" || pathname === "/signup") {
         setIsNavigating(true);
         await navigate(-1);
-        setIsNavigating(false);
       }
+      setIsNavigating(false);
     }
+
     navigateToLoginPage();
   }, [isAuthenticated, pathname, navigate]);
 
+  useEffect(() => {
+    setIsNavigating(false); // Set to false after navigation is complete
+  }, [pathname]);
+  
   return (
     <>
       <Backdrop open={isNavigating} sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}>

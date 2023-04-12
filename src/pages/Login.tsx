@@ -11,6 +11,16 @@ const useStyles = makeStyles({
   root: {
     maxHeight: "calc(100vh - 90px)",
     overflow: "auto",
+    '-webkit-overflow-scrolling': 'touch', /* Safari */
+    '-ms-overflow-style': 'none', /* IE 11 */
+    'scrollbar-width': 'thin', /* Firefox */
+    'scrollbar-color': '#ccc transparent', /* Firefox */
+    '&::-webkit-scrollbar': {
+      width: '8px',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: '#ccc',
+    },
   },
 });
 const Login = () => {
