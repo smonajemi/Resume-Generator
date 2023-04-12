@@ -40,7 +40,7 @@ const Signup = () => {
         <>
             <MainContainer title={"Signup"} >
                 <ThemeProvider theme={theme}>
-                    <Grid container component="main" >
+                    <Grid container component="main" style={{height: '75em'}} >
                         <CssBaseline />
                         <Grid
                             item

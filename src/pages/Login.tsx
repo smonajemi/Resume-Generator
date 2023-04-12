@@ -6,8 +6,15 @@ import { LockClockOutlined } from "@mui/icons-material";
 import { MainContainer } from "../components/MainContainer";
 import Game from "../components/Game";
 import { useLogin } from "../components/hooks/useLogin";
-
+import { makeStyles } from "@material-ui/core";
+const useStyles = makeStyles({
+  root: {
+    maxHeight: "calc(100vh - 90px)",
+    overflow: "auto",
+  },
+});
 const Login = () => {
+  const classes = useStyles();
   const { value,
     setValue,
     handleChange,
@@ -40,7 +47,7 @@ const Login = () => {
     <>
       <MainContainer title={"Login"} >
         <ThemeProvider theme={theme}>
-          <Grid container component="main">
+          <Grid container component="main" style={{height: '75em'}}>
             <CssBaseline />
             <Grid
               item
@@ -68,6 +75,7 @@ const Login = () => {
               >
 
                 <Paper
+                className={classes.root}
                   variant="outlined"
                   sx={{
                     my: { xs: 2, md: 6 },

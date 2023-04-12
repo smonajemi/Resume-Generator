@@ -41,6 +41,7 @@ const renderButton = (index: number) => (
             <Box style={{ display: 'flex', justifyContent: 'center', marginBottom: '1em', borderBottom: '1px solid black' }}>
                 <Typography variant="body1">{status}</Typography>
             </Box>
+            <Box>
             <Grid container spacing={3}>
                 {[0, 1, 2].map((i) => (
                     <Grid key={i} item xs={4}>
@@ -58,6 +59,7 @@ const renderButton = (index: number) => (
                     </Grid>
                 ))}
             </Grid>
+            </Box>
             
             <Box style={{ display: 'flex', justifyContent: 'center', marginTop: 5 }}>
                 <Button variant="contained" onClick={resetBoard} color='warning'>
