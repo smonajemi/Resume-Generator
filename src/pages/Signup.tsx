@@ -1,11 +1,10 @@
 import { useEffect } from "react";
-import { Avatar, Box, Button, Checkbox, CssBaseline, FormControlLabel, Grid, TextField, Typography, Link, Container, Paper, Tab, Tabs } from "@mui/material";
+import { Avatar, Box, Button, CssBaseline, Grid, TextField, Typography, Paper } from "@mui/material";
 import DefaultToaster from "../components/DefaultToaster";
 import { ThemeProvider } from "@mui/material/styles";
 import { MainContainer } from "../components/MainContainer";
 import { useLogin } from "../components/hooks/useLogin";
 import { LockClockOutlined } from "@mui/icons-material";
-import Game from "../components/Game";
 
 const Signup = () => {
     const { value,
@@ -73,7 +72,7 @@ const Signup = () => {
                                 <Typography component="h1" variant="h5">
                                     Sign up
                                 </Typography>
-                                <Box component="form" noValidate  onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                                <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                                     <Grid container spacing={2}>
                                         <Grid item xs={12} sm={6}>
                                             <TextField
@@ -84,7 +83,7 @@ const Signup = () => {
                                                 id="firstName"
                                                 label="First Name"
                                                 autoFocus
-                                                // onChange={e => handleSignup(e, (e?.target as HTMLTextAreaElement)?.name)}
+                                            // onChange={e => handleSignup(e, (e?.target as HTMLTextAreaElement)?.name)}
                                             />
                                         </Grid>
                                         <Grid item xs={12} sm={6}>
@@ -135,20 +134,19 @@ const Signup = () => {
                                         fullWidth
                                         variant="contained"
                                         sx={{ mt: 3, mb: 2 }}
-                                        // onClick={incompleteTask}
+                                    // onClick={incompleteTask}
                                     >
                                         Sign Up
                                     </Button>
                                     <Grid container justifyContent="flex-end">
                                         <Grid item>
-                                            <Link href="/login" variant="body2">
-                                                Already have an account? Sign in
-                                            </Link>
+                                            <Button variant="text" color="primary" onClick={() => navigate('/login')}>
+                                                Sign In
+                                            </Button>
                                         </Grid>
                                     </Grid>
                                 </Box>
                             </Box>
-
                         </Grid>
                     </Grid>
                 </ThemeProvider>
