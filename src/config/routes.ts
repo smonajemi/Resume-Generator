@@ -25,7 +25,7 @@ const routes: RouteType[] = [
     protected: true,
   },
   {
-    path: "/",
+    path: "/profile",
     component: ProfilePage,
     name: "Profile Page",
     protected: true,

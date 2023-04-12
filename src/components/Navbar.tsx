@@ -16,7 +16,7 @@ import { useAuth } from "./hooks/useAuth";
 
 const Navbar = () => {
     const { handleProfileOption, settings, handleClose, handleMenu, anchorEl, setAnchorEl, isLoggingOut } = useNavBar();
-    const { isAuthenticated, isGuestAuth, isNotProfile } = useAuth()
+    const { isAuthenticated, isGuestAuth, isNotProfile, isMemberProfile } = useAuth()
     return (
         <Box sx={{ display: "flex", alignItems: "center" }}>
             <AppBar position="sticky">
@@ -93,12 +93,14 @@ const Navbar = () => {
 
                                 {!isGuestAuth && settings.slice(0, -1).map((setting) => (
                                     <MenuItem
-                                        key={setting}
-                                        onClick={() => handleProfileOption(setting)}
+                                        key={setting?.includes('Profile') && isMemberProfile ? 'Home': setting}
+                                        onClick={() => handleProfileOption(setting?.includes('Profile') && isMemberProfile ? 'Home': setting)}
                                     >
-                                    <Typography textAlign="center" >{!setting?.includes('Signup') && setting}</Typography>
+                                    <Typography textAlign="center" >{!setting?.includes('Signup') && setting?.includes('Profile') && isMemberProfile ? 'Home': setting}</Typography>
                                     </MenuItem>
                                 ))}
+
+                              
                                 
                                 
                             </Menu>

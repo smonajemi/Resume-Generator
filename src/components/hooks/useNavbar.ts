@@ -20,6 +20,9 @@ export const useNavBar = () => {
 
   const handleProfileOption = async (src: any) => {
     switch (src) {
+      case 'Home':
+        navigate("/");
+        break;
       case 'Profile':
         navigate("/profile");
         break;
@@ -33,6 +36,7 @@ export const useNavBar = () => {
               setIsLoggingOut(false); 
               break;
       default:
+        navigate("/");
         break;
     }
   };

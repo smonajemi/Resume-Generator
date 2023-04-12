@@ -7,6 +7,7 @@ export const useAuth = () => {
   const isAuthenticated = Boolean(userId);
   const isGuestAuth = Boolean(userId?.includes('guest'))
   const isNotProfile = window.location.pathname.includes('signup') || window.location.pathname.includes('login');
+  const isMemberProfile = window.location.pathname.includes('profile')
   useLayoutEffect(() => {
     if (!userId) return;
     const fetchLoggedUser = async () => {
@@ -17,5 +18,5 @@ export const useAuth = () => {
     // fetchLoggedUser();
   }, [userId]);
 
-  return { isAuthenticated, isGuestAuth, isNotProfile } as const;
+  return { isAuthenticated, isGuestAuth, isNotProfile, isMemberProfile } as const;
 };
