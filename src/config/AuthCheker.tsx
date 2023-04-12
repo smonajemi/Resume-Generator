@@ -1,3 +1,4 @@
+import { useLocalStorage } from "../components/hooks/useLocalStorage";
 import React, { useEffect, useState, ReactNode } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../components/hooks/useAuth";
@@ -8,6 +9,7 @@ interface Props {
 }
 
 const AuthChecker = ({ children }: Props) => {
+  const { getItem } = useLocalStorage()
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
   const { pathname } = useLocation();
@@ -15,12 +17,17 @@ const AuthChecker = ({ children }: Props) => {
 
   useEffect(() => {
     const navigateToLoginPage = async () => {
-      if (isAuthenticated && (pathname === "/login" || pathname === "/signup")) {
+      if (!getItem('userId')) {
+        setIsNavigating(true);
+        await navigate("/login")
+        setIsNavigating(false)
+      }
+      else if (isAuthenticated && (pathname === "/login" || pathname === "/signup")) {
         setIsNavigating(true);
         await navigate(-1);
         setIsNavigating(false);
       }
-    };
+    }
     navigateToLoginPage();
   }, [isAuthenticated, pathname, navigate]);
 
