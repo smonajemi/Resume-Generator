@@ -5,6 +5,7 @@ import { useState } from "react"
 import { JobExperience } from "../types/jobExperience.types"
 import { EducationTypes } from "../types/education.types"
 import { UserTypes } from "../types/user.types"
+import DefaultToaster from "../components/DefaultToaster"
 
 const Home = () => {
   const [jobExperience, setJobExperience] = useState<JobExperience[]>([])
@@ -24,12 +25,16 @@ const Home = () => {
       skillSet: ['']
     }
   ])
+  const [isOpen, setOpen] = useState(false);
+  const [toasterMessage, setToasterMessage] = useState({ severity: 'success', message: '' });
+  
     return (
-        <MainContainer title={"ResumeGenie"} >
-            <Box>
-            <ResumeForm jobExperience={jobExperience} setJobExperience={setJobExperience} education={education} setEducation={setEducation} user={user} setUser={setUser}  />
-          </Box>
-      </MainContainer>
+    <>
+    <MainContainer title={"ResumeGenie"} >
+      <ResumeForm jobExperience={jobExperience} setJobExperience={setJobExperience} education={education} setEducation={setEducation} user={user} setUser={setUser} setOpen={setOpen} isOpen={isOpen} toasterMessage={toasterMessage.message as any} setToasterMessage={setToasterMessage}/>
+    </MainContainer>
+    <DefaultToaster setOpen={setOpen} isOpen={isOpen} severity={toasterMessage.severity as any} message={toasterMessage.message}/>
+    </>
     ) 
 }
 

@@ -42,6 +42,10 @@ interface IResumeFormProps {
   setEducation: Function;
   user: UserTypes[];
   setUser: Function;
+  setOpen: Function
+  isOpen: boolean
+  toasterMessage: boolean
+  setToasterMessage: Function
 }
 
 const ResumeForm: FunctionComponent<IResumeFormProps> = ({
@@ -50,7 +54,11 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({
   education,
   setEducation,
   user,
+  setOpen,
+  isOpen,
   setUser,
+  toasterMessage, 
+  setToasterMessage
 }) => {
   const {
     isView,
@@ -67,8 +75,6 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({
     setCurrentEducation,
     isEdit,
     setEdit,
-    isOpen,
-    setOpen,
     isChecked,
     handleChange,
     setChecked,
@@ -239,6 +245,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({
     e.preventDefault()
     if (!currentUser?.firstName || !currentUser?.lastName || !currentUser?.city || !currentUser?.address || !currentUser?.linkedIn || !currentUser?.postalCode || !currentUser?.summary || !currentUser?.phoneNumber || !currentUser?.email) {
       setOpen(true);
+      setToasterMessage({ severity: 'error', message: `Error: fields marked with asterisk are required.` });
       return;
     }
     if (!isValidated) {

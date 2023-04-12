@@ -30,7 +30,6 @@ export const useForm = () => {
   const handleCloseModal = () => setView(false);
   const [activeStep, setActiveStep] = useState(0);
   const theme = createTheme();
-  const [isOpen, setOpen] = useState(false);
   const [isChecked, setChecked] = useState(false);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(e.target.checked);
@@ -67,8 +66,6 @@ export const useForm = () => {
     setCurrentEducation,
     isEdit,
     setEdit,
-    isOpen,
-    setOpen,
     isChecked,
     handleChange,
     setChecked,
