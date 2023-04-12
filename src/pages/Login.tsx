@@ -84,7 +84,7 @@ const Login = () => {
                   <Typography component="h1" variant="h5">
                     Sign in
                   </Typography>
-                  <Box sx={{ width: '100%', bgcolor: 'background.paper', marginTop: '2em' }}>
+                  <Box sx={{ width: '100%', bgcolor: 'background.paper', marginTop: '2em', }}>
                     <Tabs value={value} onChange={handleChange} centered>
                       {tabs.map((tab) => (
                         <Tab
@@ -94,14 +94,14 @@ const Login = () => {
                       ))}
                     </Tabs>
                   </Box>
-                  <Box sx={{ p: 3 }}>
+                  <Box sx={{ p: 1 }}>
                     {value === 1 && <>
                       <Button type="submit"
                         fullWidth
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }} onClick={handleGuestLogin}>Sign In</Button>
 
-                      <Box style={{ padding: 0, marginTop: '2em' }}>
+                      <Box style={{ padding: 0}}>
                         <Game />
                       </Box>
                     </>}

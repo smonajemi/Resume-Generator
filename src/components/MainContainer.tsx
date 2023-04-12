@@ -12,11 +12,11 @@ export const MainContainer: FunctionComponent<IMainContainerProps> = ({ title, c
     }, [title])
 
     return (
-        <Box style={{ width: '100%', height: '100%', position: 'fixed' }}>
+        <Box style={{ width: '100%', height: '80%', position: 'fixed' }}>
         <Box style={{ width: '100%', height: '60px', position: 'fixed', top: 0, left: 0, right: 0 }}>
           <Navbar />
         </Box>
-        <Box style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'auto' }}>
+        <Box style={{ width: '100%', height: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'auto', marginTop: '2em' }}>
           {children}
         </Box>
       </Box>
