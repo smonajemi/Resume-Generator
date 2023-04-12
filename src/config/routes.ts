@@ -2,7 +2,7 @@ import ErrorPage from '../pages/Error'
 import HomePage from '../pages/Home'
 import LoginPage from '../pages/Login'
 import SignupPage from '../pages/Signup'
-
+import ProfilePage from '../pages/Profile'
 interface RouteType {
   path: string;
   component: any;
@@ -22,6 +22,12 @@ const routes: RouteType[] = [
     path: "/",
     component: HomePage,
     name: "Landing Page",
+    protected: true,
+  },
+  {
+    path: "/",
+    component: ProfilePage,
+    name: "Profile Page",
     protected: true,
   },
   {
