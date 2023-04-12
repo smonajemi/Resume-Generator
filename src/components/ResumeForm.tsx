@@ -23,7 +23,6 @@ import PdfGenerator from "./resume/PdfGenerator";
 import { EducationTypes } from "../types/education.types";
 import { UserTypes } from "../types/user.types";
 import AddModal from "./modals/AddModal";
-import DefaultToaster from "./DefaultToaster";
 import CoverLetterForm from "./CoverLetterForm";
 import CustomLoader from "./CustomLoader";
 import { makeStyles, Container } from "@material-ui/core";
@@ -31,7 +30,6 @@ import { makeStyles, Container } from "@material-ui/core";
 const useStyles = makeStyles({
   container: {
     paddingLeft: 0,
-    marginBottom: '3.5em'
   },
 });
 
@@ -301,7 +299,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({
         flexDirection="column"
       >
         <Box
-          flex={1}
+          // flex={1}
           display="flex"
           flexDirection="column"
           alignItems="center"

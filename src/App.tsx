@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import routes from "./config/routes";
 import AuthChecker from './config/AuthCheker';
+import AuthCheckerPublic from './config/AuthCheckerPublic';
 
 function App() {
 
@@ -20,9 +21,9 @@ function App() {
                   <route.component />
                 </AuthChecker>
               ) : (
-                <AuthChecker >
-                <route.component />
-              </AuthChecker>
+                <AuthCheckerPublic>
+                     <route.component />
+                </AuthCheckerPublic>
               )
             }
           />
