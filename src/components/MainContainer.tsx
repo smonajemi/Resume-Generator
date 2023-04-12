@@ -16,7 +16,7 @@ export const MainContainer: FunctionComponent<IMainContainerProps> = ({ title, c
         <Box style={{ width: '100%', height: '60px', position: 'fixed', top: 0, left: 0, right: 0 }}>
           <Navbar />
         </Box>
-        <Box style={{ width: '100%', height: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'auto', marginTop: '2em' }}>
+        <Box style={{ width: '100%', height: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'auto', marginTop: '3em' }}>
           {children}
         </Box>
       </Box>
