@@ -16,7 +16,7 @@ import { useAuth } from "./hooks/useAuth";
 
 const Navbar = () => {
     const { handleProfileOption, settings, handleClose, handleMenu, anchorEl, setAnchorEl, isLoggingOut } = useNavBar();
-    const { isAuthenticated } = useAuth()
+    const { isAuthenticated, isGuestAuth, isNotProfile } = useAuth()
     return (
         <Box sx={{ display: "flex", alignItems: "center" }}>
             <AppBar position="sticky">
@@ -53,7 +53,8 @@ const Navbar = () => {
                          <CircularProgress color="secondary" />
                        </Box>
                     )}
-                    {isAuthenticated && (
+             
+             {isAuthenticated && !isNotProfile && (
                         <Box sx={{ ml: "auto" }}>
                             <IconButton
                                 size="large"
@@ -80,18 +81,29 @@ const Navbar = () => {
                                 open={Boolean(anchorEl)}
                                 onClose={handleClose}
                             >
-                                {settings.map((setting) => (
+                                {isGuestAuth && settings.map((setting) => (
+                                    <MenuItem
+                                        key={setting}
+                                        onClick={() => handleProfileOption(setting)}
+                                        disabled={setting?.includes('Profile')}
+                                    >
+                                        <Typography textAlign="center" >{setting}</Typography>
+                                    </MenuItem>
+                                ))}
+
+                                {!isGuestAuth && settings.slice(0, -1).map((setting) => (
                                     <MenuItem
                                         key={setting}
                                         onClick={() => handleProfileOption(setting)}
                                     >
-                                        <Typography textAlign="center">{setting}</Typography>
+                                    <Typography textAlign="center" >{!setting?.includes('Signup') && setting}</Typography>
                                     </MenuItem>
                                 ))}
+                                
+                                
                             </Menu>
                         </Box>
                     )}
-                    
 
                 </Toolbar>
             </AppBar>

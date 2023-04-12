@@ -19,6 +19,7 @@ export const useLogin = () => {
     const theme = createTheme();
     const navigate = useNavigate();
     const { setItem } = useLocalStorage()
+
     const handleGuestLogin = () => {
         setItem('userId', 'guest')
         navigate('/')
@@ -27,16 +28,31 @@ export const useLogin = () => {
         event.preventDefault();
         try {
             const data = new FormData(event.currentTarget);
-            const username = data.get("email");
-            const password = data.get("password");
-            if (!username || !password) {
-                throw new Error("Please enter your username and password to continue.");
-            } else {
-                // setToasterMessage({ ...toasterMessage, message: 'Successful', severity: 'success' });
-                // setShowToaster(true);
-                setItem('userId', username)
-                navigate('/')
+            const userData = {
+                username: data.get('email'),
+                firstName: data.get('firstName'),
+                lastName: data.get('lastName'),
+                password: data.get('password'),
+                rePassword: data.get('re-password')
+              }
+            
+            if (window.location.pathname.includes('signup')) {
+                if (!userData.firstName || !userData.lastName || !userData.username || !userData.password || !userData.rePassword) {
+                    throw new Error("Please fill out the form to continue");
+                } else {
+                    setItem('userId', userData.username)
+                    navigate('/')
+                }
+            } if (window.location.pathname.includes('login')) {
+                if ( !userData.username || !userData.password) {
+                    throw new Error("Please enter your username and password to continue.");
+                } else {
+                    setItem('userId', userData.username)
+                    navigate('/')
+                }
             }
+
+          
 
         } catch (error) {
             if (typeof error === "string") {
@@ -58,6 +74,29 @@ export const useLogin = () => {
     for (let i = 1; i <= 10; i++) {
         images.push(`./image/random/img-${i}.jpg`);
     }
+
+    const handleSignup = (event: any, type: string) => {
+        event.preventDefault();        
+        switch (type) {
+          case "firstName":
+     
+            break;
+            case "lastName":
+     
+            break;
+            case "email":
+     
+            break;
+            case "password":
+     
+            break;
+            case "re-password":
+     
+            break;
+          default:
+        }
+      };
+    
     return {
         value,
         setValue,
@@ -75,6 +114,7 @@ export const useLogin = () => {
         handleGuestLogin,
         handleSubmit,
         incompleteTask,
-        images
+        images,
+        handleSignup
     } as const
 };

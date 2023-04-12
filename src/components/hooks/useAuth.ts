@@ -5,7 +5,8 @@ export const useAuth = () => {
   const { getItem } = useLocalStorage();
   const userId = getItem("userId");
   const isAuthenticated = Boolean(userId);
-
+  const isGuestAuth = Boolean(userId?.includes('guest'))
+  const isNotProfile = window.location.pathname.includes('signup') || window.location.pathname.includes('login');
   useLayoutEffect(() => {
     if (!userId) return;
     const fetchLoggedUser = async () => {
@@ -16,5 +17,5 @@ export const useAuth = () => {
     // fetchLoggedUser();
   }, [userId]);
 
-  return { isAuthenticated } as const;
+  return { isAuthenticated, isGuestAuth, isNotProfile } as const;
 };

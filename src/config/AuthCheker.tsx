@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "../components/hooks/useLocalStorage";
-import Navbar from "../components/Navbar";
 interface Props {
   children: React.ReactNode;
 }
@@ -12,7 +11,7 @@ const AuthChecker = ({ children }: Props) => {
   useEffect(() => {
     if (!getItem('userId')) {
       navigate("/login");
-    }
+    } else navigate('/')
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return <>{children}</>;

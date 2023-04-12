@@ -1,12 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Avatar, Box, Button, Checkbox, CssBaseline, FormControlLabel, Grid, Paper, Tab, Tabs, TextField, Typography, Link } from "@mui/material";
 import DefaultToaster from "../components/DefaultToaster";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import { LockClockOutlined } from "@mui/icons-material";
 import { MainContainer } from "../components/MainContainer";
-import { useLocalStorage } from "../components/hooks/useLocalStorage";
-import { useNavigate } from "react-router-dom";
-import React from "react";
 import Game from "../components/Game";
 import { useLogin } from "../components/hooks/useLogin";
 
@@ -40,6 +37,7 @@ const Login = () => {
   }, []);
 
   return (
+    <>
     <MainContainer title={"Login"} >
       <ThemeProvider theme={theme}>
         <Grid container component="main" sx={{ height: '100vh' }}>
@@ -61,7 +59,7 @@ const Login = () => {
           <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
             <Box
               sx={{
-                my: 8,
+                my: 2,
                 mx: 4,
                 display: 'flex',
                 flexDirection: 'column',
@@ -136,7 +134,7 @@ const Login = () => {
                         </Link>
                       </Grid>
                       <Grid item>
-                        <Link href="#" variant="body2" onClick={incompleteTask}>
+                        <Link href="/signup" variant="body2">
                           {"Sign Up"}
                         </Link>
                       </Grid>
@@ -153,9 +151,10 @@ const Login = () => {
           </Grid>
         </Grid>
       </ThemeProvider>
-
-      <DefaultToaster setOpen={setShowToaster} isOpen={showToaster} severity={toasterMessage.severity as any} message={toasterMessage.message} />
     </MainContainer>
+    
+    <DefaultToaster setOpen={setShowToaster} isOpen={showToaster} severity={toasterMessage.severity as any} message={toasterMessage.message} />
+    </>
   );
 };
 

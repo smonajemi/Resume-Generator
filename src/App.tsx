@@ -1,10 +1,14 @@
-import React, {} from 'react';
+import React, { useEffect } from 'react';
 import { Box } from "@mui/material";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import routes from "./config/routes";
 import AuthChecker from './config/AuthCheker';
+import { useAuth } from './components/hooks/useAuth';
+
 
 function App() {
+  const { isAuthenticated } = useAuth()
+
   return (
     <Box>
     <BrowserRouter basename='/'>
@@ -15,11 +19,13 @@ function App() {
             path={route.path}
             element={
               route.protected ? (
-                <AuthChecker>
+                <AuthChecker >
                   <route.component />
                 </AuthChecker>
               ) : (
+                <AuthChecker >
                 <route.component />
+              </AuthChecker>
               )
             }
           />

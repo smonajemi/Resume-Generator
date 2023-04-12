@@ -58,13 +58,13 @@ const renderButton = (index: number) => (
                     </Grid>
                 ))}
             </Grid>
-            <DefaultToaster severity={toasterMessage.severity as any} message={toasterMessage.message} setOpen={setOpen} isOpen={isOpen} />
+            
             <Box style={{ display: 'flex', justifyContent: 'center', marginTop: 5 }}>
                 <Button variant="contained" onClick={resetBoard} color='warning'>
                     Reset
                 </Button>
             </Box>
-
+            <DefaultToaster severity={toasterMessage.severity as any} message={toasterMessage.message} setOpen={setOpen} isOpen={isOpen} />
         </>
     );
 };

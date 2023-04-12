@@ -2,13 +2,14 @@ import { useNavigate } from "react-router-dom";
 import { useLogout } from "./useLogout";
 import { useAuth } from "./useAuth";
 import { useState, MouseEvent } from "react";
+import { useLocalStorage } from "./useLocalStorage";
 
 export const useNavBar = () => {
   const { logout } = useLogout();
-  const { isAuthenticated } = useAuth()
+  const { clearItem } = useLocalStorage();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const navigate = useNavigate();
-  const settings = ["Profile", "Logout"];
+  const settings = ["Profile", "Logout","Signup"];
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const handleMenu = (event: MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -18,12 +19,21 @@ export const useNavBar = () => {
     };
 
   const handleProfileOption = async (src: any) => {
-    if (src === "Profile") {
-      navigate("/profile");
-    } else if (src === "Logout") {
-      setIsLoggingOut(true); 
-      await logout(); 
-      setIsLoggingOut(false); 
+    switch (src) {
+      case 'Profile':
+        navigate("/profile");
+        break;
+      case 'Signup':
+            navigate("/signup");
+            clearItem("userId");
+            break; 
+      case 'Logout':
+              setIsLoggingOut(true); 
+              await logout(); 
+              setIsLoggingOut(false); 
+              break;
+      default:
+        break;
     }
   };
 
