@@ -12,12 +12,14 @@ export const MainContainer: FunctionComponent<IMainContainerProps> = ({ title, c
     }, [title])
 
     return (
-   <Box style={{position: 'sticky', width:"100%"}}>
-        <Navbar /> 
-        <Box style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', position: 'fixed', overflow: 'auto'}}>
-            {children}
+        <Box style={{ width: '100%', height: '100%', position: 'fixed' }}>
+        <Box style={{ width: '100%', height: '60px', position: 'fixed', top: 0, left: 0, right: 0 }}>
+          <Navbar />
         </Box>
-    </Box>
+        <Box style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'auto' }}>
+          {children}
+        </Box>
+      </Box>
     
     )
 }
