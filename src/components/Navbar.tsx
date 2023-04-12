@@ -18,7 +18,7 @@ const Navbar = () => {
     const { handleProfileOption, settings, handleClose, handleMenu, anchorEl, setAnchorEl, isLoggingOut } = useNavBar();
     const { isAuthenticated, isGuestAuth, isNotProfile, isMemberProfile } = useAuth()
     return (
-        <Box sx={{ marginRight: '1em' }}>
+        <Box sx={{ width: '100%'}}>
             <AppBar position="sticky">
                 <Toolbar>
                     <Box
