@@ -3,6 +3,7 @@ import React, { useEffect, useState, ReactNode } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../components/hooks/useAuth";
 import { CircularProgress, Backdrop } from "@mui/material";
+import DefaultToaster from "../components/DefaultToaster";
 
 interface Props {
   children: ReactNode;
@@ -14,6 +15,7 @@ const AuthChecker = ({ children }: Props) => {
   const { isAuthenticated } = useAuth();
   const { pathname } = useLocation();
   const [isNavigating, setIsNavigating] = useState(true);
+  const [isOpen, setOpen] = useState(false);
 
   useEffect(() => {
     const navigateToLoginPage = async () => {
@@ -22,13 +24,14 @@ const AuthChecker = ({ children }: Props) => {
         setIsNavigating(true);
         await navigate("/login");
       } else if (pathname === "/profile" && userId?.includes('guest')) {
-        setIsNavigating(true);
+        setOpen(true)
         await navigate('/');
+        setIsNavigating(true);
       } else if (pathname === "/login" || pathname === "/signup") {
         setIsNavigating(true);
         await navigate(-1);
       }
-      setIsNavigating(false);
+      // setIsNavigating(false);
     }
 
     navigateToLoginPage();
@@ -37,12 +40,13 @@ const AuthChecker = ({ children }: Props) => {
   useEffect(() => {
     setIsNavigating(false); // Set to false after navigation is complete
   }, [pathname]);
-  
+
   return (
     <>
       <Backdrop open={isNavigating} sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <CircularProgress />
       </Backdrop>
+      <DefaultToaster setOpen={setOpen} isOpen={isOpen} severity={"warning"} message={"You're almost toast-worthy! But first, please sign up to access this page"} />
       {children}
     </>
   );
