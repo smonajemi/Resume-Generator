@@ -25,7 +25,7 @@ const Profile = () => {
                 <Paper
                   variant="outlined"
                   sx={{
-                    my: { xs: 3, md: 6 },
+                    my: { xs: 2, md: 6 },
                     p: { xs: 1, md: 3 },
                     boxShadow: "5px 10px #262626",
                   }}
