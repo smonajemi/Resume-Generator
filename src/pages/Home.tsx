@@ -30,10 +30,10 @@ const Home = () => {
   
     return (
     <>
-    <MainContainer title={"ResumeGenie"} >
-      <ResumeForm jobExperience={jobExperience} setJobExperience={setJobExperience} education={education} setEducation={setEducation} user={user} setUser={setUser} setOpen={setOpen} isOpen={isOpen} toasterMessage={toasterMessage.message as any} setToasterMessage={setToasterMessage}/>
-    </MainContainer>
-    <DefaultToaster setOpen={setOpen} isOpen={isOpen} severity={toasterMessage.severity as any} message={toasterMessage.message}/>
+      <MainContainer title={"ResumeGenie"} >
+        <ResumeForm jobExperience={jobExperience} setJobExperience={setJobExperience} education={education} setEducation={setEducation} user={user} setUser={setUser} setOpen={setOpen} isOpen={isOpen} toasterMessage={toasterMessage.message as any} setToasterMessage={setToasterMessage}/>
+      </MainContainer>
+      <DefaultToaster setOpen={setOpen} isOpen={isOpen} severity={toasterMessage.severity as any} message={toasterMessage.message}/>
     </>
     ) 
 }

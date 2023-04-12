@@ -479,7 +479,6 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({
         education={currentEducation}
         activeStep={activeStep}
       />
-      <DefaultToaster setOpen={setOpen} isOpen={isOpen} severity="error" message="Error: fields marked with asterisk are required."/>
     </>
   );
 };
