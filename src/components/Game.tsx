@@ -1,16 +1,19 @@
 import styled from "@emotion/styled";
 import { Box, Button, Grid, Typography } from "@mui/material";
-import { FC, FunctionComponent, useState } from "react";
+import { FC, FunctionComponent, useEffect, useState } from "react";
 import DefaultToaster from "./DefaultToaster";
 import { useGameApi } from "./hooks/useGameApi";
 
 
 
 
-interface IBoardProps { }
+interface IBoardProps { 
+    isWinner: string
+    setIsWinner: Function
+}
 
 
-const Game: FunctionComponent<IBoardProps> = () => {
+const Game: FunctionComponent<IBoardProps> = ({isWinner, setIsWinner}) => {
     const {
         status,
         winner,
@@ -20,8 +23,13 @@ const Game: FunctionComponent<IBoardProps> = () => {
         isOpen,
         setOpen,
         board,
-        isPlayerTurn
+        isPlayerTurn,
+        calculateWinner,
+        computerTimeoutId,
+        setIsPlayerTurn,
+        setComputerTimeoutId
     } = useGameApi()
+
     const StyledButton = styled(Button)({
         height: '4em',
         width: '100%',
@@ -37,12 +45,19 @@ const Game: FunctionComponent<IBoardProps> = () => {
             {board[index]}
         </StyledButton>
     );
+    useEffect(() => {
+        if (computerTimeoutId && calculateWinner(board)) {
+          clearTimeout(computerTimeoutId);
+        }
+        setIsWinner(winner)
+      }, [board, computerTimeoutId, winner]);
+
     return (
         <>
             <Box style={{ display: 'flex', justifyContent: 'center', marginBottom: '1em', borderBottom: '1px solid black' }}>
                 <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
                     <Typography variant="body1">{status}</Typography>
-                    <Button variant="text" onClick={resetBoard} color='warning' >
+                    <Button variant="text" onClick={() => {resetBoard(); setIsPlayerTurn(false)}} color='warning' >
                         Reset
                     </Button>
                 </Box>

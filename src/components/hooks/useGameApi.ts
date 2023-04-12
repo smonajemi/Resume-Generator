@@ -6,6 +6,7 @@ export const useGameApi = () => {
     const [isOpen, setOpen] = useState<boolean>(false);
     const [toasterMessage, setToasterMessage] = useState({ severity: 'success', message: '' });
     const [isPlayerTurn, setIsPlayerTurn] = useState<boolean>(false);
+    const [computerTimeoutId, setComputerTimeoutId] = useState<any | null>(null);
 
     const isBoardFull = (board: BoardType): boolean => {
       return board.every(square => square !== null);
@@ -19,14 +20,20 @@ export const useGameApi = () => {
         newBoard[index] = 'X';
         setBoard(newBoard);
         setIsPlayerTurn(true);
+        const winner = calculateWinner(newBoard);
+        if (winner) {
+          setToasterMessage({ ...toasterMessage, severity: 'success', message: `Congratulations Player ${winner}.` });
+          setOpen(true)
+          return
+        }
         // Computer's turn
-        setTimeout(() => {
+        const timeoutId = setTimeout(() => {
           const emptySquares = newBoard.reduce((acc: number[], curr, index) => {
-              if (curr === null) {
-                acc.push(index);
-              }
-              return acc;
-            }, []);
+            if (curr === null) {
+              acc.push(index);
+            }
+            return acc;
+          }, []);
           const randomIndex = Math.floor(Math.random() * emptySquares.length);
           newBoard[emptySquares[randomIndex]] = 'O';
           setBoard(newBoard);
@@ -34,14 +41,15 @@ export const useGameApi = () => {
           const winner = calculateWinner(newBoard);
           if (winner) {
             setToasterMessage({ ...toasterMessage, severity: 'success', message: `Congratulations Player ${winner}.` });
-            setOpen(true)
-            return
+            setOpen(true);
           } else if (isBoardFull(newBoard)) {
             setToasterMessage({ ...toasterMessage, severity: 'warning', message: `Draw!` });
-            setOpen(true)
+            setOpen(true);
           }
         }, 2000);
+        setComputerTimeoutId(timeoutId);
       };
+      
       
     
     const calculateWinner = (board: BoardType): string | null => {
@@ -67,8 +75,8 @@ export const useGameApi = () => {
       setBoard(Array(9).fill(null));
     };
     
-    const winner = calculateWinner(board);
-    let status = winner ? `Winner: ${winner}` : (isBoardFull(board) ? "Draw" : `Next player: X`);
+    const winner = calculateWinner(board)?.includes('X') ? 'Player' : calculateWinner(board)
+    let status = winner ? `Winner: ${winner}` : (isBoardFull(board) ? "Draw" : `Next player: Player`);
     
 
 
@@ -83,7 +91,8 @@ export const useGameApi = () => {
         setToasterMessage,
         isOpen, 
         setOpen,
-        isPlayerTurn, setIsPlayerTurn
+        isPlayerTurn, setIsPlayerTurn,
+        computerTimeoutId, setComputerTimeoutId
       } as const;
 };
 

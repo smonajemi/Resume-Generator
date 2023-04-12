@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Avatar, Box, Button, Checkbox, CssBaseline, FormControlLabel, Grid, Paper, Tab, Tabs, TextField, Typography, Link } from "@mui/material";
 import DefaultToaster from "../components/DefaultToaster";
 import { ThemeProvider } from "@mui/material/styles";
@@ -24,6 +24,7 @@ const useStyles = makeStyles({
   },
 });
 const Login = () => {
+  const [isWinner, setIsWinner] = useState('')
   const classes = useStyles();
   const { value,
     setValue,
@@ -117,10 +118,11 @@ const Login = () => {
                       <Button type="submit"
                         fullWidth
                         variant="contained"
+                        disabled={!isWinner || isWinner?.includes('O')}
                         sx={{ mt: 3, mb: 2 }} onClick={handleGuestLogin}>Sign In</Button>
 
                       <Box style={{ padding: 0}}>
-                        <Game />
+                        <Game isWinner={isWinner} setIsWinner={setIsWinner}/>
                       </Box>
                     </>}
                     {value === 0 && <>
