@@ -3,6 +3,7 @@ import HomePage from '../pages/Home'
 import LoginPage from '../pages/Login'
 import SignupPage from '../pages/Signup'
 import ProfilePage from '../pages/Profile'
+import QuestionnairePage from '../pages/Questionnaire'
 interface RouteType {
   path: string;
   component: any;
@@ -25,6 +26,12 @@ const routes: RouteType[] = [
     protected: true,
   },
   {
+    path: "/Questionnaire",
+    component: QuestionnairePage,
+    name: "Questionnaire Page",
+    protected: true,
+  },
+  {
     path: "/profile",
     component: ProfilePage,
     name: "Profile Page",
@@ -42,6 +49,7 @@ const routes: RouteType[] = [
     name: "Signup Page",
     protected: false,
   },
+
 ];
 
 export default routes;
