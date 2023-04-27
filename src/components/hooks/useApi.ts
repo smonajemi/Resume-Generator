@@ -1,12 +1,13 @@
+import { ChatBoxTypes } from "../../types/chatBox.types";
 import { CoverLetterTypes } from "../../types/coverLetter.types";
-import { QuestionnaireTypes } from "../../types/questionnaire.types";
+
 
 export const useApi = () => {
   const apiGrammarUrl = process.env.REACT_APP_API_GRAMMAR_URL;
   const apiCVUrl = process.env.REACT_APP_API_CV_URL;
-  const apiQuestionnaireUrl = process.env.REACT_APP_QUESTIONNAIRE
+  const apiChatBoxUrl = process.env.REACT_APP_CHAT_BOX
   
-  if (!apiGrammarUrl || !apiCVUrl || !apiQuestionnaireUrl) {
+  if (!apiGrammarUrl || !apiCVUrl || !apiChatBoxUrl) {
     throw new Error('API URL is not defined');
   }
 
@@ -34,8 +35,8 @@ export const useApi = () => {
     return data.text
   }
 
-  const questionnaire = async (prompt: QuestionnaireTypes) : Promise<string | undefined> => {
-    const response = await fetch(apiQuestionnaireUrl, {
+  const ChatBox = async (prompt: ChatBoxTypes) : Promise<string | undefined> => {
+    const response = await fetch(apiChatBoxUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -49,7 +50,7 @@ export const useApi = () => {
   return {
     correctGrammar,
     generatedCoverLetter,
-    questionnaire
+    ChatBox
   } as const;
 };
 

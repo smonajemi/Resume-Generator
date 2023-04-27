@@ -7,8 +7,12 @@ import {
   Button,
   Typography,
   Box,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  FormControl,
 } from "@material-ui/core";
-
+import { Input, Send } from "@mui/icons-material";
 import { MainContainer } from "../components/MainContainer";
 import { useApi } from "../components/hooks/useApi";
 
@@ -85,11 +89,11 @@ interface ChatMessage {
   isUser: boolean;
 }
 
-const Questionnaire: React.FC = () => {
+const ChatBox: React.FC = () => {
   const classes = useStyles();
   const [inputValue, setInputValue] = useState("");
   const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
-  const { questionnaire } = useApi();
+  const { ChatBox } = useApi();
 
   const handleInputValueChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -112,7 +116,7 @@ const Questionnaire: React.FC = () => {
       question: inputValue,
     };
 
-    const response = await questionnaire(prompt);
+    const response = await ChatBox(prompt);
 
     const botMessage: ChatMessage = {
       message: response as any,
@@ -124,12 +128,13 @@ const Questionnaire: React.FC = () => {
     // Clear input field
     setInputValue("");
   };
+  
 
   return (
-    <MainContainer title={"Questionnaire"}>
+    <MainContainer title={"ChatBox"}>
       <Card className={classes.widerCard} >
         <CardContent >
-          <Box display="flex" flexDirection="column" marginTop="1em" style={{}}>
+          <Box display="flex" flexDirection="column" marginTop="1em" style={{width: '18em'}}>
             {chatHistory.map((chatMessage, index) => (
               <Fragment key={index}>
                 <Box
@@ -138,13 +143,13 @@ const Questionnaire: React.FC = () => {
                     chatMessage.isUser ? "flex-end" : "flex-start"
                   }
                   style={{
-                    padding: "0.5em .5em 0em 0.5em",
+                    padding: "0.5em .5em .1em .5em",
                     marginTop: ".5em",
                     maxWidth: "75%",
                     borderWidth: "2px",
-                    backgroundColor: "yellow",
-                    borderStyle: "solid",
-                    borderColor: "red",
+                    backgroundColor: "#C3B1E1",
+                    // borderStyle: "solid",
+                    // borderColor: "red",
                     borderRadius: "20px",
                     width: "fit-content",
                     marginLeft: "auto",
@@ -167,13 +172,14 @@ const Questionnaire: React.FC = () => {
                       chatMessage.isUser ? "flex-end" : "flex-start"
                     }
                     style={{
-                      padding: "0.5em .5em 0em 0.5em",
+                      padding: "0.5em .5em .1em 0.5em",
                       marginTop: ".5em",
                       maxWidth: "75%",
                       borderWidth: "2px",
-                      backgroundColor: "red",
-                      borderStyle: "solid",
-                      borderColor: "yellow",
+                      color: 'white',
+                      backgroundColor: "#51414F",
+                      // borderStyle: "solid",
+                      // borderColor: "yellow",
                       borderRadius: "20px",
                       width: "fit-content",
                       marginRight: "auto",
@@ -224,21 +230,19 @@ const Questionnaire: React.FC = () => {
             ))}
           </Box>
           <Box style={{display: 'flex', justifyContent: 'center', marginTop: '1em', position: 'fixed', bottom: '1em', left: 0, right: 0}}>
-  <Box flex="1">
-    <TextField
-      id="chat-input"
-      label="Type your question here"
-      value={inputValue}
-      onChange={handleInputValueChange}
-      variant="outlined"
-    />
-  </Box>
-
-  <Box style={{ padding: ".5em" }}>
-    <Button variant="contained" color="primary" onClick={handleSendClick}>
-      Send
-    </Button>
-  </Box>
+          <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
+  <TextField
+    id="chat-input"
+    label="Type your question here"
+    value={inputValue}
+    onChange={handleInputValueChange}
+    variant="outlined"
+    InputProps={{ style: { borderRadius: 20 } }}
+    style={{ borderRadius: 20 }}
+  />
+  <Button variant="outlined" color="primary" style={{ borderRadius: 20, marginLeft: 10 }} onClick={handleSendClick}><Send /></Button>
+</Box>
+     
 </Box>
         </CardContent>
       </Card>
@@ -246,4 +250,4 @@ const Questionnaire: React.FC = () => {
   );
 };
 
-export default Questionnaire;
+export default ChatBox;

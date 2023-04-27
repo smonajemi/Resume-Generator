@@ -3,7 +3,7 @@ import HomePage from '../pages/Home'
 import LoginPage from '../pages/Login'
 import SignupPage from '../pages/Signup'
 import ProfilePage from '../pages/Profile'
-import QuestionnairePage from '../pages/Questionnaire'
+import ChatboxPage from '../pages/Chatbox'
 interface RouteType {
   path: string;
   component: any;
@@ -26,9 +26,9 @@ const routes: RouteType[] = [
     protected: true,
   },
   {
-    path: "/Questionnaire",
-    component: QuestionnairePage,
-    name: "Questionnaire Page",
+    path: "/chatbox",
+    component: ChatboxPage,
+    name: "Chatbox Page",
     protected: true,
   },
   {

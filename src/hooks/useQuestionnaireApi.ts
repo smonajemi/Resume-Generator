@@ -1,4 +1,4 @@
-export const useQuestionnaireApi = () => {
+export const useChatboxApi = () => {
 
     const fetchUser = async (email: string) => {
         return null

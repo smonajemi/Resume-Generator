@@ -1,4 +1,4 @@
-export interface QuestionnaireTypes {
+export interface ChatBoxTypes {
     key?: string
     story?: string | ''
     question?: string | ''
