@@ -31,16 +31,15 @@ const useStyles = makeStyles({
   },
   widerCard: {
     overflow: 'auto',
-    margin: "1.5em auto",
-    height: '75vh',
-    width: "90%",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    position: 'fixed',
+    right: '0.5em',
+    left: '0.5em',
+    top: '5em',
+    height: '75vh',  
     backgroundColor: '#E6E6FA',
-    boxShadow: '10px 5px 5px rgba(0, 0, 0, 0.2)', 
+    boxShadow: '10px 5px 5px rgba(0, 0, 0, 0.2)',
     borderRadius: 20,
-
+    
   },
   root: {
     display: "flex",
@@ -235,7 +234,7 @@ const ChatBox: React.FC = () => {
           </Box>
        
           <Box style={{display: 'flex', justifyContent: 'center', marginTop: '1em', position: 'fixed', bottom: '0.5em', left: 0, right: 0}}>
-          <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Box style={{ display: 'flex', justifyContent: 'flex-end', width: '100%'}}>
   <TextField
     id="chat-input"
     label="Type your question here"
@@ -243,10 +242,10 @@ const ChatBox: React.FC = () => {
     onChange={handleInputValueChange}
     variant="outlined"
     InputProps={{ style: { borderRadius: 20 } }}
-    style={{ borderRadius: 20 }}
+    style={{ borderRadius: 20, width: '75%' }}
   />
   
-  <Button variant="outlined" color="primary" style={{ borderRadius: 20, marginLeft: 10 }} onClick={handleSendClick}><Send /></Button>
+  <Button variant="outlined" color="primary" style={{ borderRadius: 20, marginLeft: 10, marginRight: 5 }} onClick={handleSendClick}><Send /></Button>
 </Box>
      
 </Box>
