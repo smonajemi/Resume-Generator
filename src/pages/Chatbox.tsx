@@ -31,9 +31,9 @@ const useStyles = makeStyles({
   },
   widerCard: {
     overflow: 'auto',
-    margin: "1em auto", /* Added margin: 2em auto; to center the card horizontally and keep it from moving right and left */
-    height: '79vh',
-    width: "90%", // Adjust this value to change the width of the card
+    margin: ".5em auto",
+    height: '75vh',
+    width: "90%",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
