@@ -6,11 +6,7 @@ import {
   TextField,
   Button,
   Typography,
-  Box,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  FormControl,
+  Box
 } from "@material-ui/core";
 import { Input, Send } from "@mui/icons-material";
 import { MainContainer } from "../components/MainContainer";
@@ -18,9 +14,10 @@ import { useApi } from "../components/hooks/useApi";
 
 const useStyles = makeStyles({
   chatBox: {
-    maxWidth: "600px",
-    margin: "0 auto",
-    boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.1)",
+    maxWidth: '600px',
+    margin: '0 auto',
+    backgroundColor: '#E6E6FA',
+    boxShadow: '2px 2px 60px rgba(10, 0, 10, 0.9)', 
   },
   chatContent: {
     display: "flex",
@@ -33,12 +30,15 @@ const useStyles = makeStyles({
   },
   widerCard: {
     overflow: 'auto',
-    height: '45em',
-    width: "80%", // Adjust this value to change the width of the card
-    marginTop: "2em",
+    margin: "2em auto", /* Added margin: 2em auto; to center the card horizontally and keep it from moving right and left */
+    height: '79vh',
+    width: "90%", // Adjust this value to change the width of the card
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    backgroundColor: '#E6E6FA',
+    boxShadow: '2px 2px 60px rgba(0, 0, 0, 0.2)', 
+    borderRadius: 20
   },
   root: {
     display: "flex",
@@ -147,7 +147,9 @@ const ChatBox: React.FC = () => {
                     marginTop: ".5em",
                     maxWidth: "75%",
                     borderWidth: "2px",
-                    backgroundColor: "#C3B1E1",
+                    backgroundColor: "#6A5ACD",
+                    color: 'white',
+                    fontFamily: '"Lucida Console", "Courier New", "monospace"',
                     // borderStyle: "solid",
                     // borderColor: "red",
                     borderRadius: "20px",
