@@ -31,15 +31,16 @@ const useStyles = makeStyles({
   },
   widerCard: {
     overflow: 'auto',
-    margin: "2em auto", /* Added margin: 2em auto; to center the card horizontally and keep it from moving right and left */
-    height: '75vh',
+    margin: "1em auto", /* Added margin: 2em auto; to center the card horizontally and keep it from moving right and left */
+    height: '79vh',
     width: "90%", // Adjust this value to change the width of the card
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     backgroundColor: '#E6E6FA',
     boxShadow: '10px 5px 5px rgba(0, 0, 0, 0.2)', 
-    borderRadius: 20
+    borderRadius: 20,
+
   },
   root: {
     display: "flex",
@@ -233,7 +234,7 @@ const ChatBox: React.FC = () => {
             ))}
           </Box>
        
-          <Box style={{display: 'flex', justifyContent: 'center', marginTop: '1em', position: 'fixed', bottom: '.5', left: 0, right: 0}}>
+          <Box style={{display: 'flex', justifyContent: 'center', marginTop: '1em', position: 'fixed', bottom: '0.5em', left: 0, right: 0}}>
           <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
   <TextField
     id="chat-input"
