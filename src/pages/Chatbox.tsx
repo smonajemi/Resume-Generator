@@ -6,7 +6,8 @@ import {
   TextField,
   Button,
   Typography,
-  Box
+  Box,
+  Divider
 } from "@material-ui/core";
 import { Input, Send } from "@mui/icons-material";
 import { MainContainer } from "../components/MainContainer";
@@ -37,7 +38,7 @@ const useStyles = makeStyles({
     flexDirection: "column",
     alignItems: "center",
     backgroundColor: '#E6E6FA',
-    boxShadow: '2px 2px 60px rgba(0, 0, 0, 0.2)', 
+    boxShadow: '10px 5px 5px rgba(0, 0, 0, 0.2)', 
     borderRadius: 20
   },
   root: {
@@ -149,9 +150,6 @@ const ChatBox: React.FC = () => {
                     borderWidth: "2px",
                     backgroundColor: "#6A5ACD",
                     color: 'white',
-                    fontFamily: '"Lucida Console", "Courier New", "monospace"',
-                    // borderStyle: "solid",
-                    // borderColor: "red",
                     borderRadius: "20px",
                     width: "fit-content",
                     marginLeft: "auto",
@@ -166,6 +164,7 @@ const ChatBox: React.FC = () => {
                   >
                     {chatMessage.question}
                   </Typography>
+                
                 </Box>
                 {chatMessage.message ? (
                   <Box
@@ -196,6 +195,7 @@ const ChatBox: React.FC = () => {
                     >
                       {chatMessage.message}
                     </Typography>
+
                   </Box>
                 ) : (
                   <Box
@@ -228,9 +228,11 @@ const ChatBox: React.FC = () => {
                     </Typography>
                   </Box>
                 )}
+                <Divider style={{margin: '1em 0 1em 0'}} />
               </Fragment>
             ))}
           </Box>
+       
           <Box style={{display: 'flex', justifyContent: 'center', marginTop: '1em', position: 'fixed', bottom: '1em', left: 0, right: 0}}>
           <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
   <TextField
@@ -242,6 +244,7 @@ const ChatBox: React.FC = () => {
     InputProps={{ style: { borderRadius: 20 } }}
     style={{ borderRadius: 20 }}
   />
+  
   <Button variant="outlined" color="primary" style={{ borderRadius: 20, marginLeft: 10 }} onClick={handleSendClick}><Send /></Button>
 </Box>
      
