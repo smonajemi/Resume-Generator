@@ -233,8 +233,8 @@ const ChatBox: React.FC = () => {
             ))}
           </Box>
        
-          <Box style={{display: 'flex', justifyContent: 'center', marginTop: '1em', position: 'fixed', bottom: '0.5em', left: 0, right: 0}}>
-          <Box style={{ display: 'flex', justifyContent: 'flex-end', width: '100%'}}>
+          <Box style={{display: 'flex', justifyContent: 'center', position: 'fixed', bottom: '0.5em', left: 0, right: 0}}>
+          <Box style={{ display: 'flex', justifyContent: 'flex-end', width: '100%', padding: 5}}>
   <TextField
     id="chat-input"
     label="Type your question here"
@@ -242,10 +242,10 @@ const ChatBox: React.FC = () => {
     onChange={handleInputValueChange}
     variant="outlined"
     InputProps={{ style: { borderRadius: 20 } }}
-    style={{ borderRadius: 20, width: '75%' }}
+    style={{ borderRadius: 20, width: '100%' }}
   />
   
-  <Button variant="outlined" color="primary" style={{ borderRadius: 20, marginLeft: 10, marginRight: 5 }} onClick={handleSendClick}><Send /></Button>
+  <Button variant="outlined" color="primary" style={{ borderRadius: 20, marginLeft: 10}} onClick={handleSendClick}><Send /></Button>
 </Box>
      
 </Box>
