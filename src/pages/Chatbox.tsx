@@ -31,7 +31,7 @@ const useStyles = makeStyles({
   },
   widerCard: {
     overflow: 'auto',
-    margin: ".5em auto",
+    margin: "1.5em auto",
     height: '75vh',
     width: "90%",
     display: "flex",
