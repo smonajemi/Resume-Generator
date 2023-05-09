@@ -108,14 +108,16 @@ const ChatBox: React.FC = () => {
     }
   };
   const handleSendClick = async () => {
-    setInputValue('')
+    // Clear input field
+      setInputValue("");
+
     // Save user message to chat history
     const userMessage: ChatMessage = {
       message: "",
       question: inputValue,
       isUser: true,
     };
-    setChatHistory([...chatHistory, userMessage]);
+      setChatHistory([...chatHistory, userMessage]);
 
     const prompt = {
       story: 'sina is a 31 one year old man from toronto, on',
@@ -131,9 +133,6 @@ const ChatBox: React.FC = () => {
       isUser: false,
     };
     setChatHistory([...chatHistory, botMessage]);
-
-    // Clear input field
-    setInputValue("");
   };
   
 
