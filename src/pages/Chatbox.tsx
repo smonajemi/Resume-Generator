@@ -9,7 +9,7 @@ import {
   Box,
   Divider
 } from "@material-ui/core";
-import { Input, Send } from "@mui/icons-material";
+import { Send } from "@mui/icons-material";
 import { MainContainer } from "../components/MainContainer";
 import { useApi } from "../components/hooks/useApi";
 
@@ -94,7 +94,7 @@ const ChatBox: React.FC = () => {
   const classes = useStyles();
   const [inputValue, setInputValue] = useState("");
   const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
-  const { ChatBox } = useApi();
+  const { ChatBox} = useApi();
 
   const handleInputValueChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -102,7 +102,13 @@ const ChatBox: React.FC = () => {
     setInputValue(event.target.value);
   };
 
+  const handleCustomKey = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter") {
+      handleSendClick();
+    }
+  };
   const handleSendClick = async () => {
+    setInputValue('')
     // Save user message to chat history
     const userMessage: ChatMessage = {
       message: "",
@@ -112,10 +118,10 @@ const ChatBox: React.FC = () => {
     setChatHistory([...chatHistory, userMessage]);
 
     const prompt = {
-      story:
-        "Sina is a 31 old male from toronto having extensive experience in software development and hospitality. Sina speaks Persian and English",
+      story: 'sina is a 31 one year old man from toronto, on',
       question: inputValue,
     };
+
 
     const response = await ChatBox(prompt);
 
@@ -135,7 +141,7 @@ const ChatBox: React.FC = () => {
     <MainContainer title={"ChatBox"}>
       <Card className={classes.widerCard} >
         <CardContent >
-          <Box display="flex" flexDirection="column" marginTop="1em" style={{width: '18em'}}>
+          <Box display="flex" flexDirection="column" marginTop="1em" >
             {chatHistory.map((chatMessage, index) => (
               <Fragment key={index}>
                 <Box
@@ -150,7 +156,7 @@ const ChatBox: React.FC = () => {
                     borderWidth: "2px",
                     backgroundColor: "#6A5ACD",
                     color: 'white',
-                    borderRadius: "20px",
+                    borderRadius: "20px 20px 0px 20px",
                     width: "fit-content",
                     marginLeft: "auto",
                   }}
@@ -181,7 +187,7 @@ const ChatBox: React.FC = () => {
                       backgroundColor: "#51414F",
                       // borderStyle: "solid",
                       // borderColor: "yellow",
-                      borderRadius: "20px",
+                      borderRadius: "0px 20px 20px 20px",
                       width: "fit-content",
                       marginRight: "auto",
                     }}
@@ -243,6 +249,7 @@ const ChatBox: React.FC = () => {
     variant="outlined"
     InputProps={{ style: { borderRadius: 20 } }}
     style={{ borderRadius: 20, width: '100%' }}
+    onKeyPress={(e: any) => { handleCustomKey(e) }} // prevent new line
   />
   
   <Button variant="outlined" color="primary" style={{ borderRadius: 20, marginLeft: 10}} onClick={handleSendClick}><Send /></Button>
