@@ -35,7 +35,7 @@ const useStyles = makeStyles({
     right: '0.5em',
     left: '0.5em',
     top: '5em',
-    height: '75vh',  
+    height: '75%',  
     backgroundColor: '#E6E6FA',
     boxShadow: '10px 5px 5px rgba(0, 0, 0, 0.2)',
     borderRadius: 20,
@@ -118,12 +118,11 @@ const ChatBox: React.FC = () => {
       isUser: true,
     };
       setChatHistory([...chatHistory, userMessage]);
-
-    const prompt = {
-      story: 'sina is a 31 one year old man from toronto, on',
-      question: inputValue,
-    };
-
+      const prompt = {
+        story: 'Sina Monajemi is an experienced professional with a passion for technology and excellent interpersonal and communication skills. He began his career in the hospitality industry, but his interest in IT led him to switch careers and start freelancing to learn and improve. Sina has experience working in an Agile team and is confident in his ability to collaborate effectively with others.\n\nAs a Full Stack Developer, Sina specializes in crafting robust web applications with Node.js and React, backed by a great knowledge of SQL and NoSQL queries. He is currently utilizing OpenAI API to create fun and engaging cross-platform mobile applications using the Ionic framework. Additionally, Sina has a proven track record of improving website design for improved navigation and aesthetic appeal and providing valuable consultancy services to businesses for their website development needs.\n\nSina has worked as a Junior Software Developer at Black Professionals In Tech Network (BPTN) Inc, where he participated in daily scrum meetings, sprint planning, and bug fixes. He worked closely with the QA and product teams as well as other developers to ensure quality and punctual development. Sina contributed to building the BPTN social networking platform using React and improved website performance by refactoring old un-optimized code and changing it to follow proper standards. He also built a REST API using PostgreSQL with Knexjs.\n\nIn addition, Sina has worked as a Software Developer for Seneca College, where he collaborated effectively with team members and project managers through slack communication to develop a remote application for digital receipts & expense payments. He also participated in code review to ensure high code quality and proposed ideas to implement a contact-free application for helping the community stay safe. Sina analyzed user requirements and proposed design software solutions for better UI and UX, implemented enhancements that improved web functionality and responsiveness, and assisted in the back-end development using Java as well as database design using MySQL.\n\nBefore his career switch, Sina worked at Germain Hôtels, where he began as a Guest Service Agent and later became a Night Auditor. As a Guest Service Agent, he communicated with guests in a professional manner to ensure an exceptional customer service experience and developed lasting relationships with guests that built loyalty. As a Night Auditor, he prioritized and organized tasks for an effective workflow and showcased exceptional decision-making and leadership ability when dealing with challenging situations.\n\nOverall, Sina has a diverse background with skills in Amazon Web Services (AWS), Web Development, Node.js, JavaScript, MongoDB, React.js, TypeScript, PostgreSQL, Object-Oriented Design, Programming, Agile Methodologies, GitHub, Time Management, Java, and MySQL. He is a self-starter who is always seeking new opportunities to expand his knowledge and skills, and he has a track record of delivering outstanding results.',
+        question: inputValue,
+      };
+      
 
     const response = await ChatBox(prompt);
 
