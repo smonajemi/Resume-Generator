@@ -16,7 +16,7 @@ const AuthChecker = ({ children }: Props) => {
   const { pathname } = useLocation();
   const [isNavigating, setIsNavigating] = useState(true);
   const [isOpen, setOpen] = useState(false);
-  const [toasterMessage, setToasterMessage] = useState({ severity: '', message: '' });
+  const [toasterMessage, setToasterMessage] = useState({ severity: 'error', message: '' });
 
   useEffect(() => {
     const navigateToLoginPage = async () => {

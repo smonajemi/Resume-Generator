@@ -13,7 +13,7 @@ export const useLogin = () => {
 
     const tabs = ['Login', 'Continue as a guest']
 
-    const [toasterMessage, setToasterMessage] = useState({ severity: '', message: '' });
+    const [toasterMessage, setToasterMessage] = useState({ severity: 'error', message: '' });
     const [showToaster, setShowToaster] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const theme = createTheme();
