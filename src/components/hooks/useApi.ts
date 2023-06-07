@@ -12,15 +12,20 @@ export const useApi = () => {
   }
 
   const correctGrammar = async (prompt: string): Promise<string | undefined> => {
-    const response = await fetch(apiGrammarUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ prompt }),
-    });
-    const data = await response.json();
-    return prompt ? data.text?.replace('\n', '') : null
+    try {
+      const response = await fetch(apiGrammarUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt }),
+      });
+      const data = await response.json();
+      return prompt ? data.text?.replace('\n', '') : null
+    } catch (error) {
+      console.log(error)
+      return error as any
+    }
   };
 
   const generatedCoverLetter  = async (prompt: CoverLetterTypes): Promise<string | undefined> => {
