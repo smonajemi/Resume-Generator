@@ -111,7 +111,7 @@ const ResumeForm: FunctionComponent<IResumeFormProps> = ({
         setIsNextLoading(true)
         const updatedUser = {
           ...currentUser,
-          summary: await correctGrammar(currentUser?.summary),
+          summary: currentUser?.summary,
         };
         setCurrentUser(updatedUser);
         resolve();
